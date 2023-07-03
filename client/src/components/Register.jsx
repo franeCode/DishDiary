@@ -85,7 +85,6 @@ const Register = () => {
                   onChange={(e) => setConfirmation(e.target.value)}
                 ></input>
               </div>
-
               <div className="text-center text-lg-start">
                 <button
                   className="px-4 rounded text-white fs-5"
