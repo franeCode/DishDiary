@@ -38,13 +38,22 @@ const Register = () => {
           <div className="login-wrapper relative">
     <div className="container-fluid py-5 text-center">
       {errorMessage && <p className="text-danger">{errorMessage}</p>}
+      
+      <form className="d-flex flex-column justify-content-center align-items-center rounded py-4 gap-3">
+        <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+          <p className="lead mb-2 me-3">Register Account</p>
+        </div>
+        <input autoComplete="off" autoFocus className="form-control form-control-lg mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)}></input>
+      
       <div className="mb-3">
-        <input autoComplete="off" autoFocus className="form-control mx-auto w-auto" id="username" name="username" placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)}></input>
+        <input className="form-control form-control-lg mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}></input>
       </div>
-      <div className="mb-3">
-        <input className="form-control mx-auto w-auto" id="password" name="password" placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}></input>
+      <div className="text-center text-lg-start">
+        <button className="px-4 rounded text-white fs-5" type="button" onClick={() => registerUser()}>Register
+        </button>
+        <p className="small fw-bold mt-2 pt-1 mb-0">Already have an account? <a href="/login" style={{ color: "#FF7D04"}}>Login</a></p>
       </div>
-      <button className="" type="button" onClick={() => registerUser()}>Register</button>
+      </form>
     </div>
     </div>
     </div>

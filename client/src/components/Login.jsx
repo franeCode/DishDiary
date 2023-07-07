@@ -14,12 +14,9 @@ const Login = () => {
       password: password
     })
     .then(response => {
-      console.log(response.data)
-      console.log(response.headers); // Log the response headers
       const jwtToken = response.data.access_token;
       if (jwtToken) {
-        console.log(jwtToken)
-        localStorage.setItem('access_token', jwtToken); // Store the JWT token in local storage
+        localStorage.setItem('access_token', jwtToken); 
         axios.get('http://localhost:5000/api/get_recipes', {
           headers: {
             'Authorization': `Bearer ${jwtToken}`
@@ -27,8 +24,8 @@ const Login = () => {
         })
           .then(response => {
             console.log(response);
-            const jwtToken = localStorage.getItem('access_token');
-            navigate("/cookbook", { state: { message: `${username} logged in successfully!` } });
+            // const jwtToken = localStorage.getItem('access_token');
+            navigate("/menu", { state: { message: `${username} logged in successfully!` } });
           })
           .catch(error => {
             if (error.response && error.response.data && error.response.data.error) {
@@ -59,17 +56,17 @@ const Login = () => {
           <div className="login-wrapper relative">
           {errorMessage && <p className="text-danger">{errorMessage}</p>}
             {/* <div className=""> */}
-              <form className="d-flex flex-column justify-content-center align-items-center rounded py-4 gap-2">
+              <form className="d-flex flex-column justify-content-center align-items-center rounded py-4 gap-3">
                 <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
-                  <p className="lead fw-normal mb-0 me-3">Log Into Your Account</p>
+                  <p className="lead mb-2 me-3">Log Into Your Account</p>
                 </div>
 
                 <div className="form-outline mb-4">
-                  <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control form-control-lg" placeholder="Enter a valid username" />
+                  <input type="username" value={username} onChange={(e) => setUsername(e.target.value)} className="form-control form-control-lg" placeholder="Username" />
                 </div>
 
                 <div className="form-outline mb-3">
-                  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control form-control-lg" placeholder="Enter password" />
+                  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="form-control form-control-lg" placeholder="Password" />
                 </div>
 
                 {/* <div className="d-flex justify-content-between align-items-center">
@@ -83,8 +80,8 @@ const Login = () => {
                 </div> */}
 
                 <div className="text-center text-lg-start">
-                  <button type="button" className="px-4 rounded fs-4" onClick={logInUser}>Login</button>
-                  <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register" className="link-danger">Register</a></p>
+                  <button type="button" className="px-4 rounded text-white fs-4" onClick={logInUser}>Login</button>
+                  <p className="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="/register" style={{ color: "#FF7D04"}}>Register</a></p>
                 </div>
               </form>
             {/* </div> */}
