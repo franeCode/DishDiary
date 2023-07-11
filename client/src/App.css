@@ -2,9 +2,26 @@
 
  @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Poppins:ital,wght@0,300;1,200&display=swap');
 
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
+ :root {
+  --bs-body-font-family: 'Caveat', cursive;
+ }
+ body {
+  /* font-family: 'Poppins', sans-serif; */
+  /* font-family: 'Caveat', cursive; */
+ }
  nav {
   font-family: 'Caveat', cursive;
-  background-color: #e8e2d7eb;
+  background-color: #fff;
+ }
+ nav ul li {
+  /* font-size: 'Poppins', sans-serif; */
+  /* font-family: 'Caveat', cursive; */
+  /* font-family: 'Poppins', sans-serif; */
+ }
+ .logo {
+  font-family: 'Caveat', cursive;
  }
  .logo-modal img {
   width: 8rem;
@@ -32,7 +49,7 @@ button {
 }
 .app-container {
   background-color: rgba(203, 203, 196, 0.8); 
-  font-family: 'Caveat', cursive;
+  font-family: 'Poppins', sans-serif;
   font-style: italic;
   background-size: cover;
   background-repeat: no-repeat;
@@ -64,20 +81,20 @@ button {
   width: 20rem;
   height: 20rem; 
   border-radius: 50%;
-  background-color: rgba(228, 217, 204, 0.8);
+  background-color: #fff;
 }
 .quote {
-  color: rgba(228, 217, 204, 0.8);
+  color: #fff;
 }
 .login-wrapper {
   width: 25rem;
   height: 30rem;
 }
 form {
-  background-color: rgba(228, 217, 204, 0.8);
+  background-color: #fff;
 }
 .page {
-  font-family: 'Caveat', cursive;
+  font-family: 'Poppins', sans-serif;
 }
 .instructions {
   min-height: 23rem;
@@ -129,17 +146,17 @@ form {
   /* filter: blur(3px); */
   z-index: 1;
 }
-.show-recipe {
+/* .show-recipe {
   position: absolute;
   top: 20%;
   z-index: 2;
   font-family: 'Caveat', cursive;
-}
-.cards {
+} */
+/* .cards {
   width: 20rem;
   height: 20rem; 
   border: none;
-}
+} */
 .img-wrapper {
   width: 15rem;
   height: 15rem;
@@ -152,64 +169,18 @@ form {
   /* background-color: rgba(133, 130, 130, 0.8); */
   transition: 0.3s ease-in-out;
 }
-img {
+/* img {
   width: 50%;
   height: 50%;
   border-radius: 50%;
   object-fit: cover;
   opacity: 1;
-}
-
-.card:hover .card-img {
-  opacity: 0.8;
-}
-
-/* book */
-
-/* .book-container {
-  perspective: 1000px;
-  width: 300px;
-  height: 400px;
-}
-
-.book-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #e9e9e9;
-  transform-style: preserve-3d;
-  transition: transform 0.5s ease;
-}
-
-.book-page {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  backface-visibility: hidden;
-}
-
-.book-container:hover .book-cover {
-  transform: rotateY(-180deg);
-}
-
-.front-cover,
-.back-cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
 } */
+
+.card:hover .img {
+  opacity: 0.8;
+  transition: 0.3s ease-in-out;
+}
 
 .recipe-page {
   padding: 20px;
@@ -226,13 +197,59 @@ img {
   filter: blur(3px);
   z-index: 1;
 }
+/* .background-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #ffffff; 
+}
+
+.background-container:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0.1;
+  opacity: 0.2;
+  pointer-events: none;
+  background-image: url('assets/img/meal.png');
+  background-repeat: repeat;
+  background-size: auto;
+  background-color: #cccccc; 
+} */
 .book-page {
   position: absolute;
   top: 20%;
   z-index: 2;
-  font-family: 'Caveat', cursive;
-  min-height: 36rem;
+  font-family: 'Roboto', sans-serif;
 }
+
+form {
+  font-family: 'Roboto', sans-serif;
+}
+.form-control::-moz-placeholder {
+  color: #b8b6b6 !important;
+  outline: none !important;
+}
+.form-control:-ms-input-placeholder {
+  color: #b8b6b6 !important;
+  outline: none !important;
+}
+.form-control::-webkit-input-placeholder {
+  color: #b8b6b6 !important;
+  outline: none !important; 
+}
+
+input[type=username]:focus,
+input[type=password]:focus,
+[type=text].form-control:focus, 
+[type=password].form-control:focus {
+  box-shadow: inset 0 -1px 0 #ddd;
+  border-color: #FF7D04;
+}
+
 input[name="title"],
 input[name="ingredients"],
 textarea[name="instructions"]:focus {
@@ -240,7 +257,7 @@ textarea[name="instructions"]:focus {
   border: none;
   outline: none;
   background-color: transparent;
-  font-family: 'Caveat', cursive;
+  font-family: 'Poppins', sans-serif;
   /* overflow-y: scroll; */
 }
 textarea[name="instructions"] {
@@ -249,18 +266,19 @@ textarea[name="instructions"] {
   border: none;
   outline: none;
   background-color: transparent;
-  font-family: 'Caveat', cursive;
+  font-family: 'Poppins', sans-serif;
   /* overflow-y: scroll; */
-  scroll-behavior: smooth;
+  
 }
 .list {
   color: #555;
   font-size: 22px;
   padding: 0 !important;
-  height: auto;
+  height: 36rem;
   width: 500px;
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid #dedede;
+  
 }
 .list input,
 .list textarea,
