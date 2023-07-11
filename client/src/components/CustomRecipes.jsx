@@ -27,13 +27,16 @@ const CustomRecipes = () => {
     <div>
       <div className='d-flex justify-content-center align-items-center relative'>
         <div className='book'></div>
+        <button>
+        <i className="fa-light fa-hand-back-point-left"></i>
+        </button>
         <div className='book-page relative'>
           <div className="lines"></div>
             <div className="list">
             <div className="holes hole-top"></div>
               <div className="holes hole-middle"></div>
               <div className="holes hole-bottom"></div>
-      <ul>
+      <ul> My Recipe Book
         {recipes.map(recipe => (
           <Link to={''} key={recipe.id}>
           <li key={recipe.id}>
