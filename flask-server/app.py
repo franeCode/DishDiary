@@ -11,14 +11,12 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
 app.config['JWT_SECRET_KEY'] = 'super-secret'
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
-CORS(app, resources={r"/api/*": {"origins": "http://localhost:3000"}})
+CORS(app)
 
-# @app.after_request
-# def after_request(response):
-#   response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-#   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-#   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-#   return response
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  return response
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
