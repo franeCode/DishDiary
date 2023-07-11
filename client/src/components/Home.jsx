@@ -24,7 +24,7 @@ const Home = () => {
           </div>
         </div>
         <Link to='/login'>
-        <button className='login-btn rounded fs-2'>Start now!</button>
+        <button className='login-btn text-white rounded fs-2'>Start now!</button>
       </Link>
       </div>
     </div>
