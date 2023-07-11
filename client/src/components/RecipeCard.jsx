@@ -14,19 +14,39 @@ const RecipeCard = ({ recipe }) => {
   // const ingredientsArray = recipe.ingredients ? recipe.ingredients.split(', ') : [];
 
   return (
-    <div className="col-md-2">
-      <div className="d-flex flex-column justify-content-center align-items-center cards rounded">
-      <Link style={{ color: '#D16B1E' }} to={`/recipe/${recipe.id}`} state={{ recipe }}>
-        <div className="img-wrapper d-flex flex-column align-items-center justify-content-center shadow">
+    <div className="col-sm-6 col-md-4 col-lg-3 mt-5">
+        {/* // <div className="d-flex flex-row justify-content-center align-items-center rounded mt-5">  */}
+      {/* <Link style={{ textDecoration: "none" }} to={`/recipe/${recipe.id}`} state={{ recipe }}> */}
+        {/* <div className="img-wrapper d-flex flex-column align-items-center justify-content-center shadow">
         <img
           src={recipe.image_url}
           alt="Recipe Image"
         />
         <h5 className="card-title fs-3">{recipe.title}</h5>
-        </div>   
-          </Link>
+        </div>    */}
+        {/* <div class="col"> */}
+        <div className="card align-items-center rounded-4 mb-5" style={{ width: "18rem", height: "30rem" }}>
+                    {/* <div class="row g-0"> */}
+                        {/* <div class="col-md-4"> */}
+                            <img src={recipe.image_url} class="card-img-top rounded-top-4" alt="image" ></img>
+                        {/* </div> */}
+                        {/* <div class="col-md-8"> */}
+                            <div class="card-body">
+                                <h5 class="card-title fs-2">{recipe.title}</h5>
+                                <p className="fs-6 overflow-hidden" style={{ height: "4.5rem"}}>INGREDIENTS: <span style={{ fontSize: "0.6rem"}}>{recipe.ingredients}</span></p>
+                                <p class="card-text mt-2">More details
+                                <span><Link style={{ textDecoration: "none" }} to={`/recipe/${recipe.id}`} state={{ recipe }}>Link</Link>
+                                </span>
+                                <span><i class="fa-brands fa-youtube" style={{color: "#e07a1a"}}></i>
+                                </span>
+                                </p>
+                            </div>
+                        {/* </div> */}
+                    </div>
+                {/* </div> */}
+          {/* </Link> */}
       </div>
-    </div>
+    // </div>
   );
 
 
