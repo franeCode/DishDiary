@@ -58,7 +58,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/recipes">Get Inspiration</Link>
             </li>
             <li className="nav-item ms-5">
-              <button className='px-4 rounded' onClick={handleLogout}>Logout</button>
+              <button className='px-4 mt-2 rounded text-white fs-3' onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>
