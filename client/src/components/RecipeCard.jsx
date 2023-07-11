@@ -25,7 +25,7 @@ const RecipeCard = ({ recipe }) => {
         <h5 className="card-title fs-3">{recipe.title}</h5>
         </div>    */}
         {/* <div class="col"> */}
-        <div className="card align-items-center rounded-4 mb-5" style={{ width: "18rem", height: "30rem" }}>
+        <div className="card align-items-center rounded-4 shadow-sm mb-5" style={{ width: "18rem", height: "30rem", borderColor: "transparent" }}>
                     {/* <div class="row g-0"> */}
                         {/* <div class="col-md-4"> */}
                             <img src={recipe.image_url} class="card-img-top rounded-top-4" alt="image" ></img>
@@ -34,10 +34,10 @@ const RecipeCard = ({ recipe }) => {
                             <div class="card-body">
                                 <h5 class="card-title fs-2">{recipe.title}</h5>
                                 <p className="fs-6 overflow-hidden" style={{ height: "4.5rem"}}>INGREDIENTS: <span style={{ fontSize: "0.6rem"}}>{recipe.ingredients}</span></p>
-                                <p class="card-text mt-2">More details
-                                <span><Link style={{ textDecoration: "none" }} to={`/recipe/${recipe.id}`} state={{ recipe }}>Link</Link>
-                                </span>
-                                <span><i class="fa-brands fa-youtube" style={{color: "#e07a1a"}}></i>
+                                <p class="card-text">
+                                <button class="stretched-link" type='button' onClick={() => handleReadMore()}>Details
+                                </button>
+                                <span className=''><i class="fa-brands fa-youtube fs-2" style={{color: "#e07a1a"}}></i>
                                 </span>
                                 </p>
                             </div>
