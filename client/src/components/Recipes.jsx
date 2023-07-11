@@ -42,11 +42,11 @@ const Recipes = () => {
   console.log('All recipes:', recipes);
 
   return (
-    <div className="app-container relative">
-      <div class="recipes-cover"></div>
-      <div className="container show-recipe">
+    <div className="app-container relative bg-white">
+      {/* <div class="recipes-cover"></div> */}
+      <div className="container mt-5 show-recipe">
         {/* <h1 className="border-bottom shadow text-center py-3">Get Inspiration</h1> */}
-        <ul className="row gap-5">
+        <ul className="row align-items-center justify-content-center pt-5">
         {Array.isArray(currentRecipes) ? (
             currentRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)
           ) : (
@@ -56,8 +56,8 @@ const Recipes = () => {
         </ul>
 
         {/* Pagination */}
-        <nav>
-          <ul className="pagination justify-content-center fixed-bottom gap-3">
+        <footer>
+          <ul className="pagination justify-content-center my-4 pb-4 gap-3">
             {Array.from({ length: Math.ceil(recipes.length / recipesPerPage) }).map((_, index) => (
               <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
                 <button className="pag-link" onClick={() => paginate(index + 1)}>
@@ -66,7 +66,7 @@ const Recipes = () => {
               </li>
             ))}
           </ul>
-        </nav>
+        </footer>
       </div>
     </div>
   );
