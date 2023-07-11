@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import img_write from "../assets/img/make-food.jpg";
 import view from "../assets/img/view.jpg";
-import { Navbar } from "react-bootstrap";
+import logo from '../assets/img/logo-icon.svg';
 
 const Menu = () => {
     return ( 
         <div>
-        <div className="container d-flex flex-column align-items-center" style={{ height: "100vh", marginTop: "10rem" }}>
-            <h1 className="mb-5">Welcome to Recipes!</h1>
-            <div className="d-flex pb-5 fs-5">
+        <div className="container d-flex flex-column align-items-center" style={{ height: "100vh", marginTop: "10rem", fontFamily: "'Poppins', sans-serif" }}>
+            <div className="d-flex flex-column justify-content-center align-items-center p-5 mb-5 fs-5 shadow">
+                <h1 className="d-flex align-items-center justify-content-center fs-1 gap-3 mb-5">Welcome to 
+                    <span className="logo">
+                        <span>Recipes</span>
+                        <img src={logo} alt="logo"></img>
+                    </span>
+                </h1>
                 <p className="text-center">
                 Get ready to embark on a culinary adventure where you can unleash your creativity and explore a world of flavors. Whether you're a seasoned chef or a passionate home cook, this app is designed to inspire and simplify your cooking experience.
                 </p>
