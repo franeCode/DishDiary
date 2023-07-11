@@ -39,6 +39,7 @@ def register():
 @app.route("/login", methods=["POST"])
 @cross_origin(supports_credentials=True)
 def login():
+    """Login user"""
     username = request.json.get("username", None)
     password = request.json.get("password", None)
     user = Users.query.filter_by(username=username).first()
@@ -64,26 +65,24 @@ def logout():
 
 @app.route('/api/recipes', methods=['GET'])
 def store_recipes():
+    """Get recipes and store it in the db"""
     print("hello")
     try:
-        response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-   
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=')   
         data = response.json()
         print(data)
-        
 
         # Clear existing recipes from the database
-    
-        print('Deleting existing recipes...')
+         # print('Deleting existing recipes...')
         Recipe.query.delete()
-        print('Deletion complete!')
+        # print('Deletion complete!')
 
         for index, meal in enumerate(data['meals']):
             if meal is None:
                 continue
 
             if index >= 24:
-                break  # Break the loop after 25 iterations
+                break  # Break the loop after 24 iterations
 
             # Retrieve the ingredients data as a list
             ingredients = [
@@ -121,6 +120,7 @@ def store_recipes():
 @app.route('/api/get_recipes', methods=['GET', 'POST'])
 @jwt_required()
 def get_recipes():
+    """Get the recipes and send it to frontend"""
     current_user = get_jwt_identity()
     try:
         recipes = Recipe.query.all()
@@ -144,53 +144,11 @@ def get_recipes():
 
     except Exception as e:
         return jsonify({'error': str(e)})
-
-
-# @app.route('/api/favorites', methods=['GET', 'POST'])
-# # @login_required
-# def add_favorite_recipe():
-#     user_id = session.get('user_id')  # Retrieve the user ID from the session cookie
-#     print(user_id)
-
-
-#     if user_id:
-#         try:
-#             recipe_data = request.json.get('recipe')
-
-#             if recipe_data:
-#                 # Extract the necessary data from the recipe_data object
-#                 title = recipe_data.get('title')
-#                 instructions = recipe_data.get('instructions')
-#                 print(title, instructions)
-
-#                 # Retrieve the user instance from the database
-#                 user_instance = Users.query.get(user_id)
-
-#                 # Create a new FavoriteRecipe object and associate it with the user
-#                 new_recipe = FavoriteRecipe(title=title, instructions=instructions, user=user_instance)
-
-#                 # Add the new recipe to the database
-#                 db.session.add(new_recipe)
-#                 db.session.commit()
-
-#                 # Return a success response
-#                 return jsonify({'message': 'Recipe added to favorites'}), 200
-#             else:
-#                 # Return an error response if the request is invalid or missing data
-#                 return jsonify({'error': 'Invalid request'}), 400
-#         except Exception as e:
-#             # Print the exception for debugging
-#             print(f"Error: {str(e)}")
-#             # Return an error response
-#             return jsonify({'error': 'Internal Server Error'}), 500
-#     else:
-#         # User is not logged in, return an error response
-#         return jsonify({'error': 'Unauthorized'}), 401
-    
     
 @app.route('/api/add_recipe', methods=['POST'])
 @jwt_required()
 def add_recipe():
+    """Add custom recipe to the db"""
     current_user = get_jwt_identity()
     print(current_user)
     # user = Users.query.get(current_user_id)
@@ -226,6 +184,7 @@ def add_recipe():
 @app.route('/api/get_custom_recipes', methods=['GET'])
 @jwt_required()
 def get_custom_recipes():
+    """Get custom recipe form db and send it ot frontend"""
     try:
         current_user = get_jwt_identity()
 
