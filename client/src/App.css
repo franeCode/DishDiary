@@ -333,14 +333,14 @@ input[type="file" i]:hover {
   position: absolute;
   top: 30%;
   right: 0;
-  background: white; 
+  background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1;
 }
- .show-icon {
+.show-icon {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   font-size: 0.9em;
- }
+}
