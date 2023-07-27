@@ -24,7 +24,6 @@ const Navbar = () => {
       .catch((error) => {
         console.error("Logout failed:", error.message);
         if (error.response && error.response.status === 401) {
-          // Token expired, navigate to login page
           navigate("/login");
         }
       });
