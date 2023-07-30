@@ -12,7 +12,6 @@ const CookBook = () => {
     image: "",
   });
   const [formValid, setFormValid] = useState(true);
-  // const [successMessage, setSuccessMessage] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
   const navigate = useNavigate();
