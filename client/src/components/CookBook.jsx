@@ -73,7 +73,6 @@ const CookBook = () => {
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        // Update the state with the image file and the preview URL
         setRecipe({
           ...recipe,
           image: imageFile,
