@@ -20,7 +20,7 @@ const Home = () => {
         <div className='logo-wrapper d-flex flex-column align-items-center justify-content-center'>
           <div className='d-flex flex-column align-items-center logo-modal'>
             <img src={logo} alt="logo"></img>
-            <span>Recipes .</span>
+            <span>DishDiary</span>
           </div>
         </div>
         <Link to='/login'>
