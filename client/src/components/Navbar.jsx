@@ -31,9 +31,11 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow fs-2">
       <div className="container">
-        <Link className="navbar-brand d-flex align-items-center logo fs-1" to="/">
-          <img src={logo} alt="logo"></img>
-          <span>Recipes .</span>
+        <Link className="navbar-brand d-flex align-items-center fs-1" to="/">
+        <div className="logo">
+            <span>DishDiary</span>
+            <img src={logo} alt="logo"></img>
+        </div>
         </Link>
         <button
           className="navbar-toggler"
@@ -47,10 +49,13 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav fs-4">
             {/* <li className="nav-item">
               <Link className="nav-link" to="/">Home</Link>
             </li> */}
+            <li className="nav-item">
+              <Link className="nav-link" to="/menu">Home</Link>
+            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cookbook">CookBook</Link>
             </li>
@@ -58,7 +63,7 @@ const Navbar = () => {
               <Link className="nav-link" to="/recipes">Get Inspiration</Link>
             </li>
             <li className="nav-item ms-5">
-              <button className='px-4 mt-2 rounded text-white fs-3' onClick={handleLogout}>Logout</button>
+              <button className='btn px-3 rounded text-white fs-4' style={{backgroundColor: "#FF7D04"}} onClick={handleLogout}>Logout</button>
             </li>
           </ul>
         </div>
