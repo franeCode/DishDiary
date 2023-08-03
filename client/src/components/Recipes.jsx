@@ -46,6 +46,10 @@ const Recipes = () => {
       {/* <div class="recipes-cover"></div> */}
       <div className="container mt-5 show-recipe">
         {/* <h1 className="border-bottom shadow text-center py-3">Get Inspiration</h1> */}
+        <div className="d-flex flex-column justify-content-center align-items-center p-5 mt-5 fs-5 shadow">
+                <p className="text-center fs-4 fw-bold">Are you ready? Let's cook up something extraordinary!
+                </p>
+            </div>
         <ul className="row align-items-center justify-content-center pt-5">
         {Array.isArray(currentRecipes) ? (
             currentRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)
