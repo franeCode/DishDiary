@@ -33,12 +33,14 @@ const RecipeCard = ({ recipe }) => {
                         {/* <div class="col-md-8"> */}
                             <div class="card-body">
                                 <h5 class="card-title fs-2">{recipe.title}</h5>
-                                <p className="fs-6 overflow-hidden" style={{ height: "4.5rem"}}>INGREDIENTS: <span style={{ fontSize: "0.6rem"}}>{recipe.ingredients}</span></p>
-                                <p class="card-text">
-                                <button class="stretched-link" type='button' onClick={() => handleReadMore()}>Details
-                                </button>
-                                <span className=''><i class="fa-brands fa-youtube fs-2" style={{color: "#e07a1a"}}></i>
-                                </span>
+                                <p className="fs-6 overflow-hidden" style={{ height: "4.5rem"}}>INGREDIENTS: <span style={{ fontSize: "0.8rem"}}>{recipe.ingredients}</span></p>
+                                <p class="d-flex justify-content-start align-items-center gap-4 card-text">
+                                  <button class="btn bg-transparent rounded" type='button' onClick={() => handleReadMore()}><i class="fa-solid fa-info fa-xl" style={{color: "#FF7D04"}}></i>
+                                  </button>
+                                  <span className=''>
+                                    <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}><i class="fa-brands fa-youtube fs-2" style={{color: "#FF7D04"}}></i>
+                                    </a>
+                                  </span>
                                 </p>
                             </div>
                         {/* </div> */}
