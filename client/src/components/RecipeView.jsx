@@ -1,9 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import Hero from './Hero';
-import CookBook from './CookBook';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const RecipeView = () => {
         const location = useLocation();  
@@ -45,7 +41,7 @@ const RecipeView = () => {
               <ul>Ingredients:
               <li className='text-decoration-none'>{recipe.ingredients}</li>
               </ul>
-              <p className='instructions fs-6' style={{color: '#282727'}}>{recipe.instructions}</p>
+              <p className='instructions fs-5' style={{color: '#282727'}}>{recipe.instructions}</p>
             </div>
             <div className="holes hole-top"></div>
               <div className="holes hole-middle"></div>
