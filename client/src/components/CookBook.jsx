@@ -136,7 +136,6 @@ const CookBook = () => {
               onChange={handleInputChange}
               placeholder="Title"
             />
-            {/* <p className="border-card"></p> */}
             <input
               className="flex word-wrap w-75"
               type="text"
