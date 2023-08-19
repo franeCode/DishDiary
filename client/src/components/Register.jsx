@@ -49,7 +49,6 @@ const Register = () => {
         <div className="login-wrapper relative">
           <div className="container-fluid py-5 text-center">
             {errorMessage && <p className="text-danger">{errorMessage}</p>}
-
             <form className="d-flex flex-column justify-content-center align-items-center rounded py-4 gap-3">
               <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p className="lead mb-2 me-3">Register Account</p>
@@ -66,7 +65,6 @@ const Register = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
                 </div>
-
               <div className="form-outline mb-4">
                 <input
                   className="form-control form-control-lg"
