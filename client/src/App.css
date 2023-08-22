@@ -334,7 +334,6 @@ input[type="file" i]:hover {
   top: 30%;
   right: 0;
   background: white; 
-  /* border: 1px solid #ccc;  */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   /* display: none;  */
   z-index: 1;
