@@ -342,6 +342,5 @@ input[type="file" i]:hover {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0.3rem 1rem; */
   font-size: 0.9em;
  }
