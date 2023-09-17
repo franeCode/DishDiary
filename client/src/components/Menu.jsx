@@ -22,14 +22,14 @@ const Menu = () => {
             <div className="d-flex flex-column gap-5">
 
                 <div className="card mb-3" style={{ maxWidth: "80vw", borderColor: "transparent" }}>
-                    <div class="row g-0">
-                        <div class="col-md-3">
-                            <img src={view} style={{ height: "25rem", width: "100%"}} class="img-fluid rounded-4" alt="image"></img>
+                    <div className="row g-0">
+                        <div className="col-md-3">
+                            <img src={view} style={{ height: "25rem", width: "100%"}} className="img-fluid rounded-4" alt="image"></img>
                         </div>
-                        <div class="col-md-9">
-                            <div class="card-body p-3 ms-3">
-                                <h5 class="card-title fs-2">Ready to share your secret recipes with the world?</h5>
-                                <p class="card-text mt-5 fs-5">Start writing and let your imagination run wild! Jot down your unique creations, cherished family recipes, or even your innovative twists on classic dishes. Don't worry, we've got you covered with a simple and intuitive recipe editor that ensures your culinary masterpieces are captured flawlessly.</p>
+                        <div className="col-md-9">
+                            <div className="card-body p-3 ms-3">
+                                <h5 className="card-title fs-2">Ready to share your secret recipes with the world?</h5>
+                                <p className="card-text mt-5 fs-5">Start writing and let your imagination run wild! Jot down your unique creations, cherished family recipes, or even your innovative twists on classic dishes. Don't worry, we've got you covered with a simple and intuitive recipe editor that ensures your culinary masterpieces are captured flawlessly.</p>
                                 <button style={{backgroundColor: "#FF7D04"}} className="btn fs-3 px-4 mt-3 float-end rounded">
                                     <Link to="/cookbook" style={{ textDecoration: "none", color: "#fff"}}>Write</Link>
                                 </button>
@@ -39,18 +39,18 @@ const Menu = () => {
                 </div>
 
                 <div className="card mb-3" style={{ maxWidth: "80vw", borderColor: "transparent" }}>
-                    <div class="row g-0">
-                        <div class="col-md-8">
-                            <div class="card-body">
-                                <h5 class="card-title fs-2">Craving some culinary inspiration or looking to broaden your repertoire? </h5>
+                    <div className="row g-0">
+                        <div className="col-md-8">
+                            <div className="card-body">
+                                <h5 className="card-title fs-2">Craving some culinary inspiration or looking to broaden your repertoire? </h5>
                                 <p class="card-text mt-5 fs-5">Dive into a treasure trove of delightful recipes contributed by fellow food enthusiasts from all around the globe. Discover an endless array of appetizing dishes, ranging from mouthwatering main courses to decadent desserts. The possibilities are as vast as your appetite!</p>
                                 <button style={{backgroundColor: "#FF7D04"}} className="btn fs-3 px-4 mt-3 rounded float-end">
-                                    <Link to="/cookbook" style={{ textDecoration: "none", color: "#fff"}}>View</Link>
+                                    <Link to="/recipes" style={{ textDecoration: "none", color: "#fff"}}>View</Link>
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-4" style={{ height: "15rem"}}>
-                            <img src={img_write} class="img-fluid rounded-4 ms-3" alt="image"></img>
+                        <div className="col-md-4" style={{ height: "15rem"}}>
+                            <img src={img_write} className="img-fluid rounded-4 ms-3" alt="image"></img>
                         </div>
                     </div>
                 </div>

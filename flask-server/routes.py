@@ -81,7 +81,7 @@ def store_recipes():
             if meal is None:
                 continue
 
-            if index >= 24:
+            if index >= 50:
                 break  # Break the loop after 24 iterations
 
             # Retrieve the ingredients data as a list

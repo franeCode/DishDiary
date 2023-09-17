@@ -47,18 +47,22 @@ const CookBook = () => {
             </form>
             <div className='d-flex flex-column gap-5 position-absolute top-50 end-0 translate-middle-y pe-5'>
                 <button className="btn text-white rounded">
-                <i style={{color: "#FF7D04"}} class="fa-solid fa-arrow-left fa-xl"></i>
+                  <Link className='text-decoration-none text-white' to="/cookbook">
+                    <i style={{color: "#FF7D04"}} class="fa-solid fa-arrow-left fa-xl"></i>
+                  </Link>
                 </button>
                 <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
-                <i style={{color: "#FF7D04"}} class="fa-solid fa-check fa-xl"></i>
-                </button>
-                <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
-                <i style={{color: "#FF7D04"}} class="fa-regular fa-pen-to-square fa-xl"></i>
+                  <Link className='text-decoration-none text-white' to="/cookbook">
+                    <i style={{color: "#FF7D04"}} class="fa-regular fa-pen-to-square fa-xl"></i>
+                  </Link>
                 </button>
                 <button className='btn rounded bg-transparent'>
                   <Link className='text-decoration-none text-white' to="/custom_recipes">
                     <i style={{color: "#FF7D04"}} class="fa-regular fa-eye fa-xl"></i>
                   </Link>
+                </button>
+                <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
+                  <i style={{color: "#FF7D04"}} class="fa-solid fa-check fa-xl"></i>
                 </button>
               </div>
               {/* <div className="position-absolute top-0">

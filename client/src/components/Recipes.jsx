@@ -5,7 +5,7 @@ import axios from 'axios';
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recipesPerPage] = useState(8);
+  const [recipesPerPage] = useState(20);
 
   useEffect(() => {
   const fetchRecipes = async () => {

@@ -28,17 +28,17 @@ const RecipeCard = ({ recipe }) => {
         <div className="card align-items-center rounded-4 shadow-sm mb-5" style={{ width: "18rem", height: "30rem", borderColor: "transparent" }}>
                     {/* <div class="row g-0"> */}
                         {/* <div class="col-md-4"> */}
-                            <img src={recipe.image_url} class="card-img-top rounded-top-4" alt="image" ></img>
+                            <img src={recipe.image_url} className="card-img-top rounded-top-4" alt="image" ></img>
                         {/* </div> */}
                         {/* <div class="col-md-8"> */}
-                            <div class="card-body">
-                                <h5 class="card-title fs-2">{recipe.title}</h5>
+                            <div className="card-body">
+                                <h5 className="card-title fs-2">{recipe.title}</h5>
                                 <p className="fs-6 overflow-hidden" style={{ height: "4.5rem"}}>INGREDIENTS: <span style={{ fontSize: "0.8rem"}}>{recipe.ingredients}</span></p>
-                                <p class="d-flex justify-content-start align-items-center gap-4 card-text">
-                                  <button class="btn bg-transparent rounded" type='button' onClick={() => handleReadMore()}><i class="fa-solid fa-info fa-xl" style={{color: "#FF7D04"}}></i>
+                                <p className="d-flex justify-content-start align-items-center gap-4 card-text">
+                                  <button className="btn bg-transparent rounded" type='button' onClick={() => handleReadMore()}><i className="fa-solid fa-info fa-xl" style={{color: "#FF7D04"}}></i>
                                   </button>
                                   <span className=''>
-                                    <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}><i class="fa-brands fa-youtube fs-2" style={{color: "#FF7D04"}}></i>
+                                    <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}><i className="fa-brands fa-youtube fs-2" style={{color: "#FF7D04"}}></i>
                                     </a>
                                   </span>
                                 </p>
