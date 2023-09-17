@@ -39,15 +39,15 @@
   font-size: 3.3em;
   font-family: 'Caveat', cursive;
  }
-/* button {
+button[type=button] {
   background-color: #FF7D04;
-  border: 0.1rem solid #FF7D04;
-} */
+  border: 0.1rem solid transparent;
+}
 .login-btn {
   width: 15rem;
   height: 3rem;
-  border: 0.1rem solid #FF7D04;
-  background-color: #FF7D04;
+  /* border: 0.1rem solid #FF7D04;
+  background-color: #FF7D04; */
   /* position: absolute;
   top: 70%;
   left: 50%;
