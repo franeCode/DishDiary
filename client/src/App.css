@@ -10,6 +10,9 @@
  body {
   /* font-family: 'Poppins', sans-serif; */
   /* font-family: 'Caveat', cursive; */
+  margin: 0;
+  padding: 0;
+  /* overflow: hidden; */
  }
  nav {
   font-family: 'Poppins', sans-serif;
@@ -39,7 +42,7 @@
   font-size: 3.3em;
   font-family: 'Caveat', cursive;
  }
-button[type=button] {
+button, button[type=button] {
   background-color: #FF7D04;
   border: 0.1rem solid transparent;
 }
@@ -131,7 +134,7 @@ form {
   border-radius: 50%;
 }
 .recipe-view {
-  background-image: url('./assets/img/inspiration-bg.jpg');
+  /* background-image: url('./src/assets/img/inspiration-bg.jpg'); */
   background-size: cover;
   /* background-position: calc(100% 0px) calc(100% -5px); */
   background-position: center;
@@ -148,7 +151,7 @@ form {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../src/assets/img/inspiration.jpg');
+  /* background-image: url('./src/assets/img/inspiration.jpg'); */
   background-size: cover;
   /* filter: blur(3px); */
   z-index: 1;
@@ -194,13 +197,29 @@ form {
 }
 /* notebook */
 .book {
-  position: absolute;
+  /* position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   background-image: url('../src/assets/img/recipeview5.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  position: static;
+  overflow: hidden;
+  filter: blur(3px);
+  z-index: 1; */
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-image: url('../src/assets/img/recipeview5.jpg');
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  background-attachment: fixed; 
+  /* overflow-y: hidden; */
+  background-position: center center;
   filter: blur(3px);
   z-index: 1;
 }
@@ -228,11 +247,31 @@ form {
 } */
 .book-page {
   position: absolute;
-  top: 20%;
+  top: 25%;
   width: 70%;
   z-index: 2;
   font-family: 'Caveat', cursive;
   /* font-family: 'Roboto', sans-serif; */
+}
+.custom-options {
+  position: absolute;
+  top: 15%;
+  width: 70%;
+  z-index: 2;
+  /* font-family: 'Caveat', cursive; */
+  font-family: 'Roboto', sans-serif;
+  background-color: rgba(255, 255, 255);
+  border: 1px solid #dedede;
+  border-radius: 1rem;
+}
+
+.custom-recipes {
+  position: absolute;
+  top: 25%;
+  width: 90%;
+  z-index: 2;
+  /* font-family: 'Caveat', cursive; */
+  font-family: 'Roboto', sans-serif;
 }
 
 form {
@@ -281,7 +320,11 @@ textarea[name="instructions"] {
   /* font-family: 'Caveat', cursive; */
   font-family: 'Poppins', sans-serif;
   /* overflow-y: scroll; */
-  
+}
+input[type="file" i] {
+  background-color: #FF7D04;
+  border: 0.1rem solid #FF7D04;
+  color: #fff;
 }
 .list {
   color: #555;

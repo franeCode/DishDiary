@@ -43,7 +43,7 @@ const Menu = () => {
                         <div className="col-md-8">
                             <div className="card-body">
                                 <h5 className="card-title fs-2">Craving some culinary inspiration or looking to broaden your repertoire? </h5>
-                                <p class="card-text mt-5 fs-5">Dive into a treasure trove of delightful recipes contributed by fellow food enthusiasts from all around the globe. Discover an endless array of appetizing dishes, ranging from mouthwatering main courses to decadent desserts. The possibilities are as vast as your appetite!</p>
+                                <p className="card-text mt-5 fs-5">Dive into a treasure trove of delightful recipes contributed by fellow food enthusiasts from all around the globe. Discover an endless array of appetizing dishes, ranging from mouthwatering main courses to decadent desserts. The possibilities are as vast as your appetite!</p>
                                 <button style={{backgroundColor: "#FF7D04"}} className="btn fs-3 px-4 mt-3 rounded float-end">
                                     <Link to="/recipes" style={{ textDecoration: "none", color: "#fff"}}>View</Link>
                                 </button>

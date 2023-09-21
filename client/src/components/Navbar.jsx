@@ -7,25 +7,39 @@ import logo from '../assets/img/logo-icon.svg';
 
 const Navbar = () => {
   const navigate = useNavigate();
+    // const handleLogout = () => {
+    //   axios.get('/logout')
+    //     .then(response => {
+    //       if (response.status === 200) {
+    //         // Clear JWT token from client-side storage
+    //         localStorage.removeItem('token');
+    //         navigate('/login');
+    //         console.log('Logout successful');
+    //       } else {
+    //         throw new Error('Logout failed');
+    //       }
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //     });
+    // };
+
     const handleLogout = () => {
       axios.get('/logout')
         .then(response => {
           if (response.status === 200) {
             // Clear JWT token from client-side storage
-            localStorage.removeItem('token');
+            localStorage.removeItem('access_token'); // Use the correct key
             navigate('/login');
             console.log('Logout successful');
           } else {
-            throw new Error('Logout failed');
+            console.error('Logout failed: Unexpected status code');
           }
         })
         .catch(error => {
-          console.log(error);
+          console.error('Logout failed:', error.message); // Provide a more informative error message
         });
     };
-
-// Use handleLogout function in your component's JSX
-{/* <button onClick={handleLogout}>Logout</button> */}
 
 
   return (

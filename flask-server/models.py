@@ -38,13 +38,15 @@ class FavoriteRecipe(db.Model):
         return f"<FavoriteRecipe {self.title}>"
     
 class CustomRecipe(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
     ingredients = db.Column(db.Text, nullable=False)
+    image_url = db.Column(db.String(200))
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_custom_recipe_user_id'), nullable=False)
     user = db.relationship('Users', foreign_keys=[user_id])
 
     def __repr__(self):
         return f"<CustomRecipe {self.title}>"
+

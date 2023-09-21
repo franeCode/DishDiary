@@ -6,8 +6,17 @@ from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, unset_jwt_cookies, current_user
 from datetime import datetime, timedelta
 from app import app
+from sqlalchemy.sql import text
+from werkzeug.utils import secure_filename
+import os
 
 bcrypt = Bcrypt(app)
+
+@app.route('/protected', methods=['GET'])
+@jwt_required()
+def protected_route():
+    current_user = get_jwt_identity()
+    return f'Hello, {current_user}! This route is protected by JWT authentication.'
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -65,24 +74,24 @@ def logout():
 
 @app.route('/api/recipes', methods=['GET'])
 def store_recipes():
+    print('hello')
     """Get recipes and store it in the db"""
-    print("hello")
+    print('Deleting existing recipes...')
+    Recipe.query.delete()
+    print('Deletion complete!')
     try:
-        response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?s=')   
+        response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?f=')   
         data = response.json()
-        print(data)
+        # print(data)
 
         # Clear existing recipes from the database
-         # print('Deleting existing recipes...')
+        print('Deleting existing recipes...')
         Recipe.query.delete()
-        # print('Deletion complete!')
+        print('Deletion complete!')
 
-        for index, meal in enumerate(data['meals']):
+        for meal in data['meals']:
             if meal is None:
                 continue
-
-            if index >= 50:
-                break  # Break the loop after 24 iterations
 
             # Retrieve the ingredients data as a list
             ingredients = [
@@ -95,7 +104,6 @@ def store_recipes():
                 for i in range(1, 21)
                 if meal.get(f'strMeasure{i}') is not None and meal.get(f'strMeasure{i}').strip()
             ]
-            print(measure)
 
 
             recipe = Recipe(
@@ -114,17 +122,37 @@ def store_recipes():
         return jsonify({'message': 'Data successfully stored in the database!'})
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500  # Return the error message with a 500 status code
+        return jsonify({'error': str(e)}), 500  
 
+@app.route('/api/delete_recipe/<int:recipe_id>', methods=['DELETE'])
+@jwt_required()
+def delete_recipe(recipe_id):
+    try:
+        # Check if the recipe exists and belongs to the current user 
+        recipe = CustomRecipe.query.filter_by(id=recipe_id, user_id=current_user.id).first()
+         
+        if not recipe:
+            return jsonify({'error': 'Recipe not found or unauthorized'}), 404
+
+        # Delete the recipe from the database
+        db.session.delete(recipe)
+        db.session.commit()
+
+        return jsonify({'message': 'Recipe deleted successfully'}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/get_recipes', methods=['GET', 'POST'])
 @jwt_required()
 def get_recipes():
     """Get the recipes and send it to frontend"""
     current_user = get_jwt_identity()
+    print(current_user)
     try:
         recipes = Recipe.query.all()
+        # print(recipes)
         recipe_list = []
+        # print(recipe_list)
 
         for recipe in recipes:
             recipe_data = {
@@ -135,7 +163,7 @@ def get_recipes():
                 'measure': recipe.measure,
                 'image_url': recipe.image_url,
                 'youtube_link': recipe.youtube_link,
-                'current_user': current_user  # Include the current_user information in the response
+                'current_user': current_user 
             }
 
             recipe_list.append(recipe_data)
@@ -151,27 +179,53 @@ def add_recipe():
     """Add custom recipe to the db"""
     current_user = get_jwt_identity()
     print(current_user)
-    # user = Users.query.get(current_user_id)
+    
     if current_user:
         try:
-            recipe_data = request.get_json()
-            print(recipe_data)
-
-            # Extract recipe data from the request
-            title = recipe_data['title']
-            ingredients = recipe_data['ingredients']
-            instructions = recipe_data['instructions']
-
+            # Check the request content type
+            if request.content_type.startswith('multipart/form-data'):
+                # Handle file upload
+                image_file = request.files['image']
+                if image_file:
+                    image_filename = secure_filename(image_file.filename)
+                    image_path = os.path.join('uploads', image_filename)
+                    image_file.save(image_path)
+                else:
+                    image_path = None
+                
+                # if "uploads/" in recipe.image_url:
+                #     # Remove "uploads/" path from image_url
+                #     filename = recipe.image_url.split("/")[-1]
+                #     recipe.image_url = filename
+                    
+                # Extract other form fields
+                title = request.form.get('title')
+                ingredients = request.form.get('ingredients')
+                instructions = request.form.get('instructions')
+            elif request.content_type == 'application/json':
+                # Handle JSON data
+                recipe_data = request.get_json()
+                title = recipe_data.get('title')
+                ingredients = recipe_data.get('ingredients')
+                instructions = recipe_data.get('instructions')
+                image_path = None  # No image in JSON data
+                
             # Create a new CustomRecipe instance
             recipe = CustomRecipe(
                 title=title, 
                 ingredients=ingredients, 
                 instructions=instructions, 
+                image_url=image_path,  
                 user_id=current_user
-                )
+            )
             
-            db.session.add(recipe)
-            db.session.commit()
+            try:
+                db.session.add(recipe)
+                db.session.commit()
+            except Exception as db_error:
+                db.session.rollback()  # Rollback changes in case of an error
+                print(f"Database error: {str(db_error)}")
+                return jsonify({'error': 'Database error'}), 500
 
             return jsonify({'message': 'Recipe added successfully'})
         except Exception as e:
@@ -190,16 +244,71 @@ def get_custom_recipes():
 
         recipes = CustomRecipe.query.filter_by(user_id=current_user).all()  # Filter recipes by user_id
         recipe_list = []
-
+                
         for recipe in recipes:
             recipe_data = {
                 'id': recipe.id,
                 'title': recipe.title,
                 'ingredients': recipe.ingredients,
-                'instructions': recipe.instructions
+                'instructions': recipe.instructions,
+                'image_url': recipe.image_url
+                
             }
+            
+            
+                
             recipe_list.append(recipe_data)
 
         return jsonify(recipe_list)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+    
+@app.route('/api/share_recipe/<int:custom_recipe_id>/<int:recipe_id>', methods=['POST'])
+@jwt_required()
+def share_recipe(custom_recipe_id, recipe_id):
+    try:
+        # Get the current user
+        current_user = get_jwt_identity()
+        
+        app.logger.error(f"custom_recipe_id: {custom_recipe_id}, current_user.id: {current_user.id}")
+
+        custom_recipe = CustomRecipe.query.filter_by(id=custom_recipe_id, user_id=current_user.id).first()
+        
+        if custom_recipe:
+            print(f"Found custom_recipe: {custom_recipe}")
+        else:
+            print("Custom recipe not found or unauthorized")
+    
+        if not custom_recipe:
+            return jsonify({'error': 'Custom recipe not found or unauthorized'}), 404
+
+        # Get the recipe by its ID
+        recipe = Recipe.query.get(recipe_id)
+        if not recipe:
+            return jsonify({'error': 'Regular recipe not found'}), 404
+
+        # Copy the custom recipe data to the recipe
+        recipe.title = custom_recipe.title
+        recipe.ingredients = custom_recipe.ingredients
+        recipe.instructions = custom_recipe.instructions
+        recipe.image_url = custom_recipe.image_url
+
+        # Commit changes to the database
+        db.session.commit()
+
+        return jsonify({'message': 'Custom recipe shared successfully'}), 200
+    except Exception as e:
+        app.logger.error(f"Database error: {str(e)}")
+        return jsonify({'error': 'An error occurred while accessing the database'}), 500
+
+# @app.route('/test_database_connection', methods=['GET'])
+# def test_database_connection():
+#     try:
+#         sql_expression = text('SELECT 1')
+#         result = db.session.execute(sql_expression)
+#         if result.scalar() == 1:
+#             return jsonify({'message': 'Database connection is working'})
+#         else:
+#             return jsonify({'error': 'Database connection test failed'}), 500
+#     except Exception as e:
+#         return jsonify({'error': str(e)}), 500

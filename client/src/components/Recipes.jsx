@@ -4,8 +4,8 @@ import axios from 'axios';
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [recipesPerPage] = useState(20);
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const [recipesPerPage] = useState(8);
 
   useEffect(() => {
   const fetchRecipes = async () => {
@@ -32,14 +32,14 @@ const Recipes = () => {
 
 
   // Get current recipes based on pagination
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  // const indexOfLastRecipe = currentPage * recipesPerPage;
+  // const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  // const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  console.log('Current recipes:', currentRecipes);
-  console.log('All recipes:', recipes);
+  // // Change page
+  // const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  // console.log('Current recipes:', currentRecipes);
+  // console.log('All recipes:', recipes);
 
   return (
     <div className="app-container relative bg-white">
@@ -51,8 +51,8 @@ const Recipes = () => {
                 </p>
             </div>
         <ul className="row align-items-center justify-content-center pt-5">
-        {Array.isArray(currentRecipes) ? (
-            currentRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} />)
+        {Array.isArray(recipes) ? (
+            recipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} showIcon={false} />)
           ) : (
             <p>Loading...</p>
           )}
@@ -60,7 +60,7 @@ const Recipes = () => {
         </ul>
 
         {/* Pagination */}
-        <footer>
+        {/* <footer>
           <ul className="pagination justify-content-center my-4 pb-4 gap-3">
             {Array.from({ length: Math.ceil(recipes.length / recipesPerPage) }).map((_, index) => (
               <li key={index} className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}>
@@ -70,7 +70,7 @@ const Recipes = () => {
               </li>
             ))}
           </ul>
-        </footer>
+        </footer> */}
       </div>
     </div>
   );

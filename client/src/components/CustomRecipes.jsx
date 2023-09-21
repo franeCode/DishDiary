@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import logo from '../assets/img/logo-icon.svg';
 import { Link } from 'react-router-dom';
+import { handleSubmit } from './Api';
+import RecipeCard from './RecipeCard';
 
 const CustomRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 9;
-
+  const recipesPerPage = 30;
+  console.log("recipe state:", recipes);
   useEffect(() => {
     fetchRecipes();
   }, []);
@@ -26,7 +28,34 @@ const CustomRecipes = () => {
         console.log(error);
       });
   };
+ 
+  // const deleteRecipe = (recipeId) => {
+  //   // Send a DELETE request to your server to delete the recipe
+  //   axios
+  //     .delete(`/api/delete_recipe/${recipeId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log(response);
+  //       if (response.status === 200) {
+  //         // Update the recipes state to remove the deleted recipe
+  //         setRecipes((prevRecipes) =>
+  //           prevRecipes.filter((recipe) => recipe.id !== recipeId)
+  //         );
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error deleting recipe:', error);
+  //     });
+  // };
 
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit(recipes);
+  };
+  
   // Calculate the index of the last recipe to display on the current page
   const indexOfLastRecipe = currentPage * recipesPerPage;
   // Calculate the index of the first recipe to display on the current page
@@ -48,12 +77,41 @@ const CustomRecipes = () => {
 
   return (
     <div>
-      <div className='d-flex justify-content-center align-items-center relative'>
+      <div className='d-flex justify-content-center align-items-center overflow-hidden'>
         <div className='book'></div>
-        {/* <button onClick={prevPage}>
-          <i className='fa-light fa-hand-back-point-left'></i>
-        </button> */}
-        <div className='book-page relative'>
+        <div className='custom-options'>
+        <div className='w-100 d-flex flex-row justify-between p-2'>
+                <button className="btn text-white rounded">
+                  <Link className='text-decoration-none text-white' to="/menu">
+                    <i style={{color: "#FF7D04"}} className="fa-solid fa-arrow-left fa-xl"></i>
+                  </Link>
+                </button>
+                <div className='w-100 mx-5 text-end'>
+                <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
+                  <Link className='text-decoration-none text-white' to="/cookbook">
+                    <i style={{color: "#FF7D04"}} className="fa-regular fa-pen-to-square fa-xl"></i>
+                  </Link>
+                </button>
+                {/* <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
+                  <Link className='text-decoration-none text-white' to="/cookbook">
+                    <i className="fa-solid fa-trash fa-xl" style={{color: "#FF7D04"}}></i>
+                  </Link>
+                </button> */}
+                {/* <button className='btn rounded bg-transparent'>
+                  <Link className='text-decoration-none text-white' to="/custom_recipes">
+                    <i style={{color: "#FF7D04"}} className="fa-regular fa-eye fa-xl"></i>
+                  </Link>
+                </button> */}
+                {/* <button className='btn rounded bg-transparent'>
+                  <Link className='text-decoration-none text-white' to="/custom_recipes">
+                  <i className="fa-solid fa-share fa-xl" style={{color: "#ff7d04"}}></i>
+                  </Link>
+                </button> */}
+            </div>
+          </div>
+          
+        </div>
+        {/* <div className='book-page'>
           <div className='lines'></div>
           <div className='list'>
             <div className='holes hole-top'></div>
@@ -70,26 +128,34 @@ const CustomRecipes = () => {
                     <h3 style={{lineHeight: "0.5rem"}}>
                       {recipe.id}. {recipe.title}
                     </h3>
-                    <i class="fa-regular fa-trash-can"></i>
+                    <i className="fa-regular fa-trash-can"  onClick={() => deleteRecipe(recipe.id)}></i>
                   </li>
                 </Link>
               ))}
             </ul>
             <div className='d-flex justify-content-around'>
               <button style={{backgroundColor: "#FF7D04"}} className='btn rounded' onClick={prevPage}>
-                <i class="fa-solid fa-arrow-left text-white"></i>
+                <i className="fa-solid fa-arrow-left text-white"></i>
               </button>
               <button style={{backgroundColor: "#FF7D04"}} className='btn rounded' onClick={nextPage}>
-                <i class="fa-solid fa-arrow-right text-white"></i>
+                <i className="fa-solid fa-arrow-right text-white"></i>
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
+        <ul className="custom-recipes row align-items-center justify-content-center pt-5">
+        {Array.isArray(recipes) ? (
+            currentRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} customRecipeId={recipe.id}  showIcon={true} />)
+          ) : (
+            <p>Loading...</p>
+          )}
+        
+        </ul>
         {/* <button onClick={nextPage}>
           <i className='fa-light fa-hand-point-right'></i>
         </button> */}
       </div>
-    </div>
+   </div>
   );
 };
 
