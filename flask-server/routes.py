@@ -3,7 +3,7 @@ import requests
 from flask_bcrypt import Bcrypt
 from models import Recipe, Users, FavoriteRecipe, CustomRecipe, db
 from flask_cors import cross_origin
-from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, unset_jwt_cookies, current_user
+from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, unset_jwt_cookies, current_user, JWTManager
 from datetime import datetime, timedelta
 from app import app
 from sqlalchemy.sql import text
@@ -11,6 +11,18 @@ from werkzeug.utils import secure_filename
 import os
 
 bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
+
+# Define a user loader callback
+# @jwt.user_lookup_loader
+# def user_lookup_callback(identity, decoded_token):
+#     try:
+#         user_id = int(identity)
+#         user = Users.query.get(user_id)
+
+#         return user
+#     except Exception as e:
+#         return None  
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
@@ -267,40 +279,56 @@ def get_custom_recipes():
 @jwt_required()
 def share_recipe(custom_recipe_id, recipe_id):
     try:
-        # Get the current user
-        current_user = get_jwt_identity()
-        
-        app.logger.error(f"custom_recipe_id: {custom_recipe_id}, current_user.id: {current_user.id}")
+        app.logger.error(f"Request Headers: {request.headers}")
 
-        custom_recipe = CustomRecipe.query.filter_by(id=custom_recipe_id, user_id=current_user.id).first()
-        
-        if custom_recipe:
-            print(f"Found custom_recipe: {custom_recipe}")
+        # Get the current user's ID from the JWT token
+        current_user_id = get_jwt_identity()
+
+        if current_user_id is not None:
+            app.logger.error(f"current_user_id: {current_user_id}, custom_recipe_id: {custom_recipe_id}")
+
+            # Check if the custom_recipe_id is not None
+            if custom_recipe_id is not None:
+                custom_recipe = CustomRecipe.query.filter_by(id=custom_recipe_id, user_id=current_user_id).first()
+
+                if custom_recipe:
+                    app.logger.error(f"Found custom_recipe: {custom_recipe}")
+                else:
+                    app.logger.error("Custom recipe not found or unauthorized")
+
+                if not custom_recipe:
+                    return jsonify({'error': 'Custom recipe not found or unauthorized'}), 404
+
+                # Create a new Recipe instance and copy data
+                recipe = Recipe()
+                # Set the attributes without setting the ID
+                recipe.title = custom_recipe.title
+                recipe.ingredients = custom_recipe.ingredients
+                recipe.instructions = custom_recipe.instructions
+                recipe.image_url = custom_recipe.image_url
+
+                # Commit changes to the database
+                db.session.add(recipe)
+                db.session.commit()
+                
+                shared_recipe = Recipe.query.filter_by(title=recipe.title).first()
+                if shared_recipe:
+                    print(f"Shared Recipe ID: {shared_recipe.id}")
+                else:
+                    print("Shared Recipe not found in the database")
+
+                return jsonify({'message': 'Custom recipe shared successfully'}), 200
+            else:
+                return jsonify({'error': 'Invalid custom recipe ID'}), 400
         else:
-            print("Custom recipe not found or unauthorized")
-    
-        if not custom_recipe:
-            return jsonify({'error': 'Custom recipe not found or unauthorized'}), 404
-
-        # Get the recipe by its ID
-        recipe = Recipe.query.get(recipe_id)
-        if not recipe:
-            return jsonify({'error': 'Regular recipe not found'}), 404
-
-        # Copy the custom recipe data to the recipe
-        recipe.title = custom_recipe.title
-        recipe.ingredients = custom_recipe.ingredients
-        recipe.instructions = custom_recipe.instructions
-        recipe.image_url = custom_recipe.image_url
-
-        # Commit changes to the database
-        db.session.commit()
-
-        return jsonify({'message': 'Custom recipe shared successfully'}), 200
+            return jsonify({'error': 'Invalid user identity'}), 401
     except Exception as e:
         app.logger.error(f"Database error: {str(e)}")
         return jsonify({'error': 'An error occurred while accessing the database'}), 500
 
+
+    
+    
 # @app.route('/test_database_connection', methods=['GET'])
 # def test_database_connection():
 #     try:

@@ -15,15 +15,21 @@ const RecipeCard = ({ recipe, showIcon, customRecipeId }) => {
   };
 
 // Function to share a custom recipe with a regular recipe
-const shareRecipe = (customRecipeId, recipeId, formData) => {
-  axios.post(`/api/share_recipe/${customRecipeId}/${recipeId}`, formData,
-  {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-      'Content-Type': 'multipart/form-data',
-      'Accept':'multipart/form-data',
-    },
-  })
+const shareRecipe = (customRecipeId, recipeId) => {
+    // Create a FormData object to send data as multipart/form-data
+    const formData = new FormData();
+
+    // Add customRecipeId and recipeId to the FormData
+    formData.append('customRecipeId', customRecipeId);
+    formData.append('recipeId', recipeId);
+
+    // Send the POST request to share the recipe
+    axios
+      .post(`/api/share_recipe/${customRecipeId}/${recipeId}`, formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
     .then((response) => {
       // Handle success
       console.log(response.data.message);
