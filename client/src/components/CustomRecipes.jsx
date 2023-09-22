@@ -4,6 +4,7 @@ import logo from '../assets/img/logo-icon.svg';
 import { Link } from 'react-router-dom';
 import { handleSubmit } from './Api';
 import RecipeCard from './RecipeCard';
+import RecipeView from './RecipeView';
 
 const CustomRecipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -29,27 +30,30 @@ const CustomRecipes = () => {
       });
   };
  
-  // const deleteRecipe = (recipeId) => {
-  //   // Send a DELETE request to your server to delete the recipe
-  //   axios
-  //     .delete(`/api/delete_recipe/${recipeId}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log(response);
-  //       if (response.status === 200) {
-  //         // Update the recipes state to remove the deleted recipe
-  //         setRecipes((prevRecipes) =>
-  //           prevRecipes.filter((recipe) => recipe.id !== recipeId)
-  //         );
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error('Error deleting recipe:', error);
-  //     });
-  // };
+  const deleteRecipe = async (recipeId) => {
+    
+    // Send a DELETE request to your server to delete the recipe
+    axios
+      .delete(`/api/delete_recipe/${recipeId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        if (response.status === 200) {
+          // Update the recipes state to remove the deleted recipe
+          setRecipes((prevRecipes) =>
+              prevRecipes.filter((recipe) => recipe.id !== recipeId)
+            );
+        // recipe.filter((recipe) => recipe.id !== recipeId)
+        }
+      })
+      .catch((error) => {
+        console.error('Error deleting recipe:', error);
+      });
+  };
+  
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -92,63 +96,22 @@ const CustomRecipes = () => {
                     <i style={{color: "#FF7D04"}} className="fa-regular fa-pen-to-square fa-xl"></i>
                   </Link>
                 </button>
-                {/* <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
-                  <Link className='text-decoration-none text-white' to="/cookbook">
-                    <i className="fa-solid fa-trash fa-xl" style={{color: "#FF7D04"}}></i>
-                  </Link>
-                </button> */}
-                {/* <button className='btn rounded bg-transparent'>
-                  <Link className='text-decoration-none text-white' to="/custom_recipes">
-                    <i style={{color: "#FF7D04"}} className="fa-regular fa-eye fa-xl"></i>
-                  </Link>
-                </button> */}
-                {/* <button className='btn rounded bg-transparent'>
-                  <Link className='text-decoration-none text-white' to="/custom_recipes">
-                  <i className="fa-solid fa-share fa-xl" style={{color: "#ff7d04"}}></i>
-                  </Link>
-                </button> */}
             </div>
           </div>
           
         </div>
-        {/* <div className='book-page'>
-          <div className='lines'></div>
-          <div className='list'>
-            <div className='holes hole-top'></div>
-            <div className='holes hole-middle'></div>
-            <div className='holes hole-bottom'></div>
-            <ul>
-            <div className="logo text-center pt-2">
-              <span className='fs-3 text-black'>My DishDiary</span>
-              <img src={logo} alt="logo"></img>
-            </div>
-              {currentRecipes.map(recipe => (
-                <Link className='text-decoration-none text-black fs-4' to={''} key={recipe.id}>
-                  <li className='d-flex justify-content-between' key={recipe.id}>
-                    <h3 style={{lineHeight: "0.5rem"}}>
-                      {recipe.id}. {recipe.title}
-                    </h3>
-                    <i className="fa-regular fa-trash-can"  onClick={() => deleteRecipe(recipe.id)}></i>
-                  </li>
-                </Link>
-              ))}
-            </ul>
-            <div className='d-flex justify-content-around'>
-              <button style={{backgroundColor: "#FF7D04"}} className='btn rounded' onClick={prevPage}>
-                <i className="fa-solid fa-arrow-left text-white"></i>
-              </button>
-              <button style={{backgroundColor: "#FF7D04"}} className='btn rounded' onClick={nextPage}>
-                <i className="fa-solid fa-arrow-right text-white"></i>
-              </button>
-            </div>
-          </div>
-        </div> */}
         <ul className="custom-recipes row align-items-center justify-content-center pt-5">
         {Array.isArray(recipes) ? (
-            currentRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe} customRecipeId={recipe.id}  showIcon={true} />)
-          ) : (
-            <p>Loading...</p>
-          )}
+          currentRecipes.map((recipe) => (
+            <div key={recipe.id}>
+              <RecipeCard recipe={recipe} customRecipeId={recipe.id} showIcon={true} deleteRecipe={deleteRecipe} />
+              {/* Include the RecipeView component for each RecipeCard */}
+              <RecipeView recipe={recipe} customRecipeId={recipe.id} />
+            </div>
+          ))
+        ) : (
+          <p>Loading...</p>
+        )}
         
         </ul>
         {/* <button onClick={nextPage}>

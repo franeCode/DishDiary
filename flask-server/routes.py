@@ -9,6 +9,7 @@ from app import app
 from sqlalchemy.sql import text
 from werkzeug.utils import secure_filename
 import os
+import logging
 
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
@@ -140,26 +141,37 @@ def store_recipes():
 @jwt_required()
 def delete_recipe(recipe_id):
     try:
-        # Check if the recipe exists and belongs to the current user 
-        recipe = CustomRecipe.query.filter_by(id=recipe_id, user_id=current_user.id).first()
+        logging.info('Entered try block')
+        
+        current_user = get_jwt_identity()
+        
+        if current_user is not None:
+            app.logger.error(f"current_user_id: {current_user}")
+        else:
+            app.logger.error("User not found or unauthorized")
+            return jsonify({'error': 'User not found or unauthorized'}), 401  # Unauthorized status code
+        
+        custom_recipe = CustomRecipe.query.filter_by(id=recipe_id, user_id=current_user).first()
          
-        if not recipe:
+        if custom_recipe is not None:
+            # Delete the recipe from the database
+            db.session.delete(custom_recipe)
+            db.session.commit()
+            return jsonify({'message': 'Recipe deleted successfully'}), 200
+        else:
             return jsonify({'error': 'Recipe not found or unauthorized'}), 404
 
-        # Delete the recipe from the database
-        db.session.delete(recipe)
-        db.session.commit()
-
-        return jsonify({'message': 'Recipe deleted successfully'}), 200
     except Exception as e:
+        logging.error('Entered catch block')
         return jsonify({'error': str(e)}), 500
+
 
 @app.route('/api/get_recipes', methods=['GET', 'POST'])
 @jwt_required()
 def get_recipes():
     """Get the recipes and send it to frontend"""
+    
     current_user = get_jwt_identity()
-    print(current_user)
     try:
         recipes = Recipe.query.all()
         # print(recipes)
@@ -326,7 +338,37 @@ def share_recipe(custom_recipe_id, recipe_id):
         app.logger.error(f"Database error: {str(e)}")
         return jsonify({'error': 'An error occurred while accessing the database'}), 500
 
+@app.route('/api/update_recipe/<int:recipe_id>', methods=['POST'])
+@jwt_required()
+def update_recipe(recipe_id):
+    try:
+        # Get the current user's ID from the JWT token
+        current_user_id = get_jwt_identity()
 
+        # Check if the current user is authorized to update this recipe
+        custom_recipe = CustomRecipe.query.filter_by(id=recipe_id, user_id=current_user_id).first()
+
+        if custom_recipe:
+            # Parse the updated recipe data from the request
+            updated_data = request.get_json()
+            title = updated_data.get('title')
+            ingredients = updated_data.get('ingredients')
+            instructions = updated_data.get('instructions')
+
+            # Update the custom recipe data
+            custom_recipe.title = title
+            custom_recipe.ingredients = ingredients
+            custom_recipe.instructions = instructions
+
+            # Commit the changes to the database
+            db.session.commit()
+
+            return jsonify({'message': 'Recipe updated successfully'}), 200
+        else:
+            return jsonify({'error': 'Recipe not found or unauthorized'}), 404
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
     
     
 # @app.route('/test_database_connection', methods=['GET'])
