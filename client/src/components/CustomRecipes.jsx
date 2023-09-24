@@ -4,35 +4,34 @@ import logo from '../assets/img/logo-icon.svg';
 import { Link } from 'react-router-dom';
 import { handleSubmit } from './Api';
 import RecipeCard from './RecipeCard';
-import RecipeView from './RecipeView';
 
 const CustomRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 30;
   console.log("recipe state:", recipes);
+
   useEffect(() => {
+    const fetchRecipes = () => {
+      axios
+        .get('/api/get_custom_recipes', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        })
+        .then(response => {
+          setRecipes(response.data);
+          console.log('CustomRecipes component - Response data:', response.data); // Log the data here
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    };
     fetchRecipes();
   }, []);
-
-  const fetchRecipes = () => {
-    axios
-      .get('/api/get_custom_recipes', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      .then(response => {
-        setRecipes(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  };
  
   const deleteRecipe = async (recipeId) => {
     
-    // Send a DELETE request to your server to delete the recipe
     axios
       .delete(`/api/delete_recipe/${recipeId}`, {
         headers: {
@@ -102,16 +101,10 @@ const CustomRecipes = () => {
         </div>
         <ul className="custom-recipes row align-items-center justify-content-center pt-5">
         {Array.isArray(recipes) ? (
-          currentRecipes.map((recipe) => (
-            <div key={recipe.id}>
-              <RecipeCard recipe={recipe} customRecipeId={recipe.id} showIcon={true} deleteRecipe={deleteRecipe} />
-              {/* Include the RecipeView component for each RecipeCard */}
-              <RecipeView recipe={recipe} customRecipeId={recipe.id} />
-            </div>
-          ))
-        ) : (
-          <p>Loading...</p>
-        )}
+            currentRecipes.map((recipe) => <RecipeCard key={recipe.id} recipe={recipe}  showIcon={true} deleteRecipe={deleteRecipe} />)
+          ) : (
+            <p>Loading...</p>
+          )}
         
         </ul>
         {/* <button onClick={nextPage}>

@@ -46,7 +46,7 @@ const AppRoutes = () => {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/cookbook" element={<CookBook />} />
         <Route path="/custom_recipes" element={<CustomRecipes />} />
-        <Route path="/recipe_view" element={<RecipeView />} />
+        {/* <Route path="/recipe_view" element={<RecipeView />} /> */}
       </Routes>
     </>
   );

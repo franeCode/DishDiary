@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const RecipeView = ({ recipe, customRecipeId }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -9,6 +10,7 @@ const RecipeView = ({ recipe, customRecipeId }) => {
     instructions: recipe ? recipe.instructions : '', // Check if recipe is defined
   });
 
+  
   const handleEditClick = () => {
     setIsEditing(true);
   };
@@ -46,7 +48,7 @@ const RecipeView = ({ recipe, customRecipeId }) => {
     // Handle cancel edit here
     setIsEditing(false);
   };
-
+  console.log(customRecipeId)
   return (
     <div className='page d-flex justify-content-center align-items-center relative'>
       <div className='book'></div>
