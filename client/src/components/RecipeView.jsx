@@ -113,9 +113,81 @@
 
 // export default RecipeView;
 
+// import React from 'react';
+// import { useLocation } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
+// import noImage from "../assets/img/no-image.jpeg";
+
+// const RecipeView = () => {
+//   const location = useLocation();
+//   const { recipe } = location.state || {};
+//   const { id } = useParams();
+//   console.log('RecipeView - URL Parameter ID:', id);
+//   console.log('Recipe data:', recipe);
+
+//   if (!recipe) {
+//     return <div>No recipe data available.</div>;
+//   }
+
+//   return (
+//     <>
+//     <div className='page d-flex justify-content-center align-items-center relative'>
+//       <div className='book'></div>
+//       <div className='book-page relative'>
+//         <div className="lines"></div>
+//         <div className="list">
+//           <h1>{recipe.title}</h1>
+//           <div className="" style={{height: "5rem", width: "5rem"}}>
+//           {recipe.image_url ? (
+//           <img
+//             src={recipe.image_url}
+//             className="card-img-top rounded-top-4"
+//             alt="image"
+//           />
+//         ) : (
+//           <img
+//             src={noImage}
+//             className="card-img-top rounded-top-4"
+//             alt="image"
+//           />
+//         )}
+//         </div>
+//           <div className="d-flex flex-row">
+//           <ul className='d-flex flex-column' style={{width: "10rem"}}>
+//             <li className='text-decoration-none'>{recipe.measure}</li>
+//           </ul>
+//           <ul className='d-flex flex-column' style={{width: "10rem"}}>
+//             <li className='text-decoration-none'>{recipe.ingredients}</li>
+//           </ul>
+//           {/* <ul className='d-flex flex-column'>
+//                 {measures.map((measure, index) => (
+//                   <li key={index} className='text-decoration-none'>{measure}</li>
+//                 ))}
+//               </ul>
+//               <ul>
+//                 {ingredients.map((ingredient, index) => (
+//                   <li key={index} className='d-flex flex-column text-decoration-none'>{ingredient}</li>
+//                 ))}
+//               </ul> */}
+//           </div>
+//           <p className='instructions fs-6' style={{ color: '#282727' }}>{recipe.instructions}</p>
+//         </div>
+//         <div className="holes hole-top"></div>
+//         <div className="holes hole-middle"></div>
+//         <div className="holes hole-bottom"></div>
+//       </div>
+//       <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}>Watch Video</a>
+//     </div>
+//     </>
+//   );
+// };
+
+// export default RecipeView;
+
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
+import noImage from "../assets/img/no-image.jpeg";
 
 const RecipeView = () => {
   const location = useLocation();
@@ -128,28 +200,63 @@ const RecipeView = () => {
     return <div>No recipe data available.</div>;
   }
 
+  // Split measures and ingredients by comma
+  const measures = recipe.measure.split(', ');
+  const ingredients = recipe.ingredients.split(', ');
+
+  if (measures.length !== ingredients.length) {
+    return <div>Invalid data format for measures and ingredients.</div>;
+  }
+
   return (
     <>
-    <div className='page d-flex justify-content-center align-items-center relative'>
-      <div className='book'></div>
-      <div className='book-page relative'>
-        <div className="lines"></div>
-        <div className="list">
-          <h1>{recipe.title}</h1>
-          <ul>
-            <li className='text-decoration-none'>{recipe.ingredients}</li>
-          </ul>
-          <p className='instructions fs-6' style={{ color: '#282727' }}>{recipe.instructions}</p>
+      <div className='page d-flex justify-content-center align-items-center relative'>
+        <div className='book'></div>
+        <div className='book-page relative'>
+          <div className="lines"></div>
+          <div className="list">
+            <div className="d-flex flex-column p-3">
+            <h1>{recipe.title}</h1>
+            <div className="" style={{height: "10rem", width: "10rem"}}>
+              {recipe.image_url ? (
+                <img
+                  src={recipe.image_url}
+                  className="card-img-top rounded-top-4"
+                  alt="image"
+                />
+              ) : (
+                <img
+                  src={noImage}
+                  className="card-img-top rounded-top-4"
+                  alt="image"
+                />
+              )}
+            </div>
+            <div className="w-25 d-flex flex-row border border-dark position-absolute top-0 start-50 translate-end">
+              <ul className='d-flex flex-column text-center p-0 mb-0'>
+                {measures.map((measure, index) => (
+                  <li key={index} className='text-decoration-none fs-6'
+                  style={{lineHeight: "1rem"}}>{measure}</li>
+                ))}
+              </ul>
+              <ul className='d-flex flex-column text-center p-0 mb-0'>
+                {ingredients.map((ingredient, index) => (
+                  <li key={index} className='text-decoration-none fs-6'
+                  style={{lineHeight: "1rem"}}>{ingredient}</li>
+                ))}
+              </ul>
+            </div>
+            <p className='instructions fs-6' style={{ color: '#282727' }}>{recipe.instructions}</p>
+          </div>
+          </div>
+          <div className="holes hole-top"></div>
+          <div className="holes hole-middle"></div>
+          <div className="holes hole-bottom"></div>
         </div>
-        <div className="holes hole-top"></div>
-        <div className="holes hole-middle"></div>
-        <div className="holes hole-bottom"></div>
+        <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}>Watch Video</a>
       </div>
-      <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}>Watch Video</a>
-    </div>
     </>
   );
 };
 
 export default RecipeView;
-
