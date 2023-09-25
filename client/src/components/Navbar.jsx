@@ -74,6 +74,9 @@ const Navbar = () => {
               <Link className="nav-link" to="/cookbook">CookBook</Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/custom_recipes">My Recipes</Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to="/recipes">Get Inspiration</Link>
             </li>
             <li className="nav-item ms-5">
