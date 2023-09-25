@@ -13,7 +13,7 @@ const RecipeCard = ({
   isEditing,
   setIsEditing,
 }) => {
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
+  // const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   const navigate = useNavigate();
 
@@ -47,9 +47,10 @@ const RecipeCard = ({
 
   const handleInfoIconClick = (recipe) => {
     if (recipe && recipe.id) {
-      navigate(`/recipe/${recipe.id}`, { state: { recipe } });
+      console.log('Recipe data before navigation:', recipe);
+      navigate(`/recipe/${recipe.id}`, { state: { recipe: recipe } });
     }
-    setSelectedRecipe(recipe);
+    // setSelectedRecipe(recipe);
   };
 
   const handleDeleteClick = () => {
@@ -87,10 +88,10 @@ const RecipeCard = ({
             </span>
           </p>
           <p className="d-flex justify-content-start align-items-center gap-4 card-text">
-            <Link
+            {/* <Link
               className="text-decoration-none text-white"
-              to="/recipe/recipe:id"
-            >
+              to={`/recipe/${recipe.id}`}
+            > */}
               <button
                 className="btn bg-transparent rounded"
                 type="button"
@@ -101,8 +102,8 @@ const RecipeCard = ({
                   style={{ color: "#FF7D04" }}
                 ></i>
               </button>
-            </Link>
-            {showIcon && !isEditing && (
+            {/* </Link> */}
+            {showIcon && (
               <button
                 className="btn rounded bg-transparent position-absolute top-0 end-0 p-2"
                 onClick={() => shareRecipe(customRecipeId, recipe.id)}
@@ -118,7 +119,7 @@ const RecipeCard = ({
                 </Link>
               </button>
             )}
-            {showIcon && !isEditing && (
+            {showIcon && (
               <button
                 className="btn text-white rounded"
                 type="submit"
