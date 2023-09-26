@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from models import Recipe, Users, FavoriteRecipe, CustomRecipe, db
 from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, unset_jwt_cookies, current_user, JWTManager
+from flask import send_from_directory
 from datetime import datetime, timedelta
 from app import app
 from sqlalchemy.sql import text
@@ -206,8 +207,8 @@ def add_recipe():
     
     if current_user:
         try:
-            # Check the request content type
-            if request.content_type.startswith('multipart/form-data'):
+            # Check if 'image' field exists in the form data
+            if 'image' in request.files:
                 # Handle file upload
                 image_file = request.files['image']
                 if image_file:
@@ -216,30 +217,20 @@ def add_recipe():
                     image_file.save(image_path)
                 else:
                     image_path = None
+            else:
+                image_path = None
                 
-                # if "uploads/" in recipe.image_url:
-                #     # Remove "uploads/" path from image_url
-                #     filename = recipe.image_url.split("/")[-1]
-                #     recipe.image_url = filename
-                    
-                # Extract other form fields
-                title = request.form.get('title')
-                ingredients = request.form.get('ingredients')
-                instructions = request.form.get('instructions')
-            elif request.content_type == 'application/json':
-                # Handle JSON data
-                recipe_data = request.get_json()
-                title = recipe_data.get('title')
-                ingredients = recipe_data.get('ingredients')
-                instructions = recipe_data.get('instructions')
-                image_path = None  # No image in JSON data
-                
+            # Extract other form fields
+            title = request.form.get('title')
+            ingredients = request.form.get('ingredients')
+            instructions = request.form.get('instructions')
+            
             # Create a new CustomRecipe instance
             recipe = CustomRecipe(
                 title=title, 
                 ingredients=ingredients, 
                 instructions=instructions, 
-                image_url=image_path,  
+                image_url=image_path,  # Use the image path here
                 user_id=current_user
             )
             
@@ -257,6 +248,11 @@ def add_recipe():
             return jsonify({'error': str(e)}), 500
     else:
         return jsonify({"error": "Unauthorized"}), 401
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 @app.route('/api/get_custom_recipes', methods=['GET'])
