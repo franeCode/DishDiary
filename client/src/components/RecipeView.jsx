@@ -201,8 +201,9 @@ const RecipeView = () => {
   }
 
   // Split measures and ingredients by comma
-  const measures = recipe.measure.split(', ');
-  const ingredients = recipe.ingredients.split(', ');
+  const measures = recipe.measure && recipe.measure.trim() !== '' ? recipe.measure.split(', ') : [];
+  const ingredients = recipe.ingredients && recipe.ingredients.trim() !== '' ? recipe.ingredients.split(', ') : [];
+
 
   if (measures.length !== ingredients.length) {
     return <div>Invalid data format for measures and ingredients.</div>;
@@ -215,24 +216,10 @@ const RecipeView = () => {
         <div className='book-page relative'>
           <div className="lines"></div>
           <div className="list">
+            <div className="d-flex flex-row">
             <div className="d-flex flex-column p-3">
             <h1>{recipe.title}</h1>
-            <div className="" style={{height: "10rem", width: "10rem"}}>
-              {recipe.image_url ? (
-                <img
-                  src={recipe.image_url}
-                  className="card-img-top rounded-top-4"
-                  alt="image"
-                />
-              ) : (
-                <img
-                  src={noImage}
-                  className="card-img-top rounded-top-4"
-                  alt="image"
-                />
-              )}
-            </div>
-            <div className="w-25 d-flex flex-row border border-dark position-absolute top-0 start-50 translate-end">
+            <div className="d-flex flex-row border border-dark" style={{ width: "20rem", height: "25rem"}}>
               <ul className='d-flex flex-column text-center p-0 mb-0'>
                 {measures.map((measure, index) => (
                   <li key={index} className='text-decoration-none fs-6'
@@ -246,7 +233,26 @@ const RecipeView = () => {
                 ))}
               </ul>
             </div>
-            <p className='instructions fs-6' style={{ color: '#282727' }}>{recipe.instructions}</p>
+            </div>
+            <div className='d-flex flex-column p-3 mt-5'>
+            {/* <div className="" style={{height: "15rem", width: "20rem"}}>
+              {recipe.image_url ? (
+                <img
+                  src={recipe.image_url}
+                  className="card-img-top rounded-top-4"
+                  alt="image"
+                />
+              ) : (
+                <img
+                  src={noImage}
+                  className="card-img-top rounded-top-4"
+                  alt="image"
+                />
+              )}
+            </div> */}
+            <p className='instructions fs-5' style={{ color: '#282727' }}>{recipe.instructions}
+            </p>
+          </div>
           </div>
           </div>
           <div className="holes hole-top"></div>

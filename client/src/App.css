@@ -106,9 +106,9 @@ form {
 .page {
   font-family: 'Poppins', sans-serif;
 }
-.instructions {
+/* .instructions {
   min-height: 23rem;
-}
+} */
 .hero-container {
   position: relative;
   height: 10rem;
@@ -321,10 +321,8 @@ textarea[name="instructions"] {
   font-family: 'Poppins', sans-serif;
   /* overflow-y: scroll; */
 }
-input[type="file" i] {
-  background-color: #FF7D04;
-  border: 0.1rem solid #FF7D04;
-  color: #fff;
+input[type="file" i]:hover {
+  background-color: none;
 }
 .list {
   color: #555;
