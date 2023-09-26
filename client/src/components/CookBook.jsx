@@ -25,7 +25,7 @@ const CookBook = () => {
     formData.append('title', recipe.title);
     formData.append('ingredients', recipe.ingredients);
     formData.append('instructions', recipe.instructions);
-    formData.append('image', recipe.image); 
+    formData.append('image', recipe.image_url); 
     axios.post('/api/add_recipe', formData, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('access_token')}`,
@@ -79,10 +79,11 @@ const CookBook = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
+                style={{fontSize: "1rem", color: "#555", padding: "0rem", border: "none"}}
               />
-              <button className='btn text-white rounded' type="submit" onClick={handleSubmit}>
+              <button className='btn text-white rounded position-absolute end-0 bottom-0 translate-middle' type="submit" onClick={handleSubmit}>
                 <Link className='text-decoration-none text-white' to="/custom_recipes">
-                  <i style={{color: "#FF7D04"}} className="fa-solid fa-check fa-xl"></i>
+                  <i style={{color: "#FF7D04"}} className="fa-solid fa-check fa-2xl"></i>
                 </Link>
               </button>
             </form>
