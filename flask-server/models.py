@@ -42,6 +42,7 @@ class CustomRecipe(db.Model):
     title = db.Column(db.String(100), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
     ingredients = db.Column(db.Text, nullable=False)
+    measure = db.Column(db.Text)
     image_url = db.Column(db.String(200))
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_custom_recipe_user_id'), nullable=False)

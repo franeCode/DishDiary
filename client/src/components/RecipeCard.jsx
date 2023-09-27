@@ -3,35 +3,44 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import noImage from "../assets/img/no-image.jpeg";
 import axios from "axios";
-import RecipeView from "./RecipeView"; 
 
-const RecipeCard = ({
-  recipe,
-  showIcon,
-  customRecipeId,
-  deleteRecipe,
-  isEditing,
-  setIsEditing,
-}) => {
-  // const [selectedRecipe, setSelectedRecipe] = useState(null);
-
+const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId }) => {
   const navigate = useNavigate();
 
+  // const handleDelete = () => {
+  //   deleteRecipe(recipe.id)
+  // }
+  const handleReadMore = () => {
+    navigate(`/recipe/${recipe.id}`, { state: { recipe } });
+  };
+
+  const deleteRecipe = async (recipeId) => {
+    axios
+      .delete(`/api/delete_recipe/${recipeId}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      })
+      .then((response) => {
+        
+        if (response.status === 200) {
+          setRecipes((recipes) =>
+          recipes.filter((recipe) => recipe.id !== recipeId));
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting recipe:", error);
+      });
+  };
 
   // Function to share a custom recipe with a regular recipe
-  const shareRecipe = (customRecipeId, recipeId) => {
-    // Create a FormData object to send data as multipart/form-data
-    const formData = new FormData();
-
-    // Add customRecipeId and recipeId to the FormData
-    formData.append("customRecipeId", customRecipeId);
-    formData.append("recipeId", recipeId);
-
-    // Send the POST request to share the recipe
+  const shareRecipe = (customRecipeId, recipeId, formData) => {
     axios
       .post(`/api/share_recipe/${customRecipeId}/${recipeId}`, formData, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          "Content-Type": "multipart/form-data",
+          Accept: "multipart/form-data",
         },
       })
       .then((response) => {
@@ -45,27 +54,22 @@ const RecipeCard = ({
       });
   };
 
-  const handleInfoIconClick = (recipe) => {
-    if (recipe && recipe.id) {
-      console.log('Recipe data before navigation:', recipe);
-      navigate(`/recipe/${recipe.id}`, { state: { recipe: recipe } });
-    }
-    // setSelectedRecipe(recipe);
-  };
+  const displayRecipe = recipe || customRecipeId;
 
-  const handleDeleteClick = () => {
-    deleteRecipe(recipe.id);
-  };
+  // Check if recipe.image_url is an absolute URL (contains http or https)
+  // const isAbsoluteURL = /^https?:\/\//i.test(recipe.image_url);
 
+  // const imageSrc = isAbsoluteURL ? recipe.image_url : `${recipe.image_url}`;
+  // console.log(recipe.image_url)
   return (
     <div className="col-sm-6 col-md-4 col-lg-3 mt-5">
       <div
         className="card align-items-center rounded-4 shadow-sm mb-5 position-relative"
         style={{ width: "18rem", height: "25rem", borderColor: "transparent" }}
       >
-        {recipe.image_url ? (
+        {displayRecipe && displayRecipe.image_url ? (
           <img
-            src={recipe.image_url}
+            src={displayRecipe.image_url}
             className="card-img-top rounded-top-4"
             alt="image"
           />
@@ -78,31 +82,26 @@ const RecipeCard = ({
         )}
         <div className="card-body pt-0">
           <h5 className="card-title fs-4">
-            {recipe.title || "No title available"}
+            {displayRecipe ? displayRecipe.title : "No title available"}
           </h5>
           <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem" }}>
             INGREDIENTS:{" "}
             <span style={{ fontSize: "0.8rem" }}>
-              {recipe.measure}
-              {recipe.ingredients}
+              {/* {displayRecipe ? displayRecipe.measure : ""} */}
+              {displayRecipe ? displayRecipe.ingredients : ""}
             </span>
           </p>
           <p className="d-flex justify-content-start align-items-center gap-4 card-text">
-            {/* <Link
-              className="text-decoration-none text-white"
-              to={`/recipe/${recipe.id}`}
-            > */}
-              <button
-                className="btn bg-transparent rounded"
-                type="button"
-                onClick={() => handleInfoIconClick(recipe)}
-              >
-                <i
-                  className="fa-solid fa-info fa-lg"
-                  style={{ color: "#FF7D04" }}
-                ></i>
-              </button>
-            {/* </Link> */}
+            <button
+              className="btn bg-transparent rounded"
+              type="button"
+              onClick={() => handleReadMore(recipe.id)}
+            >
+              <i
+                className="fa-solid fa-info fa-lg"
+                style={{ color: "#FF7D04" }}
+              ></i>
+            </button>
             {showIcon && (
               <button
                 className="btn rounded bg-transparent position-absolute top-0 end-0 p-2"
@@ -123,7 +122,7 @@ const RecipeCard = ({
               <button
                 className="btn text-white rounded"
                 type="submit"
-                onClick={() => handleDeleteClick(recipe.id)}
+                onClick={() => deleteRecipe(recipe.id)}
               >
                 <Link
                   className="text-decoration-none text-white"
@@ -143,9 +142,6 @@ const RecipeCard = ({
           </p>
         </div>
       </div>
-
-      {/* Conditionally render RecipeView */}
-      {/* {selectedRecipe && <RecipeView recipe={selectedRecipe} />} */}
     </div>
   );
 };

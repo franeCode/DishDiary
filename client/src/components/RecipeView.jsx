@@ -201,13 +201,15 @@ const RecipeView = () => {
   }
 
   // Split measures and ingredients by comma
-  const measures = recipe.measure && recipe.measure.trim() !== '' ? recipe.measure.split(', ') : [];
-  const ingredients = recipe.ingredients && recipe.ingredients.trim() !== '' ? recipe.ingredients.split(', ') : [];
+  // const measures = recipe.measure && recipe.measure.trim() !== '' ? recipe.measure.split(', ') : [];
+  // const ingredients = recipe.ingredients && recipe.ingredients.trim() !== '' ? recipe.ingredients.split(', ') : [];
 
+  // console.log("measures:", measures);
+  // console.log("ingredients:", ingredients);
 
-  if (measures.length !== ingredients.length) {
-    return <div>Invalid data format for measures and ingredients.</div>;
-  }
+  // if (measures.length !== ingredients.length) {
+  //   return <div>Invalid data format for measures and ingredients.</div>;
+  // }
 
   return (
     <>
@@ -220,18 +222,22 @@ const RecipeView = () => {
             <div className="d-flex flex-column p-3">
             <h1>{recipe.title}</h1>
             <div className="d-flex flex-row border border-dark" style={{ width: "20rem", height: "25rem"}}>
-              <ul className='d-flex flex-column text-center p-0 mb-0'>
-                {measures.map((measure, index) => (
-                  <li key={index} className='text-decoration-none fs-6'
-                  style={{lineHeight: "1rem"}}>{measure}</li>
-                ))}
+            
+              <ul>
+                
+                  <li className='text-decoration-none fs-6' style={{ lineHeight: "1rem" }}>
+                    {recipe.measure}
+                  </li>
+              
               </ul>
+            
               <ul className='d-flex flex-column text-center p-0 mb-0'>
-                {ingredients.map((ingredient, index) => (
-                  <li key={index} className='text-decoration-none fs-6'
-                  style={{lineHeight: "1rem"}}>{ingredient}</li>
-                ))}
+                
+                  <li className='text-decoration-none fs-6'
+                  style={{lineHeight: "1rem"}}>{recipe.ingredients}</li>
+             
               </ul>
+          
             </div>
             </div>
             <div className='d-flex flex-column p-3 mt-5'>
@@ -259,7 +265,7 @@ const RecipeView = () => {
           <div className="holes hole-middle"></div>
           <div className="holes hole-bottom"></div>
         </div>
-        <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}>Watch Video</a>
+        {/* <a href={`https://www.youtube.com/embed/${recipe.youtube_link}`}>Watch Video</a> */}
       </div>
     </>
   );
