@@ -7,9 +7,6 @@ import axios from "axios";
 const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId }) => {
   const navigate = useNavigate();
 
-  // const handleDelete = () => {
-  //   deleteRecipe(recipe.id)
-  // }
   const handleReadMore = () => {
     navigate(`/recipe/${recipe.id}`, { state: { recipe } });
   };
@@ -44,12 +41,9 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId }) => {
         },
       })
       .then((response) => {
-        // Handle success
         console.log(response.data.message);
-        // You can also update your UI to reflect the successful sharing action
       })
       .catch((error) => {
-        // Handle error
         console.error(error.response.data.error);
       });
   };
