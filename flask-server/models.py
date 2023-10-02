@@ -41,7 +41,7 @@ class CustomRecipe(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(100), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
-    ingredients = db.Column(db.Text, nullable=False)
+    ingredients = db.Column(db.String, nullable=False)
     measure = db.Column(db.Text)
     image_url = db.Column(db.String(200))
 

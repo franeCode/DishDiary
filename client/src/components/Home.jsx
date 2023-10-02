@@ -7,7 +7,7 @@ const Home = () => {
   const message = location.state && location.state.message;
 
   useEffect(() => {
-    console.log(message);
+    console.log("This is a message:", message);
   }, [message]);
 
   return (

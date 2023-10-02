@@ -36,7 +36,7 @@ const CookBook = () => {
     .then((resp) => {
       const data = resp.data;
       setRecipe({ title: '', ingredients: '', instructions: '', image: null, imagePreview: null });
-      navigate('/cookbook');
+      navigate('/custom_recipes');
     })
     .catch((err) => {
       console.log(err);

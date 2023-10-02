@@ -10,7 +10,7 @@ export const handleSubmit = async (recipe, navigate) => {
                 },
             });
         const data = resp.data;
-        navigate('/cookbook');
+        navigate('/custom_recipes');
     } catch (err) {
         console.log(err);
     }
