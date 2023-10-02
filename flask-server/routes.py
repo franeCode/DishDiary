@@ -167,28 +167,38 @@ def delete_recipe(recipe_id):
         return jsonify({'error': str(e)}), 500
 
 
-@app.route('/api/get_recipes', methods=['GET', 'POST'])
+@app.route('/api/get_recipes', methods=['GET'])
 @jwt_required()
 def get_recipes():
     """Get the recipes and send it to frontend"""
-    
+
     current_user = get_jwt_identity()
     try:
         recipes = Recipe.query.all()
-        # print(recipes)
         recipe_list = []
-        # print(recipe_list)
 
         for recipe in recipes:
+            # Check if ingredients and measures are not None
+            if recipe.ingredients and recipe.measure:
+                # Split the ingredients and measures
+                ingredients = recipe.ingredients.split(', ')
+                measures = recipe.measure.split(', ')
+
+                # Combine ingredients and measures into a single string
+                ingredients_with_measures = ', '.join([f"{m} {i}" for m, i in zip(measures, ingredients)])
+            else:
+                # Use the existing ingredients and measures if available, or an empty string if they are None
+                ingredients_with_measures = recipe.ingredients or ""
+
+            # Create a dictionary for each recipe with combined ingredients and measures
             recipe_data = {
                 'id': recipe.id,
                 'title': recipe.title,
                 'instructions': recipe.instructions,
-                'ingredients': recipe.ingredients,
-                'measure': recipe.measure,
+                'ingredients': ingredients_with_measures,  # Use the combined string
                 'image_url': recipe.image_url,
                 'youtube_link': recipe.youtube_link,
-                'current_user': current_user 
+                'current_user': current_user
             }
 
             recipe_list.append(recipe_data)
@@ -197,6 +207,7 @@ def get_recipes():
 
     except Exception as e:
         return jsonify({'error': str(e)})
+
     
 @app.route('/api/add_recipe', methods=['POST'])
 @jwt_required()
@@ -230,7 +241,7 @@ def add_recipe():
                 title=title, 
                 ingredients=ingredients, 
                 instructions=instructions, 
-                image_url=image_path,  # Use the image path here
+                image_url=image_path,
                 user_id=current_user
             )
             
