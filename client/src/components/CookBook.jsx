@@ -45,7 +45,6 @@ const CookBook = () => {
 
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0]; // Get the selected image file
-    // Display a preview of the selected image (optional)
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -78,10 +77,11 @@ const CookBook = () => {
             className="holes hole-bottom"
             style={{ width: "20px", height: "20px" }}
           ></div>
-            <form className="list">
+            <form className="list my-5">
               <input className='border-none fs-3 w-75' type="text" name='title' value={recipe.title} onChange={handleInputChange} placeholder='Title' />
               <input className='flex word-wrap w-75' type="text" name='ingredients' value={recipe.ingredients} onChange={handleInputChange} placeholder='Ingredients' />
               <textarea className='border-none w-75' type="text" name='instructions' value={recipe.instructions} onChange={handleInputChange} placeholder='Instructions' />
+              <label className='px-5'>Do you want to upload image?</label>
               <input
                 type="file"
                 accept="image/*"

@@ -95,23 +95,22 @@ const Recipes = () => {
           ></div>
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-              <button className="btn text-white rounded">
-                <Link className="text-decoration-none text-white" to="/menu">
+              <button className="btn text-dark rounded">
+                <Link className="text-decoration-none text-white px-2" to="/menu">
                   <i
                     style={{ color: "#FF7D04" }}
                     className="fa-solid fa-arrow-left fa-xl"
                   ></i>
                 </Link>
+                Go back
               </button>
               <div className="fs-3">COOKBOOK</div>
               <button
                 className="btn text-white rounded"
-                type="submit"
-                onClick={handleSubmit}
               >
                 <Link
                   className="text-decoration-none text-white"
-                  to="/cookbook"
+                  to="/create_recipe"
                 >
                   <i
                     style={{ color: "#FF7D04" }}
