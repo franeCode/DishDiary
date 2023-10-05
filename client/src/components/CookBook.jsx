@@ -62,15 +62,22 @@ const CookBook = () => {
  
   return (
     <div>
-      <div className='d-flex justify-content-center align-items-center relative'>
-        <div className='book'></div>
-        <div className='custom-options'>
-        <div className='w-50 d-flex flex-row align-items-center text-center p-2'>
-                  My Dish Diary
-          </div>
-        </div>
-        <div className='book-page relative'>
+      <div className='d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5'>
+        <div className='bg-image'></div>
+        <div className="book position-relative border rounded shadow mt-5">
           <div className="lines"></div>
+          <div
+            className="holes hole-top"
+            style={{ width: "20px", height: "20px" }}
+          ></div>
+          <div
+            className="holes hole-middle"
+            style={{ width: "20px", height: "20px" }}
+          ></div>
+          <div
+            className="holes hole-bottom"
+            style={{ width: "20px", height: "20px" }}
+          ></div>
             <form className="list">
               <input className='border-none fs-3 w-75' type="text" name='title' value={recipe.title} onChange={handleInputChange} placeholder='Title' />
               <input className='flex word-wrap w-75' type="text" name='ingredients' value={recipe.ingredients} onChange={handleInputChange} placeholder='Ingredients' />
@@ -91,10 +98,7 @@ const CookBook = () => {
               <div className="holes hole-middle"></div>
               <div className="holes hole-bottom"></div>
           </div>
-        
         </div>
-        
-        
     </div>
   );
 };

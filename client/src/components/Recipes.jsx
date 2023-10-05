@@ -3,6 +3,8 @@ import RecipeCard from "./RecipeCard";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { handleSubmit } from "./Api";
+import { useMemo } from "react";
+import { useCallback } from "react";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -43,6 +45,14 @@ const Recipes = () => {
   // Get the recipes to display on the current page
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
+  // const currentRecipes = useMemo(() => {
+  //   // Calculate currentRecipes here
+  //   const indexOfLastRecipe = currentPage * recipesPerPage;
+  //   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  //   return recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  // }, [currentPage, recipes, recipesPerPage]);
+  
+
   // Function to handle going to the next page
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -54,6 +64,16 @@ const Recipes = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+  // const nextPage = useCallback(() => {
+  //   setCurrentPage(currentPage + 1);
+  // }, [currentPage]);
+  
+  // const prevPage = useCallback(() => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage(currentPage - 1);
+  //   }
+  // }, [currentPage]);
+  
 
   return (
     <div>
@@ -101,7 +121,7 @@ const Recipes = () => {
               </button>
             </div>
           </div>
-          <ul className="row row-cols-2 p-5 pb-3">
+          <ul className="row row-cols-2 list-unstyled p-5 pb-3">
             {Array.isArray(recipes) ? (
               currentRecipes.map((recipe) => (
                 <RecipeCard

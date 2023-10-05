@@ -113,7 +113,7 @@ const CustomRecipes = () => {
               </button>
             </div>
           </div>
-          <ul className="row row-cols-lg-2 row-cols-md-1 p-5 pb-3 p-sm-2">
+          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 pb-3 p-sm-2">
             {Array.isArray(recipes) ? (
               currentRecipes.map((recipe) => (
                 <RecipeCard
@@ -128,7 +128,6 @@ const CustomRecipes = () => {
               <p>Loading...</p>
             )}
           </ul>
-          {/* <div className="position-relative"> */}
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
             <button className="p-3 bg-transparent" onClick={() => prevPage()}>
               <i
@@ -142,7 +141,6 @@ const CustomRecipes = () => {
                 style={{ color: "#414448" }}
               ></i>
             </button>
-          {/* </div> */}
           </div>
         </div>
       </div>

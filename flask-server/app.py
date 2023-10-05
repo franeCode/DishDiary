@@ -8,7 +8,10 @@ from flask_jwt_extended import JWTManager, get_jwt_identity
 from datetime import timedelta
 
 
-app = Flask(__name__)
+
+# app = Flask(__name__)
+app = Flask(__name__, static_folder='client/src')
+# cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
 app.config['JWT_SECRET_KEY'] = 'super-secret'
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
@@ -35,8 +38,8 @@ migrate = Migrate(app, db)
 def user_lookup_callback(_jwt_header, jwt_data):
     identity = jwt_data["sub"]  
     user = Users.query.get(identity)
-    return user
-
+    return user  
+  
 from routes import *
 from models import *
   

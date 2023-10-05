@@ -19,12 +19,12 @@ const Home = () => {
       <h1 className='quote'>The kitchen is where the magic happens.</h1>
         <div className='logo-wrapper d-flex flex-column align-items-center justify-content-center'>
           <div className='d-flex flex-column align-items-center logo-modal'>
-            <img src={logo} alt="logo"></img>
+            <img src={logo} alt="logo" style={{ width: "5rem", height: "5rem"}}></img>
             <span>DishDiary</span>
           </div>
         </div>
         <Link to='/login'>
-        <button className='login-btn text-white rounded fs-2'>Start now!</button>
+        <button className='text-white rounded fs-3 px-3'>Join now!</button>
       </Link>
       </div>
     </div>

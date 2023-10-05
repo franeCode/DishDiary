@@ -1,4 +1,4 @@
-from flask import jsonify, request, make_response, session
+from flask import jsonify, request, make_response, session, send_from_directory
 import requests
 from flask_bcrypt import Bcrypt
 from models import Recipe, Users, FavoriteRecipe, CustomRecipe, db
@@ -11,20 +11,27 @@ from sqlalchemy.sql import text
 from werkzeug.utils import secure_filename
 import os
 import logging
+from flask_caching import Cache
 
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-# Define a user loader callback
-# @jwt.user_lookup_loader
-# def user_lookup_callback(identity, decoded_token):
-#     try:
-#         user_id = int(identity)
-#         user = Users.query.get(user_id)
+# @app.route('/menu')
+# def serve_static():
+#     response = make_response(send_from_directory('client/src/assets/img', 'logo-icon.svg'))
 
-#         return user
-#     except Exception as e:
-#         return None  
+#     response.headers['Cache-Control'] = 'public, max-age=31536000, immutable' 
+
+#     return response
+
+# @app.route('/client/src/assets/img/logo-icon.svg')
+# def serve_static():
+#     response = make_response(send_from_directory('client/src/assets.img', 'logo-icon.svg'))
+
+#     response.headers['Cache-Control'] = 'public, max-age=31536000, immutable' 
+
+#     return response
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
@@ -87,6 +94,7 @@ def logout():
 
 
 @app.route('/api/recipes', methods=['GET'])
+@cache.cached(timeout=3600)
 def store_recipes():
     print('hello')
     """Get recipes and store it in the db"""

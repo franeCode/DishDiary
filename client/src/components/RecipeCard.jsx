@@ -67,7 +67,7 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
   // const imageSrc = isAbsoluteURL ? recipe.image_url : `${recipe.image_url}`;
   // console.log(recipe.image_url)
   return (
-    <div className="col mt-3">
+    <li>
       <div
         className="d-flex flex-row align-items-start justify-content-center rounded-4 shadow position-relative"
         style={{ width: "100%", height: "auto", borderColor: "transparent" }}
@@ -159,7 +159,7 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
           <div className="holes hole-middle" style={{width: "20px", height: "20px",}}></div>
           <div className="holes hole-bottom" style={{width: "20px", height: "20px",}}></div> */}
       </div>
-    </div>
+    </li>
   );
 };
 
