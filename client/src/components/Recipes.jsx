@@ -95,7 +95,7 @@ const Recipes = () => {
           ></div>
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-              <button className="btn text-dark rounded">
+              {/* <button className="btn text-dark rounded">
                 <Link className="text-decoration-none text-white px-2" to="/menu">
                   <i
                     style={{ color: "#FF7D04" }}
@@ -103,7 +103,7 @@ const Recipes = () => {
                   ></i>
                 </Link>
                 Go back
-              </button>
+              </button> */}
               <div className="fs-3">COOKBOOK</div>
               <button
                 className="btn text-white rounded"
@@ -120,7 +120,7 @@ const Recipes = () => {
               </button>
             </div>
           </div>
-          <ul className="row row-cols-2 list-unstyled p-5 pb-3">
+          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 my-5 p-sm-2">
             {Array.isArray(recipes) ? (
               currentRecipes.map((recipe) => (
                 <RecipeCard
@@ -136,13 +136,13 @@ const Recipes = () => {
           </ul>
           {/* <div className="position-relative"> */}
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
-            <button className="bg-transparent px-3" onClick={() => prevPage()}>
+            <button className="bg-transparent p-3" onClick={() => prevPage()}>
               <i
                 class="fa-solid fa-arrow-left-long fa-xl"
                 style={{ color: "#414448" }}
               ></i>
             </button>
-            <button className="bg-transparent px-3" onClick={() => nextPage()}>
+            <button className="bg-transparent p-3" onClick={() => nextPage()}>
               <i
                 class="fa-solid fa-arrow-right-long fa-xl"
                 style={{ color: "#414448" }}

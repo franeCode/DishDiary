@@ -325,7 +325,7 @@ textarea[name="instructions"]:focus {
   /* overflow-y: scroll; */
 }
 textarea[name="instructions"] {
-  min-height: 23rem;
+  min-height: 27rem;
   /* width: 25rem; */
   width: 90%;
   border: none;

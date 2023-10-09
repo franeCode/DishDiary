@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../assets/img/logo-icon.svg';
+import logo from '../assets/img/logo.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -46,8 +46,8 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow fs-2">
       <div className="container-fluid">
         <Link className="navbar-brand d-flex align-items-center fs-1" to="/">
-        <div className="logo">
-            <span>DishDiary</span>
+        <div style={{width: "10rem"}}>
+            {/* <span>DishDiary</span> */}
             <img src={logo} alt="logo"></img>
         </div>
         </Link>

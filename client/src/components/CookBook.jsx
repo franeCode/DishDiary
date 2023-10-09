@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useEffect } from "react";
 import CustomRecipes from "./CustomRecipes";
 import { Link, useNavigate } from "react-router-dom";
 // import { handleSubmit } from './Api';
@@ -12,6 +13,7 @@ const CookBook = () => {
     image: "",
   });
   const [formValid, setFormValid] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
 
   const navigate = useNavigate();
 
@@ -51,12 +53,20 @@ const CookBook = () => {
           recipe.ingredients === "" ||
           recipe.instructions === ""
         ) {
-          console.log("Form is invalid. Please fill out all required fields.");
           setFormValid(false);
+          setShowMessage(true);
         } else {
-          console.log("Form is valid. Submitting...");
-          navigate("/custom_recipes");
+          setFormValid(true);
+          setShowMessage(false);
+          navigate("/custom_recipes?formValid=true&showMessage=false");
         }
+        // Reset the recipe state
+      setRecipe({
+        title: "",
+        ingredients: "",
+        instructions: "",
+        image: null,
+      });
       })
       .catch((err) => {
         console.log(err);
@@ -79,10 +89,29 @@ const CookBook = () => {
     }
   };
 
+  useEffect(() => {
+    if (showMessage) {
+      const timer = setTimeout(() => {
+        setShowMessage(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showMessage]);
+
   return (
     <div>
-      <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
+      <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
+        {!formValid && showMessage ? (
+          <div className="bg-light rounded px-4" style={{ zIndex: "2" }}>
+            <p className="text-center p-3" style={{ color: "red" }}>
+              Form is invalid. Please fill out all required fields.
+            </p>
+          </div>
+        ) : (
+          " "
+        )
+        }
         <div className="book position-relative border rounded shadow mt-5">
           <div className="lines"></div>
           <div
@@ -97,11 +126,6 @@ const CookBook = () => {
             className="holes hole-bottom"
             style={{ width: "20px", height: "20px" }}
           ></div>
-          {!formValid && (
-              <p className="text-center p-3" style={{ color: "red" }}>
-                Please fill out all required fields.
-              </p>
-            )}
           <form className="list my-5">
             <input
               className="border-none fs-3 w-75"
@@ -140,18 +164,20 @@ const CookBook = () => {
               }}
             />
             <button
-              className="btn text-white rounded position-absolute end-0 bottom-0 translate-middle"
+              className="btn rounded position-absolute end-0 bottom-0 translate-middle fs-3"
               type="submit"
+              style={{ color: "#FF7D04" }}
               onClick={handleSubmit}
             >
+              Add
               {/* <Link
                 className="text-decoration-none text-white"
                 to="/custom_recipes"
               > */}
-                <i
+              {/* <i
                   style={{ color: "#FF7D04" }}
                   className="fa-solid fa-check fa-2xl"
-                ></i>
+                ></i> */}
               {/* </Link> */}
             </button>
           </form>

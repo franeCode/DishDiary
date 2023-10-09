@@ -4,11 +4,14 @@ import { Link } from "react-router-dom";
 import noImage from "../assets/img/no-image.jpeg";
 import axios from "axios";
 
-const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients }) => {
+const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId }) => {
+  const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
 
   const handleReadMore = () => {
-    navigate(`/recipe/${recipe.id}`, { state: { recipe } });
+    if (displayRecipe && displayRecipe.id) {
+      navigate(`/recipe/${displayRecipe.id}`, { state: { recipe: displayRecipe } });
+    }
   };
 
   const deleteRecipe = async (recipeId) => {
@@ -48,45 +51,25 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
       });
   };
 
-  const displayRecipe = recipe || customRecipeId;
-
-  const displayIngredients = (recipe) => {
-    if (typeof recipe.ingredients === 'string') {
-      const ingredientsArray = recipe.ingredients.split(', ');
-      return ingredientsArray.join(', '); // Join the array back to a string for display
-    } else if (Array.isArray(recipe.ingredients)) {
-      return recipe.ingredients.join(', '); // If it's already an array, join it
-    } else {
-      return ''; // Handle other cases gracefully
-    }
-  };
-
-  // Check if recipe.image_url is an absolute URL (contains http or https)
-  // const isAbsoluteURL = /^https?:\/\//i.test(recipe.image_url);
-
-  // const imageSrc = isAbsoluteURL ? recipe.image_url : `${recipe.image_url}`;
-  // console.log(recipe.image_url)
   return (
     <li>
       <div
-        className="d-flex flex-row align-items-start justify-content-center rounded-4 shadow position-relative"
-        style={{ width: "100%", height: "auto", borderColor: "transparent" }}
+        className="d-flex flex-row align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
+        style={{ width: "100%", height: "15rem", borderColor: "transparent" }}
       >
-        {/* <div className="lines" style={{minHeight: "14rem", marginTop: "0.5rem"}}></div> */}
         {displayRecipe && displayRecipe.image_url ? (
           <img
             src={displayRecipe.image_url}
             className="card-img-top rounded-4 m-3"
             alt="image"
-            style={{width: "38%", height: "80%"}}
+            style={{width: "30%", height: "80%"}}
           />
         ) : (
           <img
             src={noImage}
             className="card-img-top rounded-4 m-3"
             alt="image"
-            // style={{width: "14rem", height: "13rem"}}
-            style={{width: "40%", height: "80%"}}
+            style={{width: "30%", height: "80%"}}
           />
         )}
         <div className="card-body my-3 p-2">
@@ -95,7 +78,6 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
           </h5>
           <p className="border-card"></p>
           <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem" }}>
-
             Ingredients:{" "}
             <span style={{ fontSize: "0.8rem" }}>
             {displayRecipe.ingredients}
@@ -109,14 +91,12 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
             </span>
             <span>...</span>
           </p>
-          
-          
         </div>
         <p className="d-flex flex-column justify-content-around align-items-center border-start p-3 card-text" style={{width: "20%", height: "100%"}}>
           {showIcon && (
               <button
                 className="btn rounded bg-transparent p-2"
-                onClick={() => shareRecipe(customRecipeId, recipe.id)}
+                onClick={() => shareRecipe(customRecipeId, displayRecipe.id)}
               >
                 <Link
                   className="text-decoration-none text-white"
@@ -132,7 +112,7 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
             <button
               className="btn bg-transparent rounded"
               type="button"
-              onClick={() => handleReadMore(displayRecipe.id)}
+              onClick={() => handleReadMore()}
             >
               <i
                 className="fa-solid fa-info fa-lg"
@@ -153,11 +133,7 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipeId, ingredients 
                 </Link>
               </button>
             )}
-            {/* <span>Written by: {displayRecipe.user_id}</span> */}
           </p>
-          {/* <div className="holes hole-top" style={{width: "20px", height: "20px",}}></div>
-          <div className="holes hole-middle" style={{width: "20px", height: "20px",}}></div>
-          <div className="holes hole-bottom" style={{width: "20px", height: "20px",}}></div> */}
       </div>
     </li>
   );

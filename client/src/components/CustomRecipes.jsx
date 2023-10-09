@@ -6,15 +6,34 @@ import logo from "../assets/img/logo-icon.svg";
 import { Link } from "react-router-dom";
 import { handleSubmit } from "./Api";
 import RecipeCard from "./RecipeCard";
+import { useLocation } from "react-router-dom";
 
 const CustomRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 4;
-  console.log("recipe state:", recipes);
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const isRecipeAdded = queryParams.get("formValid") === "true";
+  // const showMessage = queryParams.get("showMessage") === "false";
+  
   useEffect(() => {
     fetchRecipes();
   }, []);
+
+  // useEffect(() => {
+  //   if (isRecipeAdded && showMessage) {
+  //     // Use setTimeout to hide the message after 5 seconds
+  //     const timer = setTimeout(() => {
+  //       // Update the URL to remove the showMessage parameter
+  //       queryParams.delete("showMessage");
+  //       window.history.replaceState(null, "", `?${queryParams}`);
+  //     }, 5000);
+
+  //     // Clean up the timer on component unmount or when a new recipe is clicked
+  //     return () => clearTimeout(timer);
+  //   }
+  // }, [isRecipeAdded, showMessage, queryParams]);
 
   const fetchRecipes = () => {
     axios
@@ -44,10 +63,6 @@ const CustomRecipes = () => {
   };
 
   
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    handleSubmit(recipes);
-  };
   // Calculate the index of the last recipe to display on the current page
   const indexOfLastRecipe = currentPage * recipesPerPage;
   // Calculate the index of the first recipe to display on the current page
@@ -69,7 +84,7 @@ const CustomRecipes = () => {
 
   return (
     <div>
-      <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
+      <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="book position-relative border rounded shadow mt-5">
           <div className="lines"></div>
@@ -87,7 +102,7 @@ const CustomRecipes = () => {
           ></div>
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-            <button className="btn text-dark rounded">
+            {/* <button className="btn text-dark rounded">
                 <Link className="text-decoration-none text-white px-2" to="/menu">
                   <i
                     style={{ color: "#FF7D04" }}
@@ -95,7 +110,7 @@ const CustomRecipes = () => {
                   ></i>
                 </Link>
                 Go back
-              </button>
+              </button> */}
               <div className="fs-3">COOKBOOK</div>
               <button
                 className="btn text-white rounded"
@@ -112,7 +127,7 @@ const CustomRecipes = () => {
               </button>
             </div>
           </div>
-          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 pb-3 p-sm-2">
+          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 my-5 p-sm-2">
             {Array.isArray(recipes) ? (
               currentRecipes.map((recipe) => (
                 <RecipeCard

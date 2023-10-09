@@ -1,4 +1,4 @@
-from flask import jsonify, request, make_response, session, send_from_directory
+from flask import jsonify, request, redirect, session, send_from_directory
 import requests
 from flask_bcrypt import Bcrypt
 from models import Recipe, Users, FavoriteRecipe, CustomRecipe, db
@@ -17,21 +17,6 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-# @app.route('/menu')
-# def serve_static():
-#     response = make_response(send_from_directory('client/src/assets/img', 'logo-icon.svg'))
-
-#     response.headers['Cache-Control'] = 'public, max-age=31536000, immutable' 
-
-#     return response
-
-# @app.route('/client/src/assets/img/logo-icon.svg')
-# def serve_static():
-#     response = make_response(send_from_directory('client/src/assets.img', 'logo-icon.svg'))
-
-#     response.headers['Cache-Control'] = 'public, max-age=31536000, immutable' 
-
-#     return response
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
@@ -91,7 +76,6 @@ def logout():
     resp = jsonify({'logout': True})
     unset_jwt_cookies(resp)
     return resp, 200
-
 
 @app.route('/api/recipes', methods=['GET'])
 @cache.cached(timeout=3600)
@@ -228,7 +212,6 @@ def add_recipe():
         try:
             # Check if 'image' field exists in the form data
             if 'image' in request.files:
-                # Handle file upload
                 image_file = request.files['image']
                 if image_file:
                     image_filename = secure_filename(image_file.filename)

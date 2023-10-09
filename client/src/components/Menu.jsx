@@ -66,7 +66,7 @@ const Menu = () => {
                     className="btn fs-3 px-4 mt-3 rounded"
                   >
                     <Link
-                      to="/cookbook"
+                      to="/create_recipe"
                       style={{ textDecoration: "none", color: "#fff" }}
                     >
                       Write
