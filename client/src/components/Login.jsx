@@ -26,7 +26,7 @@ const Login = () => {
             })
             .then((response) => {
               console.log(response);
-              navigate("/menu", {
+              navigate("/home", {
                 state: { message: `${username} logged in successfully!` },
               });
             })
