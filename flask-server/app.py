@@ -6,14 +6,17 @@ from flask_migrate import Migrate
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, get_jwt_identity
 from datetime import timedelta
+from dotenv import load_dotenv
+import os
+
 
 
 
 # app = Flask(__name__)
 app = Flask(__name__, static_folder='client/src')
-# cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+load_dotenv()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
-app.config['JWT_SECRET_KEY'] = 'super-secret'
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_TYPE'] = 'filesystem'
