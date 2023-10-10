@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import "./App.css";
 import Navbar from './components/Navbar';
-import Menu from './components/Menu';
+import Intro from './components/Intro';
 import Register from './components/Register';
 import Home from './components/Home';
 import Login from './components/Login';
@@ -17,7 +17,7 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<Home />}
+          element={<Intro />}
         />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -39,14 +39,11 @@ const AppRoutes = () => {
     <>
       {isHomePage ? null : <Navbar />}
       <Routes>
-        {/* <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} /> */}
-        <Route path="/menu" element={<Menu />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/recipe/:id" element={<RecipeView />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/create_recipe" element={<CookBook />} />
         <Route path="/custom_recipes" element={<CustomRecipes />} />
-        {/* <Route path="/recipe_view" element={<RecipeView />} /> */}
       </Routes>
     </>
   );

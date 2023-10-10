@@ -4,13 +4,21 @@ import { Link } from "react-router-dom";
 import noImage from "../assets/img/no-image.jpeg";
 import axios from "axios";
 
-const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId }) => {
+const RecipeCard = ({
+  recipe,
+  setRecipes,
+  showIcon,
+  customRecipe,
+  customRecipeId,
+}) => {
   const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
 
   const handleReadMore = () => {
     if (displayRecipe && displayRecipe.id) {
-      navigate(`/recipe/${displayRecipe.id}`, { state: { recipe: displayRecipe } });
+      navigate(`/recipe/${displayRecipe.id}`, {
+        state: { recipe: displayRecipe },
+      });
     }
   };
 
@@ -22,10 +30,10 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
         },
       })
       .then((response) => {
-        
         if (response.status === 200) {
           setRecipes((recipes) =>
-          recipes.filter((recipe) => recipe.id !== recipeId));
+            recipes.filter((recipe) => recipe.id !== recipeId)
+          );
         }
       })
       .catch((error) => {
@@ -33,7 +41,6 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
       });
   };
 
-  // Function to share a custom recipe with a regular recipe
   const shareRecipe = (customRecipeId, recipeId, formData) => {
     axios
       .post(`/api/share_recipe/${customRecipeId}/${recipeId}`, formData, {
@@ -62,14 +69,14 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
             src={displayRecipe.image_url}
             className="card-img-top rounded-4 m-3"
             alt="image"
-            style={{width: "30%", height: "80%"}}
+            style={{ width: "30%", height: "80%" }}
           />
         ) : (
           <img
             src={noImage}
             className="card-img-top rounded-4 m-3"
             alt="image"
-            style={{width: "30%", height: "80%"}}
+            style={{ width: "30%", height: "80%" }}
           />
         )}
         <div className="card-body my-3 p-2">
@@ -80,7 +87,7 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
           <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem" }}>
             Ingredients:{" "}
             <span style={{ fontSize: "0.8rem" }}>
-            {displayRecipe.ingredients}
+              {displayRecipe.ingredients}
             </span>
           </p>
           <p className="border-card"></p>
@@ -92,47 +99,54 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
             <span>...</span>
           </p>
         </div>
-        <p className="d-flex flex-column justify-content-around align-items-center border-start p-3 card-text" style={{width: "20%", height: "100%"}}>
+        <p
+          className="d-flex flex-column justify-content-around align-items-center border-start p-3 card-text"
+          style={{ width: "20%", height: "100%" }}
+        >
           {showIcon && (
-              <button
-                className="btn rounded bg-transparent p-2"
-                onClick={() => shareRecipe(customRecipeId, displayRecipe.id)}
-              >
-                <Link
-                  className="text-decoration-none text-white"
-                  to="/custom_recipes"
-                >
-                  <i 
-                    className="fa-solid fa-share-nodes fa-lg" 
-                    style={{ color: "#414448" }}></i>
-                </Link>
-              </button>
-            )}
             <button
-              className="btn bg-transparent rounded"
-              type="button"
-              onClick={() => handleReadMore()}
+              className="btn rounded bg-transparent p-2"
+              onClick={() => shareRecipe(customRecipeId, displayRecipe.id)}
             >
-              <i
-                className="fa-solid fa-info fa-lg"
-                style={{ color: "var(--text-color)" }}
-              ></i>
-            </button>
-            {showIcon && (
-              <button
-                className="btn text-white rounded"
-                type="submit"
-                onClick={() => deleteRecipe(displayRecipe.id)}
+              <Link
+                className="text-decoration-none text-white"
+                to="/custom_recipes"
               >
-                <Link
-                  className="text-decoration-none text-white"
-                  to="/custom_recipes"
-                >
-                  <i className="fa-solid fa-trash fa-lg" style={{ color: "#414448" }}></i>
-                </Link>
-              </button>
-            )}
-          </p>
+                <i
+                  className="fa-solid fa-share-nodes fa-lg"
+                  style={{ color: "#414448" }}
+                ></i>
+              </Link>
+            </button>
+          )}
+          <button
+            className="btn bg-transparent rounded"
+            type="button"
+            onClick={() => handleReadMore()}
+          >
+            <i
+              className="fa-solid fa-info fa-lg"
+              style={{ color: "var(--text-color)" }}
+            ></i>
+          </button>
+          {showIcon && (
+            <button
+              className="btn text-white rounded"
+              type="submit"
+              onClick={() => deleteRecipe(displayRecipe.id)}
+            >
+              <Link
+                className="text-decoration-none text-white"
+                to="/custom_recipes"
+              >
+                <i
+                  className="fa-solid fa-trash fa-lg"
+                  style={{ color: "#414448" }}
+                ></i>
+              </Link>
+            </button>
+          )}
+        </p>
       </div>
     </li>
   );

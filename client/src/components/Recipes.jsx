@@ -33,13 +33,13 @@ const Recipes = () => {
   //       console.error("Invalid data format:", data);
   //     }
   //     }).catch (error => {
-  //       console.error('Logout failed:', error.message); 
+  //       console.error('Logout failed:', error.message);
   //       if (error.response && error.response.status === 401) {
   //         navigate("/login");
   //       }
   //     });
   // };
-  
+
   const fetchRecipes = async () => {
     try {
       const response = await axios.get(
@@ -96,12 +96,10 @@ const Recipes = () => {
     handleSearchChange({ target: { value: searchQuery.toLowerCase() } });
   }, [recipes, searchQuery]);
 
-  // Calculate the index of the last recipe to display on the current page
   const indexOfLastRecipe = currentPage * recipesPerPage;
-  // Calculate the index of the first recipe to display on the current page
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  // Get the recipes to display on the current page
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+
   // Function to handle going to the next page
   const nextPage = () => {
     setCurrentPage(currentPage + 1);

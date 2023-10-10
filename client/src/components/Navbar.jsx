@@ -1,59 +1,43 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from '../assets/img/logo.png';
+import React from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import logo from "../assets/img/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
-    // const handleLogout = () => {
-    //   axios.get('/logout')
-    //     .then(response => {
-    //       if (response.status === 200) {
-    //         // Clear JWT token from client-side storage
-    //         localStorage.removeItem('token');
-    //         navigate('/login');
-    //         console.log('Logout successful');
-    //       } else {
-    //         throw new Error('Logout failed');
-    //       }
-    //     })
-    //     .catch(error => {
-    //       console.log(error);
-    //     });
-    // };
 
-    const handleLogout = () => {
-      axios.get('/logout')
-        .then(response => {
-          if (response.status === 200) {
-            // Clear JWT token from client-side storage
-            localStorage.removeItem('access_token'); // Use the correct key
-            window.location.href = '/login';
-            console.log('Logout successful');
-          } else {
-            console.error('Logout failed: Unexpected status code');
-          }
-        })
-        .catch(error => {
-          console.error('Logout failed:', error.message); 
-          if (error.response && error.response.status === 401) {
-            // Token expired, navigate to login page
-            navigate("/login");
-          }
-        });
-    };
-
+  const handleLogout = () => {
+    axios
+      .get("/logout")
+      .then((response) => {
+        if (response.status === 200) {
+          // Clear JWT token from client-side storage
+          localStorage.removeItem("access_token");
+          window.location.href = "/login";
+          console.log("Logout successful");
+        } else {
+          console.error("Logout failed: Unexpected status code");
+        }
+      })
+      .catch((error) => {
+        console.error("Logout failed:", error.message);
+        if (error.response && error.response.status === 401) {
+          // Token expired, navigate to login page
+          navigate("/login");
+        }
+      });
+  };
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow fs-2">
       <div className="container-fluid">
         <Link className="navbar-brand d-flex align-items-center fs-1" to="/">
-        <div style={{width: "10rem"}}>
+          <div style={{ width: "10rem" }}>
             {/* <span>DishDiary</span> */}
             <img src={logo} alt="logo"></img>
-        </div>
+          </div>
         </Link>
         <button
           className="navbar-toggler"
@@ -66,19 +50,34 @@ const Navbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div
+          className="collapse navbar-collapse justify-content-end"
+          id="navbarNav"
+        >
           <ul className="navbar-nav align-items-md-center fs-4">
             <li className="nav-item">
-              <Link className="nav-link" to="/menu">Home</Link>
+              <Link className="nav-link" to="/home">
+                Home
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/custom_recipes">My Recipes</Link>
+              <Link className="nav-link" to="/custom_recipes">
+                My Recipes
+              </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/recipes">Get Inspiration</Link>
+              <Link className="nav-link" to="/recipes">
+                Get Inspiration
+              </Link>
             </li>
             <li className="nav-item">
-              <button className='btn px-3 rounded fs-4' style={{backgroundColor: "transparent"}} onClick={handleLogout}>Logout</button>
+              <button
+                className="btn px-3 rounded fs-4"
+                style={{ backgroundColor: "transparent" }}
+                onClick={handleLogout}
+              >
+                Logout
+              </button>
             </li>
           </ul>
         </div>

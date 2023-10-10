@@ -12,7 +12,7 @@ const RecipeView = () => {
   const navigate = useNavigate();
   console.log("RecipeView - URL Parameter ID:", id);
   console.log("Recipe data:", recipe);
-  console.log("Image:", recipe.image_url)
+  console.log("Image:", recipe.image_url);
 
   if (!recipe) {
     return <div>No recipe data available.</div>;

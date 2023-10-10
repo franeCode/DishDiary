@@ -1,10 +1,8 @@
-// export default CustomRecipes;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import logo from "../assets/img/logo-icon.svg";
+// import logo from "../assets/img/logo-icon.svg";
 import { Link } from "react-router-dom";
-import { handleSubmit } from "./Api";
+// import { handleSubmit } from "./Api";
 import RecipeCard from "./RecipeCard";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -17,21 +15,17 @@ const CustomRecipes = () => {
   const queryParams = new URLSearchParams(location.search);
   const isRecipeAdded = queryParams.get("formValid") === "true";
   // const showMessage = queryParams.get("showMessage") === "false";
-  
+
   useEffect(() => {
     fetchRecipes();
   }, []);
 
   // useEffect(() => {
   //   if (isRecipeAdded && showMessage) {
-  //     // Use setTimeout to hide the message after 5 seconds
   //     const timer = setTimeout(() => {
-  //       // Update the URL to remove the showMessage parameter
   //       queryParams.delete("showMessage");
   //       window.history.replaceState(null, "", `?${queryParams}`);
   //     }, 5000);
-
-  //     // Clean up the timer on component unmount or when a new recipe is clicked
   //     return () => clearTimeout(timer);
   //   }
   // }, [isRecipeAdded, showMessage, queryParams]);
@@ -45,33 +39,28 @@ const CustomRecipes = () => {
       })
       .then((response) => {
         const customRecipes = response.data.map((recipe) => {
-          // Check if ingredients are provided as a single string
-          if (typeof recipe.ingredients === 'string') {
-            const ingredientsArray = recipe.ingredients.split(', ');
+          if (typeof recipe.ingredients === "string") {
+            const ingredientsArray = recipe.ingredients.split(", ");
             return {
               ...recipe,
               ingredients: ingredientsArray,
             };
           }
-          return recipe; 
+          return recipe;
         });
 
         setRecipes(customRecipes);
       })
-      .catch(error => {
-        console.error('Logout failed:', error.message); 
+      .catch((error) => {
+        console.error("Logout failed:", error.message);
         if (error.response && error.response.status === 401) {
           navigate("/login");
         }
       });
   };
 
-  
-  // Calculate the index of the last recipe to display on the current page
   const indexOfLastRecipe = currentPage * recipesPerPage;
-  // Calculate the index of the first recipe to display on the current page
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  // Get the recipes to display on the current page
   const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   // Function to handle going to the next page
@@ -107,9 +96,7 @@ const CustomRecipes = () => {
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
               <div className="text-center fs-3">COOKBOOK</div>
-              <button
-                className="btn text-white rounded"
-              >
+              <button className="btn text-white rounded">
                 <Link
                   className="text-decoration-none text-white"
                   to="/create_recipe"

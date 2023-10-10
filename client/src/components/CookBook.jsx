@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CookBook = () => {
   const [recipe, setRecipe] = useState({
@@ -59,12 +59,12 @@ const CookBook = () => {
           navigate("/custom_recipes?formValid=true&showMessage=false");
         }
         // Reset the recipe state
-      setRecipe({
-        title: "",
-        ingredients: "",
-        instructions: "",
-        image: null,
-      });
+        setRecipe({
+          title: "",
+          ingredients: "",
+          instructions: "",
+          image: null,
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -72,7 +72,7 @@ const CookBook = () => {
   };
 
   const handleImageChange = (e) => {
-    const imageFile = e.target.files[0]; // Get the selected image file
+    const imageFile = e.target.files[0];
     if (imageFile) {
       const reader = new FileReader();
       reader.onload = (e) => {
@@ -108,8 +108,7 @@ const CookBook = () => {
           </div>
         ) : (
           " "
-        )
-        }
+        )}
         <div className="book position-relative border rounded shadow mt-5">
           <div className="lines my-5"></div>
           <div
