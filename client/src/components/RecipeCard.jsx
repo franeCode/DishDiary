@@ -48,6 +48,9 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
       })
       .catch((error) => {
         console.error(error.response.data.error);
+        // if (error.response && error.response.status === 401) {
+        //   customRecipeId.image_url === recipe.image_url;
+        // }
       });
   };
 
@@ -102,10 +105,9 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
                   className="text-decoration-none text-white"
                   to="/custom_recipes"
                 >
-                  <i
-                    className="fa-solid fa-share fa-lg"
-                    style={{ color: "#414448" }}
-                  ></i>
+                  <i 
+                    className="fa-solid fa-share-nodes fa-lg" 
+                    style={{ color: "#414448" }}></i>
                 </Link>
               </button>
             )}
