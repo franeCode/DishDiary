@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import CustomRecipes from "./CustomRecipes";
 import { Link, useNavigate } from "react-router-dom";
-// import { handleSubmit } from './Api';
 
 const CookBook = () => {
   const [recipe, setRecipe] = useState({
@@ -113,7 +111,7 @@ const CookBook = () => {
         )
         }
         <div className="book position-relative border rounded shadow mt-5">
-          <div className="lines"></div>
+          <div className="lines my-5"></div>
           <div
             className="holes hole-top"
             style={{ width: "20px", height: "20px" }}
