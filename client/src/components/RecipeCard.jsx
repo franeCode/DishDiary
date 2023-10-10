@@ -48,9 +48,6 @@ const RecipeCard = ({ recipe, setRecipes, showIcon, customRecipe, customRecipeId
       })
       .catch((error) => {
         console.error(error.response.data.error);
-        // if (error.response && error.response.status === 401) {
-        //   customRecipeId.image_url === recipe.image_url;
-        // }
       });
   };
 

@@ -30,7 +30,7 @@ const Navbar = () => {
           if (response.status === 200) {
             // Clear JWT token from client-side storage
             localStorage.removeItem('access_token'); // Use the correct key
-            navigate('/login');
+            window.location.href = '/login';
             console.log('Logout successful');
           } else {
             console.error('Logout failed: Unexpected status code');
