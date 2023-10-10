@@ -13,6 +13,33 @@ const Recipes = () => {
     fetchRecipes();
   }, []);
 
+  // const fetchRecipes = async () => {
+  //   axios
+  //     .get(
+  //       "http://localhost:5000/api/get_recipes",
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+  //         },
+  //       }
+  //     ).then((response) => {
+  //       const data = response.data;
+
+  //     if (Array.isArray(data)) {
+  //       setRecipes(data);
+  //       setFilteredRecipes(data);
+  //       console.log("Response data:", data);
+  //     } else {
+  //       console.error("Invalid data format:", data);
+  //     }
+  //     }).catch (error => {
+  //       console.error('Logout failed:', error.message); 
+  //       if (error.response && error.response.status === 401) {
+  //         navigate("/login");
+  //       }
+  //     });
+  // };
+  
   const fetchRecipes = async () => {
     try {
       const response = await axios.get(
@@ -92,7 +119,7 @@ const Recipes = () => {
       <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="book position-relative border rounded shadow mt-5">
-          <div className="lines" style={{ minHeight: "100%" }}></div>
+          <div className="lines my-5"></div>
           <div
             className="holes hole-top"
             style={{ width: "20px", height: "20px" }}
@@ -107,7 +134,7 @@ const Recipes = () => {
           ></div>
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-              <div className="input-group">
+              <div className="input-group w-50 mx-auto">
                 <input
                   type="text"
                   className="form-control"
@@ -140,13 +167,13 @@ const Recipes = () => {
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
             <button className="bg-transparent p-3" onClick={() => prevPage()}>
               <i
-                class="fa-solid fa-arrow-left-long fa-xl"
+                className="fa-solid fa-arrow-left-long fa-xl"
                 style={{ color: "#414448" }}
               ></i>
             </button>
             <button className="bg-transparent p-3" onClick={() => nextPage()}>
               <i
-                class="fa-solid fa-arrow-right-long fa-xl"
+                className="fa-solid fa-arrow-right-long fa-xl"
                 style={{ color: "#414448" }}
               ></i>
             </button>
