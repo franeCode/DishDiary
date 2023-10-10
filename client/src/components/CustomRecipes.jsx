@@ -6,13 +6,14 @@ import logo from "../assets/img/logo-icon.svg";
 import { Link } from "react-router-dom";
 import { handleSubmit } from "./Api";
 import RecipeCard from "./RecipeCard";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CustomRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 4;
   const location = useLocation();
+  const navigate = useNavigate();
   const queryParams = new URLSearchParams(location.search);
   const isRecipeAdded = queryParams.get("formValid") === "true";
   // const showMessage = queryParams.get("showMessage") === "false";
@@ -52,13 +53,16 @@ const CustomRecipes = () => {
               ingredients: ingredientsArray,
             };
           }
-          return recipe; // If the format is already correct, return as is
+          return recipe; 
         });
 
         setRecipes(customRecipes);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(error => {
+        console.error('Logout failed:', error.message); 
+        if (error.response && error.response.status === 401) {
+          navigate("/login");
+        }
       });
   };
 
@@ -87,7 +91,7 @@ const CustomRecipes = () => {
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="book position-relative border rounded shadow mt-5">
-          <div className="lines"></div>
+          <div className="lines my-5"></div>
           <div
             className="holes hole-top"
             style={{ width: "20px", height: "20px" }}
@@ -102,16 +106,7 @@ const CustomRecipes = () => {
           ></div>
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-            {/* <button className="btn text-dark rounded">
-                <Link className="text-decoration-none text-white px-2" to="/menu">
-                  <i
-                    style={{ color: "#FF7D04" }}
-                    className="fa-solid fa-arrow-left fa-xl"
-                  ></i>
-                </Link>
-                Go back
-              </button> */}
-              <div className="fs-3">COOKBOOK</div>
+              <div className="text-center fs-3">COOKBOOK</div>
               <button
                 className="btn text-white rounded"
               >
