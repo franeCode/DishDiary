@@ -148,7 +148,7 @@ const CookBook = () => {
               onChange={handleInputChange}
               placeholder="Instructions"
             />
-            <label className="px-5">Do you want to upload image?</label>
+            <label className="px-5 fs-5">Image cannot exceed 50mb.</label>
             <input
               type="file"
               accept="image/*"
@@ -166,15 +166,15 @@ const CookBook = () => {
               style={{ color: "#FF7D04" }}
               onClick={handleSubmit}
             >
-              Add
+              {/* Add */}
               {/* <Link
                 className="text-decoration-none text-white"
                 to="/custom_recipes"
               > */}
-              {/* <i
+              <i
                   style={{ color: "#FF7D04" }}
                   className="fa-solid fa-check fa-2xl"
-                ></i> */}
+                ></i>
               {/* </Link> */}
             </button>
           </form>
