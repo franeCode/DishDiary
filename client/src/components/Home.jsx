@@ -18,12 +18,12 @@ const Home = () => {
             Welcome to
             <div className="logo">
               <span>DishDiary</span>
-              <img
+              {/* <img
                 src={logo}
                 alt="logo"
                 style={{ width: "1rem", height: "1rem" }}
                 loading="lazy"
-              ></img>
+              ></img> */}
             </div>
           </h1>
           <p className="text-center fs-4">
