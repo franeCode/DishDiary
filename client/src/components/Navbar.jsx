@@ -15,7 +15,7 @@ const Navbar = () => {
         if (response.status === 200) {
           // Clear JWT token from client-side storage
           localStorage.removeItem("access_token");
-          window.location.href = "/login";
+          navigate("/login");
           console.log("Logout successful");
         } else {
           console.error("Logout failed: Unexpected status code");
@@ -35,7 +35,6 @@ const Navbar = () => {
       <div className="container-fluid">
         <Link className="navbar-brand d-flex align-items-center fs-1" to="/">
           <div style={{ width: "10rem" }}>
-            {/* <span>DishDiary</span> */}
             <img src={logo} alt="logo"></img>
           </div>
         </Link>
@@ -62,12 +61,12 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/custom_recipes">
-                My Recipes
+                CookBook
               </Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/recipes">
-                Get Inspiration
+                Inspiration
               </Link>
             </li>
             <li className="nav-item">
