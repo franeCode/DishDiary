@@ -5,6 +5,7 @@ Whether you're a professional chef or a cooking enthusiast, DishDiary helps you 
 
 🌟 Features
 
+
 Recipe Management: Create and organize your recipes with a user-friendly interface.
 
 Image Upload: Easily upload images of your culinary creations to accompany your recipes.
@@ -18,6 +19,7 @@ Responsive Design: DishDiary is fully responsive for both mobile and desktop use
 
 💻 Technologies
 
+
 DishDiary is built using a variety of technologies, including:
 
 Frontend: HTML, CSS, Bootstrap, JavaScript, React
@@ -28,7 +30,9 @@ Database: SQLAlchemy (Database ORM)
 
 Authentication: JWT (JSON Web Tokens)
 
+
 🚅 Live Demo
+
 
 Check out the live demo of DishDiary at here. Explore its features, try out some recipes, and see how DishDiary can elevate your cooking experience.
 
@@ -36,6 +40,7 @@ Enjoy your cooking adventures with DishDiary, and never let your cooking inspira
 
 
 ## 🚀 Getting Started
+
 
 To run DishDiary on your local machine, follow these simple steps:
 
