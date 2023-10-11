@@ -6,10 +6,15 @@ Whether you're a professional chef or a cooking enthusiast, DishDiary helps you 
 🌟 Features
 
 Recipe Management: Create and organize your recipes with a user-friendly interface.
+
 Image Upload: Easily upload images of your culinary creations to accompany your recipes.
+
 Recipe Sharing: Share your recipes with the world and discover new culinary ideas.
+
 User Authentication: Secure login and registration process with JWT token-based authentication.
+
 Responsive Design: DishDiary is fully responsive for both mobile and desktop users.
+
 
 💻 Technologies
 
