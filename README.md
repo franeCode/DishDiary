@@ -30,6 +30,7 @@ Database: SQLAlchemy (Database ORM)
 
 Authentication: JWT (JSON Web Tokens)
 
+<img src="/dish-diary1.png" alt="image-app">
 
 🚅 Live Demo
 
