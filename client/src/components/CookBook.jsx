@@ -109,29 +109,30 @@ const CookBook = () => {
         ) : (
           " "
         )}
-        <div className="book position-relative border rounded shadow mt-5">
-          <div className="lines my-5"></div>
+        <div className="book position-relative border rounded shadow mt-5" style={{height: "100%"}}>
+          <div className="form-lines my-5"></div>
           <div
-            className="holes hole-top"
+            className="form-holes form-hole-top"
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div
-            className="holes hole-middle"
+            className="form-holes form-hole-middle"
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div
-            className="holes hole-bottom"
+            className="form-holes form-hole-bottom"
             style={{ width: "20px", height: "20px" }}
           ></div>
-          <form className="list my-5">
+          <form className="d-flex flex-column justify-content-center align-items-center">
             <input
-              className="border-none fs-3 w-75"
+              className="border-none w-75"
               type="text"
               name="title"
               value={recipe.title}
               onChange={handleInputChange}
               placeholder="Title"
             />
+            {/* <p className="border-card"></p> */}
             <input
               className="flex word-wrap w-75"
               type="text"
@@ -148,7 +149,8 @@ const CookBook = () => {
               onChange={handleInputChange}
               placeholder="Instructions"
             />
-            <label className="px-5 fs-5">Image cannot exceed 50mb.</label>
+            <div className="d-flex flex-lg-row flex-wrap justify-content-between align-items-center p-3 w-75" style={{color: "#555"}}>
+            <label className="text-start fs-6">Image cannot exceed 50mb</label>
             <input
               type="file"
               accept="image/*"
@@ -161,26 +163,28 @@ const CookBook = () => {
               }}
             />
             <button
-              className="btn rounded position-absolute end-0 bottom-0 translate-middle fs-3"
+              className="btn rounded fs-5"
               type="submit"
               style={{ color: "#FF7D04" }}
               onClick={handleSubmit}
             >
-              {/* Add */}
+              <span 
+                className="px-2"
+                style={{color: "#555"}}
+                >Add
+                </span>
               {/* <Link
                 className="text-decoration-none text-white"
                 to="/custom_recipes"
               > */}
               <i
                   style={{ color: "#FF7D04" }}
-                  className="fa-solid fa-check fa-2xl"
+                  className="fa-solid fa-check fa-xl"
                 ></i>
               {/* </Link> */}
             </button>
+            </div>
           </form>
-          <div className="holes hole-top"></div>
-          <div className="holes hole-middle"></div>
-          <div className="holes hole-bottom"></div>
         </div>
       </div>
     </div>
