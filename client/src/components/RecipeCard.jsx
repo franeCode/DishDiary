@@ -7,10 +7,11 @@ import axios from "axios";
 const RecipeCard = ({
   recipe,
   setRecipes,
-  showIcon,
   customRecipe,
   customRecipeId,
+  type, // Add a "type" prop
 }) => {
+  const [isIconVisible, setIsIconVisible] = useState(false); // State for showing/hiding icons
   const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
 
@@ -20,6 +21,11 @@ const RecipeCard = ({
         state: { recipe: displayRecipe },
       });
     }
+  };
+
+  const handleIconClick = () => {
+    console.log('Ellipsis button clicked');
+    setIsIconVisible(!isIconVisible);
   };
 
   const deleteRecipe = async (recipeId) => {
@@ -80,18 +86,68 @@ const RecipeCard = ({
           />
         )}
         <div className="card-body my-3 p-2">
-          <h5 className="card-title fs-4">
-            {displayRecipe ? displayRecipe.title : "No title available"}
-          </h5>
+          <div className="d-flex flex-row justify-content-between">
+            <h5 className="card-title fs-4">
+              {displayRecipe ? displayRecipe.title : "No title available"}
+            </h5>
+            <button
+              className="rounded bg-transparent p-2"
+              onClick={() => setIsIconVisible(!isIconVisible)} 
+            >
+              <i className="fa-solid fa-ellipsis-vertical fa-xl" style={{ color: "#414448" }}></i>
+            </button>
+          </div>
+            <div className="icon-box">
+              <div className="d-flex flex-column justify-content-between">
+            {type === "custom" && isIconVisible && (
+              <div className="d-flex flex-column justify-content-between">
+                <button
+                  className="btn rounded bg-transparent"
+                  onClick={() => shareRecipe(customRecipeId, displayRecipe.id)}
+                >
+                  <Link 
+                    className="show-icon text-decoration-none" to="/custom_recipes"
+                    style={{ color: "#414448" }}>
+                    <p className="mb-0 px-2">Share</p>
+                    <i className="fa-solid fa-share-nodes fa-sm" style={{ color: "#414448" }}></i>
+                  </Link>
+                </button>
+                <button
+                  className="btn text-white rounded"
+                  type="submit"
+                  onClick={() => deleteRecipe(displayRecipe.id)}
+                >
+                  <Link 
+                    className="show-icon text-decoration-none" to="/custom_recipes"
+                    style={{ color: "#414448" }}>
+                      <p className="mb-0 px-2">Delete</p>
+                    <i className="fa-solid fa-trash fa-sm" style={{ color: "#414448" }}></i>
+                  </Link>
+                </button>
+              </div>
+            )}
+            {isIconVisible && (
+              <button
+                className="btn bg-transparent rounded"
+                type="button"
+                style={{ color: "#414448" }}
+                onClick={() => handleReadMore()}
+              >
+                <span className="show-icon">
+                  <p className="mb-0 px-2">Read more</p>
+                  <i className="fa-solid fa-info fa-sm" style={{ color: "var(--text-color)" }}></i>
+                </span>
+              </button>
+            )}
+          </div>
+          </div>
           <p className="border-card"></p>
-          <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem" }}>
+          <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem", width: "90%" }}>
             Ingredients:{" "}
-            <span style={{ fontSize: "0.8rem" }}>
-              {displayRecipe.ingredients}
-            </span>
+            <span style={{ fontSize: "0.8rem" }}>{displayRecipe.ingredients}</span>
           </p>
           <p className="border-card"></p>
-          <p className="fs-6 overflow-y-hidden mb-0" style={{ height: "5rem" }}>
+          <p className="fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
             Instructions:{" "}
             <span style={{ fontSize: "0.8rem" }}>
               {displayRecipe ? displayRecipe.instructions : ""}
@@ -99,54 +155,6 @@ const RecipeCard = ({
             <span>...</span>
           </p>
         </div>
-        <p
-          className="d-flex flex-column justify-content-around align-items-center border-start p-3 card-text"
-          style={{ width: "20%", height: "100%" }}
-        >
-          {showIcon && (
-            <button
-              className="btn rounded bg-transparent p-2"
-              onClick={() => shareRecipe(customRecipeId, displayRecipe.id)}
-            >
-              <Link
-                className="text-decoration-none text-white"
-                to="/custom_recipes"
-              >
-                <i
-                  className="fa-solid fa-share-nodes fa-lg"
-                  style={{ color: "#414448" }}
-                ></i>
-              </Link>
-            </button>
-          )}
-          <button
-            className="btn bg-transparent rounded"
-            type="button"
-            onClick={() => handleReadMore()}
-          >
-            <i
-              className="fa-solid fa-info fa-lg"
-              style={{ color: "var(--text-color)" }}
-            ></i>
-          </button>
-          {showIcon && (
-            <button
-              className="btn text-white rounded"
-              type="submit"
-              onClick={() => deleteRecipe(displayRecipe.id)}
-            >
-              <Link
-                className="text-decoration-none text-white"
-                to="/custom_recipes"
-              >
-                <i
-                  className="fa-solid fa-trash fa-lg"
-                  style={{ color: "#414448" }}
-                ></i>
-              </Link>
-            </button>
-          )}
-        </p>
       </div>
     </li>
   );
