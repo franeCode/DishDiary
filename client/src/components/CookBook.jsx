@@ -11,6 +11,7 @@ const CookBook = () => {
     image: "",
   });
   const [formValid, setFormValid] = useState(true);
+  const [successMessage, setSuccessMessage] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
   const navigate = useNavigate();
@@ -55,8 +56,9 @@ const CookBook = () => {
           setShowMessage(true);
         } else {
           setFormValid(true);
-          setShowMessage(false);
-          navigate("/custom_recipes?formValid=true&showMessage=false");
+          setShowMessage(true);
+          setSuccessMessage(true);
+          // navigate("/custom_recipes?formValid=true&showMessage=false");
         }
         // Reset the recipe state
         setRecipe({
@@ -68,6 +70,8 @@ const CookBook = () => {
       })
       .catch((err) => {
         console.log(err);
+        setSuccessMessage(false); // Hide the success message
+        setShowMessage(true);
       });
   };
 
@@ -109,6 +113,11 @@ const CookBook = () => {
         ) : (
           " "
         )}
+        {successMessage ? (
+           <div className="bg-light rounded px-4" style={{ zIndex: "2" }}>
+            <p className="text-center p-3" style={{ color: "green" }}>Recipe added successfully!</p>
+          </div>
+        ) : null}
         <div className="book position-relative border rounded shadow mt-5" style={{height: "100%"}}>
           <div className="form-lines my-5"></div>
           <div
