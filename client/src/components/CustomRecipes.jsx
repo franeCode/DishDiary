@@ -20,16 +20,6 @@ const CustomRecipes = () => {
     fetchRecipes();
   }, []);
 
-  // useEffect(() => {
-  //   if (isRecipeAdded && showMessage) {
-  //     const timer = setTimeout(() => {
-  //       queryParams.delete("showMessage");
-  //       window.history.replaceState(null, "", `?${queryParams}`);
-  //     }, 5000);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [isRecipeAdded, showMessage, queryParams]);
-
   const fetchRecipes = () => {
     axios
       .get("/api/get_custom_recipes", {
@@ -94,15 +84,15 @@ const CustomRecipes = () => {
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div className="mx-5 mt-3">
-            <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-              <div className="text-center fs-3">COOKBOOK</div>
-              <button className="btn text-white rounded">
+            <div className="w-100 d-flex p-2">
+              <div className="flex-grow-1 text-center ps-5 fs-3">~ COOKBOOK ~</div>
+              <button className="btn text-white rounded align-self-end">
                 <Link
                   className="text-decoration-none text-white"
                   to="/create_recipe"
                 >
                   <i
-                    style={{ color: "#414448" }}
+                    style={{ color: "#FF7D04" }}
                     className="fa-regular fa-pen-to-square fa-xl"
                   ></i>
                 </Link>
@@ -110,7 +100,7 @@ const CustomRecipes = () => {
             </div>
           </div>
           <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 my-5 p-sm-2">
-            {Array.isArray(recipes) ? (
+          {recipes.length > 0 ? (
               currentRecipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}
@@ -121,7 +111,11 @@ const CustomRecipes = () => {
                 />
               ))
             ) : (
-              <p>Loading...</p>
+              <div className="w-100 p-5 fs-4 text-center">
+                <p>No recipes to display. Start writing!
+                </p>
+                <p className="border-card mx-auto w-50"></p>
+              </div>
             )}
           </ul>
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
