@@ -194,9 +194,9 @@ button a i:hover {
   font-family: "Roboto", sans-serif;
 }
 
-form {
+/* form {
   font-family: "Roboto", sans-serif;
-}
+} */
 .form-control::-moz-placeholder {
   color: #b8b6b6 !important;
   outline: none !important;
@@ -247,19 +247,18 @@ input[type="file" i]:hover {
   width: 100%;
   background-color: rgba(255, 255, 255);
 }
-.list input,
-.list textarea,
-.list li {
+form input[type="text"],
+form textarea {
   margin-left: 1rem;
   list-style: none;
-  border-bottom: 1px dotted #aeacac;
+  /* border-bottom: 1px dotted #aeacac; */
   text-indent: 25px;
   height: auto;
   padding: 1rem;
-  text-transform: capitalize;
+  border-bottom: 0.1rem dashed #a09e9e;
 }
-.list input:hover,
-.list textarea:hover {
+form input:hover,
+form textarea:hover {
   background-color: #f0f0f0;
   -webkit-transition: all 0.2s;
   -moz-transition: all 0.2s;
@@ -304,6 +303,33 @@ input[type="file" i]:hover {
 .hole-bottom {
   bottom: 10%;
 }
+
+.form-holes {
+  position: absolute;
+  top: 10px;
+  background-color: #b08769;
+  border-radius: 50%;
+  box-shadow: inset 0px 0px 2px 0px #888;
+  z-index: 1;
+}
+.form-hole-top {
+  left: 10%;
+}
+.form-hole-middle {
+  left: 50%;
+}
+.form-hole-bottom {
+  left: 90%;
+}
+.form-lines {
+  border-top: 1px solid rgba(209, 107, 30);
+  border-bottom: 1px solid rgba(209, 107, 30);
+  height: 2px;
+  width: 90%;
+  margin: 2.5rem auto;
+}
+
+
 .recipes-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
