@@ -158,6 +158,7 @@ const Recipes = () => {
                   recipe={recipe}
                   setRecipes={setRecipes}
                   showIcon={false}
+                  type="recipe"
                 />
               )
             )}

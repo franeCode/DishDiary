@@ -118,6 +118,7 @@ const CustomRecipes = () => {
                   customRecipeId={recipe.id}
                   setRecipes={setRecipes}
                   showIcon={true}
+                  type="custom"
                 />
               ))
             ) : (
