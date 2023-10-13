@@ -41,11 +41,10 @@ const CookBook = () => {
       .then((resp) => {
         const data = resp.data;
         setRecipe({
-          title: data.title,
-          ingredients: data.ingredients,
-          instructions: data.instructions,
-          image: data.image,
-          imagePreview: data.imagePreview,
+          title: "",
+          ingredients: "",
+          instructions: "",
+          image: null, 
         });
         if (
           recipe.title === "" ||
