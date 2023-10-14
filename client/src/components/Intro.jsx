@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import logo from '../assets/img/logo-icon.svg';
+import logo from '../assets/img/part-logo.png';
 import { Link } from 'react-router-dom';
 
 const Intro = () => {
@@ -20,12 +20,12 @@ const Intro = () => {
       <h1 className='quote'>The kitchen is where the magic happens.</h1>
         <div className='logo-wrapper d-flex flex-column align-items-center justify-content-center'>
           <div className='d-flex flex-column align-items-center logo-modal'>
-            <img src={logo} alt="logo" style={{ width: "5rem", height: "5rem"}}></img>
+            <img src={logo} alt="logo" style={{ width: "4rem", height: "4rem"}}></img>
             <span>DishDiary</span>
           </div>
         </div>
         <Link to='/login'>
-        <button className='text-white rounded fs-3 px-3'>Join now!</button>
+        <button type="button" className='text-white rounded fs-3 px-3'>Start</button>
       </Link>
       </div>
     </div>
