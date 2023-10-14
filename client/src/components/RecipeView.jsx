@@ -20,10 +20,10 @@ const RecipeView = () => {
 
   return (
     <>
-      <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
+      <div className="d-flex justify-content-center align-items-center overflow-hidden my-5 pt-5">
         <div className="bg-image"></div>
-        <div className="book position-relative border rounded shadow mt-5">
-          <div className="lines" style={{ minHeight: "100%" }}></div>
+        <div className="book h-auto position-relative border rounded shadow mt-5">
+          <div className="lines my-5"></div>
           <div
             className="holes hole-top"
             style={{ width: "20px", height: "20px" }}
@@ -64,58 +64,51 @@ const RecipeView = () => {
               </button>
             </div>
           </div>
-          <div className="d-flex flex-start px-5 py-4">
-            <div className="w-25" style={{ flex: "0 0 auto" }}>
+          <div 
+            className="d-flex flex-column justify-content-center align-items-center px-5 py-4"
+            // style={{ overflowY: "scroll", maxHeight: "100%"}}
+            >
               {recipe && recipe.image_url ? (
                 <img
                   src={recipe.image_url}
-                  className="rounded-top-4"
+                  className="rounded"
                   alt="image"
-                  style={{ maxWidth: "100%", height: "auto" }}
+                  style={{ width: "25%", height: "auto" }}
                 />
               ) : (
                 <img
                   src={noImage}
-                  className="rounded-top-4"
+                  className="rounded"
                   alt="image"
-                  style={{ maxWidth: "100px", height: "auto" }}
+                  style={{ width: "25%", height: "auto" }}
                 />
               )}
-            </div>
-            <div
-              className="d-flex flex-column px-5 mt-2"
-              style={{ flex: "1 1 auto" }}
-            >
-              <h1 className="fs-3">{recipe.title}</h1>
+              <h1 
+                className="text-center my-3"
+                style={{ color: "#414448" }}>~ {recipe.title} ~</h1>
               <p className="border-card"></p>
-              <div className="d-flex flex-row">
-                Ingredients:
-                <ul>
+              <h4 
+                className="my-3 text-center fst-italic"
+                style={{ color: "#414448" }}>Ingredients</h4>
+                <ul className="d-flex flex-column text-center p-2 mb-0 list-unstyled">
                   <li
-                    className="text-decoration-none fs-6"
-                    style={{ lineHeight: "1rem" }}
-                  ></li>
-                </ul>
-                <ul className="d-flex flex-column text-center p-0 mb-0">
-                  <li
-                    className="text-decoration-none fs-6"
+                    className="lh-base fs-6"
                     style={{ lineHeight: "1rem" }}
                   >
                     {recipe.ingredients}
                   </li>
                 </ul>
-              </div>
-
+              <div className="my-3 text-center">* * *</div>
               <p className="border-card"></p>
-              <p className="instructions fs-6" style={{ color: "#282727" }}>
+              <h4 
+                className="my-3 text-center fst-italic"
+                style={{ color: "#414448" }}>Instructions</h4>
+              <p className="instructions py-2 px-5 fs-6" style={{ color: "#282727" }}>
                 {recipe.instructions}
               </p>
+              <div className="my-3 text-center">* * *</div>
             </div>
-          </div>
         </div>
-        <div className="holes hole-top"></div>
-        <div className="holes hole-middle"></div>
-        <div className="holes hole-bottom"></div>
       </div>
     </>
   );
