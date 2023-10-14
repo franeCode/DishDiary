@@ -178,27 +178,22 @@ const CookBook = () => {
                 border: "none",
               }}
             />
+            <div className="">
             <button
-              className="btn rounded fs-5"
+              className="rounded mx-2 p-2 fs-5"
+              type="submit"
+              style={{ backgroundColor: "#ff7d04", color: "#fff" }}
+              onClick={handleSubmit}
+            > add
+            </button>
+            <button
+              className="rounded mx-2 p-2 fs-5"
               type="submit"
               style={{ backgroundColor: "#555", color: "#fff" }}
               onClick={handleSubmit}
-            > add
-              {/* <span 
-                className="px-2"
-                style={{color: "#555"}}
-                >Add
-                </span> */}
-              {/* <Link
-                className="text-decoration-none text-white"
-                to="/custom_recipes"
-              > */}
-              {/* <i
-                  style={{ color: "#FF7D04" }}
-                  className="fa-solid fa-check fa-xl"
-                ></i> */}
-              {/* </Link> */}
+            > view
             </button>
+            </div>
             </div>
           </form>
         </div>

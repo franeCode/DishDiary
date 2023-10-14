@@ -34,6 +34,7 @@ Authentication: JWT (JSON Web Tokens)
 <img src="/dish-diary2.png" alt="image-app">
 <img src="/dish-diary3.png" alt="image-app">
 <img src="/dish-diary4.png" alt="image-app">
+<img src="/dish-diary5.png" alt="image-app">
 
 🚅 Live Demo
 
