@@ -180,7 +180,7 @@ button a i:hover {
   background-color: rgba(255, 255, 255);
 }
 .bg-image {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -188,6 +188,7 @@ button a i:hover {
   z-index: 2;
   background-image: url("../src/assets/img/recipeview5.jpg");
   background-size: cover;
+  background-attachment: fixed;
   filter: blur(3px);
 }
 .book-page {
@@ -272,14 +273,6 @@ form textarea:hover {
   -ms-transition: all 0.2s;
   -o-transition: all 0.2s;
 }
-.lines {
-  border-left: 1px solid rgba(209, 107, 30);
-  border-right: 1px solid rgba(209, 107, 30);
-  width: 2px;
-  float: left;
-  min-height: 90%;
-  margin-left: 40px;
-}
 .text {
   position: absolute;
   top: 65px;
@@ -291,27 +284,8 @@ form textarea:hover {
   overflow: hidden;
   outline: none;
 }
-.holes {
-  position: absolute;
-  left: 10px;
-  height: 25px;
-  width: 25px;
-  background-color: #b08769;
-  border-radius: 50%;
-  box-shadow: inset 0px 0px 2px 0px #888;
-  z-index: 1;
-}
-.hole-top {
-  top: 10%;
-}
-.hole-middle {
-  top: 50%;
-}
-.hole-bottom {
-  bottom: 10%;
-}
 
-.form-holes {
+.holes {
   position: absolute;
   top: 10px;
   background-color: #b08769;
@@ -319,16 +293,16 @@ form textarea:hover {
   box-shadow: inset 0px 0px 2px 0px #888;
   z-index: 1;
 }
-.form-hole-top {
+.hole-top {
   left: 10%;
 }
-.form-hole-middle {
+.hole-middle {
   left: 50%;
 }
-.form-hole-bottom {
+.hole-bottom {
   left: 90%;
 }
-.form-lines {
+.lines {
   border-top: 1px solid rgba(209, 107, 30);
   border-bottom: 1px solid rgba(209, 107, 30);
   height: 2px;
