@@ -11,7 +11,7 @@ const CookBook = () => {
     image: "",
   });
   const [formValid, setFormValid] = useState(true);
-  const [successMessage, setSuccessMessage] = useState(false);
+  // const [successMessage, setSuccessMessage] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
 
   const navigate = useNavigate();
@@ -53,23 +53,28 @@ const CookBook = () => {
         ) {
           setFormValid(false);
           setShowMessage(true);
+          // setSuccessMessage(false);
         } else {
           setFormValid(true);
           setShowMessage(true);
-          setSuccessMessage(true);
-          // navigate("/custom_recipes?formValid=true&showMessage=false");
+          setRecipe({
+            title: "",
+            ingredients: "",
+            instructions: "",
+            image: null,
+          });
         }
         // Reset the recipe state
-        setRecipe({
-          title: "",
-          ingredients: "",
-          instructions: "",
-          image: null,
-        });
+        // setRecipe({
+        //   title: "",
+        //   ingredients: "",
+        //   instructions: "",
+        //   image: null,
+        // });
       })
       .catch((err) => {
         console.log(err);
-        setSuccessMessage(false); // Hide the success message
+        // setSuccessMessage(false); // Hide the success message
         setShowMessage(true);
       });
   };
@@ -100,11 +105,11 @@ const CookBook = () => {
   }, [showMessage]);
 
   return (
-    <div>
+    <div className="pt-5">
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         {!formValid && showMessage ? (
-          <div className="bg-light rounded px-4" style={{ zIndex: "2" }}>
+          <div className="bg-light position-absolute middle-50 rounded px-4" style={{ top: "10%", zIndex: "2" }}>
             <p className="text-center p-3" style={{ color: "red" }}>
               Form is invalid. Please fill out all required fields.
             </p>
@@ -112,12 +117,12 @@ const CookBook = () => {
         ) : (
           " "
         )}
-        {successMessage ? (
-           <div className="bg-light rounded px-4" style={{ zIndex: "2" }}>
+        {formValid && showMessage ? (
+           <div className="bg-light position-absolute middle-50 rounded px-4" style={{ top: "10%", zIndex: "2" }}>
             <p className="text-center p-3" style={{ color: "green" }}>Recipe added successfully!</p>
           </div>
         ) : null}
-        <div className="book position-relative border rounded shadow mt-5" style={{height: "100%"}}>
+        <div className="book position-relative border rounded shadow mt-5 p-3" style={{height: "100%"}}>
           <div className="form-lines my-5"></div>
           <div
             className="form-holes form-hole-top"
@@ -132,6 +137,9 @@ const CookBook = () => {
             style={{ width: "20px", height: "20px" }}
           ></div>
           <form className="d-flex flex-column justify-content-center align-items-center">
+            <h3 
+              className="text-center p-2"
+              style={{ color: "#555" }}>~  CookBook ~</h3>
             <input
               className="border-none w-75"
               type="text"
@@ -173,22 +181,22 @@ const CookBook = () => {
             <button
               className="btn rounded fs-5"
               type="submit"
-              style={{ color: "#FF7D04" }}
+              style={{ backgroundColor: "#555", color: "#fff" }}
               onClick={handleSubmit}
-            >
-              <span 
+            > add
+              {/* <span 
                 className="px-2"
                 style={{color: "#555"}}
                 >Add
-                </span>
+                </span> */}
               {/* <Link
                 className="text-decoration-none text-white"
                 to="/custom_recipes"
               > */}
-              <i
+              {/* <i
                   style={{ color: "#FF7D04" }}
                   className="fa-solid fa-check fa-xl"
-                ></i>
+                ></i> */}
               {/* </Link> */}
             </button>
             </div>
