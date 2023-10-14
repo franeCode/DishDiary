@@ -31,7 +31,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow fs-2">
+    <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow px-5 fs-2">
       <div className="container-fluid">
         <Link className="navbar-brand d-flex align-items-center fs-1" to="/">
           <div style={{ width: "10rem" }}>
@@ -71,8 +71,8 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <button
-                className="btn px-3 rounded fs-4"
-                style={{ backgroundColor: "transparent" }}
+                className="px-3 rounded fs-4"
+                style={{ backgroundColor: "transparent", color: "#555" }}
                 onClick={handleLogout}
               >
                 Logout
