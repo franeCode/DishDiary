@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const CookBook = () => {
   const [recipe, setRecipe] = useState({
@@ -190,8 +191,13 @@ const CookBook = () => {
               className="rounded mx-2 p-2 fs-5"
               type="submit"
               style={{ backgroundColor: "#555", color: "#fff" }}
-              onClick={handleSubmit}
-            > view
+            >
+              <Link
+            className="text-decoration-none text-white"
+            to="/custom_recipes"
+          >
+            view
+          </Link>
             </button>
             </div>
             </div>
