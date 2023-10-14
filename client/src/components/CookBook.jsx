@@ -123,17 +123,17 @@ const CookBook = () => {
           </div>
         ) : null}
         <div className="book position-relative border rounded shadow mt-5 p-3" style={{height: "100%"}}>
-          <div className="form-lines my-5"></div>
+          <div className="lines my-5"></div>
           <div
-            className="form-holes form-hole-top"
+            className="holes hole-top"
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div
-            className="form-holes form-hole-middle"
+            className="holes hole-middle"
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div
-            className="form-holes form-hole-bottom"
+            className="holes hole-bottom"
             style={{ width: "20px", height: "20px" }}
           ></div>
           <form className="d-flex flex-column justify-content-center align-items-center">

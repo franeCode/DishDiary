@@ -69,7 +69,7 @@ const CustomRecipes = () => {
     <div>
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
-        <div className="book position-relative border rounded shadow mt-5">
+        <div className="book position-relative border rounded shadow mt-5 px-5">
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"
