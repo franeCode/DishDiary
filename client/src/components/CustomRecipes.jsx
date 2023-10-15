@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import logo from "../assets/img/logo-icon.svg";
 import { Link } from "react-router-dom";
-// import { handleSubmit } from "./Api";
 import RecipeCard from "./RecipeCard";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -10,11 +8,12 @@ const CustomRecipes = () => {
   const [recipes, setRecipes] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const recipesPerPage = 4;
-  const location = useLocation();
+  // const location = useLocation();
   const navigate = useNavigate();
-  const queryParams = new URLSearchParams(location.search);
-  const isRecipeAdded = queryParams.get("formValid") === "true";
-  // const showMessage = queryParams.get("showMessage") === "false";
+  // const queryParams = new URLSearchParams(location.search);
+  // const isRecipeAdded = queryParams.get("formValid") === "true";  
+  const [shareMessage, setShareMessage] = useState("");
+  const [deleteMessage, setDeleteMessage] = useState("");
 
   useEffect(() => {
     fetchRecipes();
@@ -28,25 +27,45 @@ const CustomRecipes = () => {
         },
       })
       .then((response) => {
-        const customRecipes = response.data.map((recipe) => {
-          if (typeof recipe.ingredients === "string") {
-            const ingredientsArray = recipe.ingredients.split(", ");
-            return {
-              ...recipe,
-              ingredients: ingredientsArray,
-            };
-          }
-          return recipe;
-        });
+        // const customRecipes = response.data.map((recipe) => {
+        //   if (typeof recipe.ingredients === "string") {
+        //     const ingredientsArray = recipe.ingredients.split(", ");
+        //     return {
+        //       ...recipe,
+        //       ingredients: ingredientsArray,
+        //     };
+        //   }
+        //   return recipe;
+        // });
+        const data = response.data;
 
-        setRecipes(customRecipes);
-      })
+        if (Array.isArray(data)) {
+          setRecipes(data);
+        } else {
+          console.error("Invalid data format:", data);
+        }
+        })
       .catch((error) => {
         console.error("Logout failed:", error.message);
         if (error.response && error.response.status === 401) {
           navigate("/login");
         }
       });
+  };
+
+  // Function to show the message
+  const showRecipeMessage = (message, messageType) => {
+    if (messageType === "share") {
+      setShareMessage(message);
+      setTimeout(() => {
+        setShareMessage("");
+      }, 3000);
+    } else if (messageType === "delete") {
+      setDeleteMessage(message);
+      setTimeout(() => {
+        setDeleteMessage("");
+      }, 3000);
+    }
   };
 
   const indexOfLastRecipe = currentPage * recipesPerPage;
@@ -70,6 +89,17 @@ const CustomRecipes = () => {
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="book position-relative border rounded shadow mt-5 px-5">
+        {shareMessage && (
+        <div className="alert alert-success">
+          {shareMessage}
+        </div>
+      )}
+
+      {deleteMessage && (
+        <div className="alert alert-success">
+          {deleteMessage}
+        </div>
+      )}
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"
@@ -108,6 +138,7 @@ const CustomRecipes = () => {
                   customRecipeId={recipe.id}
                   setRecipes={setRecipes}
                   showIcon={true}
+                  showRecipeMessage={showRecipeMessage}
                   type="custom"
                 />
               ))

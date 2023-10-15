@@ -26,6 +26,16 @@ const CookBook = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (
+      recipe.title.trim() === "" ||
+      recipe.ingredients.trim() === "" ||
+      recipe.instructions.trim() === ""
+    ) {
+      setFormValid(false);
+      setShowMessage(true);
+    } else {
+      setFormValid(true);
+
     const formData = new FormData();
     formData.append("title", recipe.title);
     formData.append("ingredients", recipe.ingredients);
@@ -47,39 +57,15 @@ const CookBook = () => {
           instructions: "",
           image: null, 
         });
-        if (
-          recipe.title === "" ||
-          recipe.ingredients === "" ||
-          recipe.instructions === ""
-        ) {
-          setFormValid(false);
-          setShowMessage(true);
-          // setSuccessMessage(false);
-        } else {
-          setFormValid(true);
-          setShowMessage(true);
-          setRecipe({
-            title: "",
-            ingredients: "",
-            instructions: "",
-            image: null,
-          });
-        }
-        // Reset the recipe state
-        // setRecipe({
-        //   title: "",
-        //   ingredients: "",
-        //   instructions: "",
-        //   image: null,
-        // });
+        setShowMessage(true);
       })
       .catch((err) => {
         console.log(err);
-        // setSuccessMessage(false); // Hide the success message
         setShowMessage(true);
       });
   };
-
+  };
+  
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     if (imageFile) {

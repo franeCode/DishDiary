@@ -9,7 +9,8 @@ const RecipeCard = ({
   setRecipes,
   customRecipe,
   customRecipeId,
-  type, // Add a "type" prop
+  showRecipeMessage,
+  type,
 }) => {
   const [isIconVisible, setIsIconVisible] = useState(false); // State for showing/hiding icons
   const displayRecipe = recipe || customRecipe;
@@ -23,10 +24,10 @@ const RecipeCard = ({
     }
   };
 
-  const handleIconClick = () => {
-    console.log('Ellipsis button clicked');
-    setIsIconVisible(!isIconVisible);
-  };
+  // const handleIconClick = () => {
+  //   console.log('Ellipsis button clicked');
+  //   setIsIconVisible(!isIconVisible);
+  // };
 
   const deleteRecipe = async (recipeId) => {
     axios
@@ -40,6 +41,7 @@ const RecipeCard = ({
           setRecipes((recipes) =>
             recipes.filter((recipe) => recipe.id !== recipeId)
           );
+          showRecipeMessage("Recipe deleted successfully.", "delete");
         }
       })
       .catch((error) => {
@@ -57,6 +59,7 @@ const RecipeCard = ({
         },
       })
       .then((response) => {
+        showRecipeMessage("Recipe shared successfully.", "share");
         console.log(response.data.message);
       })
       .catch((error) => {
