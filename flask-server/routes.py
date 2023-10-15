@@ -30,13 +30,17 @@ def register():
    
     username = request.json["username"]
     password = request.json["password"]
+    confirmation = request.json["confirmation"]
  
     user_exists = Users.query.filter_by(username=username).first() is not None
  
     if user_exists:
         return jsonify({"error": "Email already exists"}), 409
-    # if not username or not password:
-    #     return jsonify({"error": "Username and password are required"}), 400
+    if not username or not password:
+        return jsonify({"error": "Username and password are required"}), 400
+    if password != confirmation:
+        return jsonify({"error": "Password is not matched!"}), 409
+
      
     hashed_password = bcrypt.generate_password_hash(password, rounds=12)
     new_user = Users(username=username, password=hashed_password)
