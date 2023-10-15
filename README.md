@@ -52,16 +52,18 @@ To run DishDiary on your local machine, follow these simple steps:
 
 ### Backend Setup
 
-Backend Setup with Pipenv
-Install Pipenv if you haven't already:
+Install Pipenv:
 
-1. Install Pipenv
+1. Install Pipenv:
+
 pip install pipenv
 
 2. Create a virtual environment with Pipenv and install the Python dependencies:
+
 pipenv install
 
 3. Activate the virtual environment:
+
 pipenv shell
 
 ### Frontend Setup
