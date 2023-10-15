@@ -122,7 +122,7 @@ const CustomRecipes = () => {
                   to="/create_recipe"
                 >
                   <i
-                    style={{ color: "#FF7D04" }}
+                    style={{ color: "#555" }}
                     className="fa-regular fa-pen-to-square fa-xl"
                   ></i>
                 </Link>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
@@ -8,6 +9,7 @@ const Recipes = () => {
   const recipesPerPage = 4;
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchRecipes();
@@ -61,6 +63,9 @@ const Recipes = () => {
       }
     } catch (error) {
       console.error("Error fetching recipes:", error);
+      if (error.response && error.response.status === 401) {
+        navigate("/login");
+      }
     }
   };
 
@@ -130,9 +135,9 @@ const Recipes = () => {
             className="holes hole-bottom"
             style={{ width: "20px", height: "20px" }}
           ></div>
-          <div className="mx-5 mt-3">
+          <div className="mx-lg-5 mt-3">
             <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
-              <div className="input-group w-50 mx-auto">
+              <div className="input-group mx-auto">
                 <input
                   type="text"
                   className="form-control"
@@ -141,7 +146,7 @@ const Recipes = () => {
                   onChange={(e) => handleSearchChange(e)}
                 />
                 <button
-                  className="btn btn-outline-secondary text-light"
+                  className="rounded text-light"
                   type="button"
                   id="button-addon2"
                 >
@@ -150,7 +155,7 @@ const Recipes = () => {
               </div>
             </div>
           </div>
-          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 my-5 p-sm-2">
+          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 my-5 p-sm-2">
             {(searchQuery === "" ? currentRecipes : filteredRecipes).map(
               (recipe) => (
                 <RecipeCard

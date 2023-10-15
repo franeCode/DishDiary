@@ -19,15 +19,13 @@ const RecipeCard = ({
   const handleReadMore = () => {
     if (displayRecipe && displayRecipe.id) {
       navigate(`/recipe/${displayRecipe.id}`, {
-        state: { recipe: displayRecipe },
+        state: { 
+          recipe: displayRecipe,
+          image_url: displayRecipe.image_url, 
+        },
       });
     }
   };
-
-  // const handleIconClick = () => {
-  //   console.log('Ellipsis button clicked');
-  //   setIsIconVisible(!isIconVisible);
-  // };
 
   const deleteRecipe = async (recipeId) => {
     axios
@@ -46,6 +44,9 @@ const RecipeCard = ({
       })
       .catch((error) => {
         console.error("Error deleting recipe:", error);
+        if (error.response && error.response.status === 401) {
+          navigate("/login");
+        }
       });
   };
 
@@ -64,19 +65,22 @@ const RecipeCard = ({
       })
       .catch((error) => {
         console.error(error.response.data.error);
+        if (error.response && error.response.status === 401) {
+          navigate("/login");
+        }
       });
   };
 
   return (
     <li>
       <div
-        className="d-flex flex-row align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
+        className="d-flex flex-sm-row flex-wrap flex-sm-nowrap align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
         style={{ width: "100%", height: "15rem", borderColor: "transparent" }}
       >
         {displayRecipe && displayRecipe.image_url ? (
           <img
             src={displayRecipe.image_url}
-            className="card-img-top rounded-4 m-3"
+            className="w-75 h-75 card-img-top rounded-4 m-sm-3"
             alt="image"
             style={{ width: "30%", height: "80%" }}
           />
@@ -90,11 +94,11 @@ const RecipeCard = ({
         )}
         <div className="card-body my-3 p-2">
           <div className="d-flex flex-row justify-content-between">
-            <h5 className="card-title fs-4">
+            <h5 className="card-title fs-4 mx-3 mx-sm-0">
               {displayRecipe ? displayRecipe.title : "No title available"}
             </h5>
             <button
-              className="rounded bg-transparent p-2"
+              className="rounded bg-transparent p-sm-2"
               onClick={() => setIsIconVisible(!isIconVisible)} 
             >
               <i className="fa-solid fa-ellipsis-vertical fa-xl" style={{ color: "#414448" }}></i>
@@ -144,13 +148,13 @@ const RecipeCard = ({
             )}
           </div>
           </div>
-          <p className="border-card"></p>
-          <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem", width: "90%" }}>
+          <p className="d-none d-sm-block border-card"></p>
+          <p className="d-none d-sm-block fs-6 overflow-hidden mb-0" style={{ height: "1.5rem", width: "90%" }}>
             Ingredients:{" "}
             <span style={{ fontSize: "0.8rem" }}>{displayRecipe.ingredients}</span>
           </p>
-          <p className="border-card"></p>
-          <p className="fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
+          <p className="d-none d-sm-block border-card"></p>
+          <p className="d-none d-sm-block fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
             Instructions:{" "}
             <span style={{ fontSize: "0.8rem" }}>
               {displayRecipe ? displayRecipe.instructions : ""}

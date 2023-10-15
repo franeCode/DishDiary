@@ -59,13 +59,16 @@ const CookBook = () => {
         });
         setShowMessage(true);
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        console.log(error);
         setShowMessage(true);
+        if (error.response && error.response.status === 401) {
+          navigate("/login");
+        }
       });
   };
   };
-  
+
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     if (imageFile) {
@@ -123,7 +126,7 @@ const CookBook = () => {
             className="holes hole-bottom"
             style={{ width: "20px", height: "20px" }}
           ></div>
-          <form className="d-flex flex-column justify-content-center align-items-center">
+          <form className="d-flex flex-column justify-content-center align-items-center form">
             <h3 
               className="text-center p-2"
               style={{ color: "#555" }}>~  CookBook ~</h3>

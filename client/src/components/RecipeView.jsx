@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import noImage from "../assets/img/no-image.jpeg";
 import { Link } from "react-router-dom";
-import { handleSubmit } from "./Api";
 
 const RecipeView = () => {
   const location = useLocation();
@@ -17,6 +16,10 @@ const RecipeView = () => {
   if (!recipe) {
     return <div>No recipe data available.</div>;
   }
+
+  // Define the imageUrl
+  const imageUrl = `${window.location.origin}/${recipe.image_url}`;
+  console.log("Image url:", imageUrl);
 
   return (
     <>
@@ -47,13 +50,13 @@ const RecipeView = () => {
                   style={{ color: "#414448" }}
                 ></i>
               </button>
-              <button
+              {/* <button
                 className="btn text-white rounded"
-                type="submit"
-                onClick={handleSubmit}
-              >
+                // type="submit"
+                // onClick={handleSubmit}
+              > */}
                 <Link
-                  className="text-decoration-none text-white"
+                  className="text-decoration-none"
                   to="/cookbook"
                 >
                   <i
@@ -61,16 +64,16 @@ const RecipeView = () => {
                     className="fa-regular fa-pen-to-square fa-xl"
                   ></i>
                 </Link>
-              </button>
+              {/* </button> */}
             </div>
           </div>
           <div 
             className="d-flex flex-column justify-content-center align-items-center px-5 py-4"
             // style={{ overflowY: "scroll", maxHeight: "100%"}}
             >
-              {recipe && recipe.image_url ? (
+              {recipe.image_url ?  (
                 <img
-                  src={recipe.image_url}
+                  src={recipe.image_url ? recipe.image_url : imageUrl}
                   className="rounded"
                   alt="image"
                   style={{ width: "25%", height: "auto" }}
