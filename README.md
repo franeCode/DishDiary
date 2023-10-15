@@ -1,7 +1,8 @@
 # 🍽️ DishDiary
 
-DishDiary is your go-to app for organizing, sharing, and discovering delicious recipes. 
-Whether you're a professional chef or a cooking enthusiast, DishDiary helps you streamline your culinary journey.
+Video Demo: [URL HERE]
+
+DishDiary is a web application that simplifies the way you manage, share, and explore delicious recipes. Whether you're an experienced chef or a cooking enthusiast, DishDiary streamlines your culinary journey.
 
 🌟 Features
 
@@ -51,18 +52,17 @@ To run DishDiary on your local machine, follow these simple steps:
 
 ### Backend Setup
 
-1. Create and activate a virtual environment:
+Backend Setup with Pipenv
+Install Pipenv if you haven't already:
 
-    ```bash
-    python -m venv venv
-    source venv/bin/activate
-    ```
+1. Install Pipenv
+pip install pipenv
 
-2. Install Python dependencies:
+2. Create a virtual environment with Pipenv and install the Python dependencies:
+pipenv install
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+3. Activate the virtual environment:
+pipenv shell
 
 ### Frontend Setup
 
@@ -77,15 +77,3 @@ To run DishDiary on your local machine, follow these simple steps:
     ```bash
     npm install
     ```
-
-### Database Setup (optional)
-
-DishDiary uses SQLAlchemy as the ORM for database operations.
-
-### Environment Variables
-
-Create a `.env` file in the root directory and add the necessary environment variables. For example:
-
-```env
-SECRET_KEY=your_secret_key
-DATABASE_URL=your_database_url
