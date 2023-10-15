@@ -26,9 +26,10 @@ const Login = () => {
             })
             .then((response) => {
               console.log(response);
+              localStorage.setItem("username", username);
               navigate("/home", {
-                state: { message: `${username} logged in successfully!` },
-              });
+                state: { username: username },
+              }); 
             })
             .catch((error) => {
               if (

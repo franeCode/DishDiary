@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import view from "../assets/img/make-food.jpg";
 import write from "../assets/img/view.webp";
 import logo from "../assets/img/logo-icon.svg";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
+  // const location = useLocation();
+  // const { username } = location.state || {};
+  const username = localStorage.getItem("username");
+
+
   return (
     <div>
       <div
@@ -15,16 +21,7 @@ const Home = () => {
       >
         <div className="d-flex flex-column justify-content-center align-items-center p-5 mb-5 fs-5 shadow">
           <h1 className="d-flex align-items-center justify-content-center fs-1 gap-3 mb-5">
-            Welcome to
-            <div className="logo">
-              <span>DishDiary</span>
-              {/* <img
-                src={logo}
-                alt="logo"
-                style={{ width: "1rem", height: "1rem" }}
-                loading="lazy"
-              ></img> */}
-            </div>
+            Welcome, {username}
           </h1>
           <p className="text-center fs-4">
             Get ready to embark on a culinary adventure where you can unleash

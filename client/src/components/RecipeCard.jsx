@@ -15,6 +15,8 @@ const RecipeCard = ({
   const [isIconVisible, setIsIconVisible] = useState(false); // State for showing/hiding icons
   const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
+  // const username = localStorage.getItem("username");
+
 
   const handleReadMore = () => {
     if (displayRecipe && displayRecipe.id) {
@@ -74,13 +76,13 @@ const RecipeCard = ({
   return (
     <li>
       <div
-        className="d-flex flex-sm-row flex-wrap flex-sm-nowrap align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
-        style={{ width: "100%", height: "15rem", borderColor: "transparent" }}
+        className="d-flex flex-sm-row align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
+        style={{ width: "100%", borderColor: "transparent" }}
       >
         {displayRecipe && displayRecipe.image_url ? (
           <img
             src={displayRecipe.image_url}
-            className="w-75 h-75 card-img-top rounded-4 m-sm-3"
+            className="card-img-top rounded-4 m-sm-3"
             alt="image"
             style={{ width: "30%", height: "80%" }}
           />
@@ -92,6 +94,7 @@ const RecipeCard = ({
             style={{ width: "30%", height: "80%" }}
           />
         )}
+        {/* <p>Written by {username}</p> */}
         <div className="card-body my-3 p-2">
           <div className="d-flex flex-row justify-content-between">
             <h5 className="card-title fs-4 mx-3 mx-sm-0">
@@ -148,13 +151,13 @@ const RecipeCard = ({
             )}
           </div>
           </div>
-          <p className="d-none d-sm-block border-card"></p>
-          <p className="d-none d-sm-block fs-6 overflow-hidden mb-0" style={{ height: "1.5rem", width: "90%" }}>
+          <p className="border-card"></p>
+          <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem", width: "90%" }}>
             Ingredients:{" "}
             <span style={{ fontSize: "0.8rem" }}>{displayRecipe.ingredients}</span>
           </p>
-          <p className="d-none d-sm-block border-card"></p>
-          <p className="d-none d-sm-block fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
+          <p className="border-card"></p>
+          <p className="fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
             Instructions:{" "}
             <span style={{ fontSize: "0.8rem" }}>
               {displayRecipe ? displayRecipe.instructions : ""}

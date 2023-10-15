@@ -15,6 +15,7 @@ const Navbar = () => {
         if (response.status === 200) {
           // Clear JWT token from client-side storage
           localStorage.removeItem("access_token");
+          localStorage.removeItem("username");
           navigate("/login");
           console.log("Logout successful");
         } else {

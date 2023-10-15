@@ -27,16 +27,6 @@ const CustomRecipes = () => {
         },
       })
       .then((response) => {
-        // const customRecipes = response.data.map((recipe) => {
-        //   if (typeof recipe.ingredients === "string") {
-        //     const ingredientsArray = recipe.ingredients.split(", ");
-        //     return {
-        //       ...recipe,
-        //       ingredients: ingredientsArray,
-        //     };
-        //   }
-        //   return recipe;
-        // });
         const data = response.data;
 
         if (Array.isArray(data)) {
@@ -115,8 +105,8 @@ const CustomRecipes = () => {
           ></div>
           <div className="mx-5 mt-3">
             <div className="w-100 d-flex p-2">
-              <div className="flex-grow-1 text-center ps-5 fs-3">~ COOKBOOK ~</div>
-              <button className="btn text-white rounded align-self-end">
+              <div className="flex-grow-1 text-center ps-sm-5 fs-3">~ COOKBOOK ~</div>
+              <button className="d-none d-sm-block btn text-white rounded align-self-end">
                 <Link
                   className="text-decoration-none text-white"
                   to="/create_recipe"
@@ -129,7 +119,7 @@ const CustomRecipes = () => {
               </button>
             </div>
           </div>
-          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-5 my-5 p-sm-2">
+          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 my-5 p-sm-2">
           {recipes.length > 0 ? (
               currentRecipes.map((recipe) => (
                 <RecipeCard
