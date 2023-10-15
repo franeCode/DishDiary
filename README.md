@@ -1,6 +1,6 @@
 # 🍽️ DishDiary
 
-Video Demo: [URL HERE]
+Video Demo: [https://youtu.be/NbNP-kkSxAc]
 
 DishDiary is a web application that simplifies the way you manage, share, and explore delicious recipes. Whether you're an experienced chef or a cooking enthusiast, DishDiary streamlines your culinary journey.
 
