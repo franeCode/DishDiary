@@ -31,6 +31,7 @@ Database: SQLAlchemy (Database ORM)
 
 Authentication: JWT (JSON Web Tokens)
 
+Images taken from www.unsplash.com
 <img src="/dish-diary1.png" alt="image-app">
 <img src="/dish-diary2.png" alt="image-app">
 <img src="/dish-diary3.png" alt="image-app">

@@ -78,18 +78,19 @@ const CustomRecipes = () => {
     <div>
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
-        <div className="book position-relative border rounded shadow mt-5 px-5">
         {shareMessage && (
-        <div className="alert alert-success">
+        <div className="bg-light position-absolute middle-50 rounded px-4 text-success p-2" style={{ top: "9%", zIndex: "2" }}>
           {shareMessage}
         </div>
       )}
 
       {deleteMessage && (
-        <div className="alert alert-success">
+        <div className="bg-light position-absolute middle-50 rounded px-4 text-success" style={{ top: "9%", zIndex: "2" }}>
           {deleteMessage}
         </div>
       )}
+        <div className="book position-relative border rounded shadow mt-5 px-5">
+        
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"
