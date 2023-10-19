@@ -42,7 +42,6 @@ nav ul li:hover {
   font-size: 3.3em;
   font-family: "Caveat", cursive;
 }
-/* button, */
 button[type="button"] {
   background-color: #ff7d04;
   border: 0.1rem solid transparent;
@@ -51,10 +50,6 @@ button[type="button"] {
 button {
   border: none;
 }
-/* button[type="submit"] {
-  background-color: #555;
-  color: #fff;
-} */
 button:hover {
   transition: all 0.3s ease-in-out;
   transform: scale(1.1);
