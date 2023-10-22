@@ -193,10 +193,6 @@ button a i:hover {
 .custom-recipes {
   font-family: "Roboto", sans-serif;
 }
-
-/* form {
-  font-family: "Roboto", sans-serif;
-} */
 .form-control::-moz-placeholder {
   color: #b8b6b6 !important;
   outline: none !important;
