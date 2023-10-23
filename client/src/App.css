@@ -205,7 +205,6 @@ button a i:hover {
   color: #b8b6b6 !important;
   outline: none !important;
 }
-
 input[type="username"]:focus,
 input[type="password"]:focus,
 [type="text"].form-control:focus,
