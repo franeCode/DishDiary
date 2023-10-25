@@ -216,7 +216,6 @@ input[name="title"],
 input[name="ingredients"],
 textarea[name="instructions"]:focus {
   width: 35rem;
-  /* width: 90%; */
   border: none;
   outline: none;
   background-color: transparent;
