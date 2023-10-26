@@ -244,7 +244,6 @@ input[type="file" i]:hover {
 .form textarea {
   margin-left: 1rem;
   list-style: none;
-  /* border-bottom: 1px dotted #aeacac; */
   text-indent: 25px;
   height: auto;
   padding: 1rem;
