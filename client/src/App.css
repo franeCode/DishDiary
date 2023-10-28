@@ -292,8 +292,6 @@ input[type="file" i]:hover {
   width: 90%;
   margin: 2.5rem auto;
 }
-
-
 .recipes-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
