@@ -298,7 +298,6 @@ input[type="file" i]:hover {
   gap: 20px;
   list-style: none;
 }
-
 .border-card {
   border-bottom: 0.1rem dashed #a09e9e;
   margin-top: 0.5rem;
