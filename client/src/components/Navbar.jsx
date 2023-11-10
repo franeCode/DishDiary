@@ -69,6 +69,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
+              <Link className="nav-link" to="/shared">
+                Shared
+              </Link>
+            </li>
+            <li className="nav-item">
               <button
                 className="px-3 rounded fs-4"
                 style={{ backgroundColor: "transparent", color: "#555" }}
