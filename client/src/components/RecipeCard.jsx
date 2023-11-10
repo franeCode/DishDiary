@@ -16,8 +16,8 @@ const RecipeCard = ({
   const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
   // const username = localStorage.getItem("username");
-
-
+  // console.log("User:", customRecipe.user_id)
+  
   const handleReadMore = () => {
     if (displayRecipe && displayRecipe.id) {
       navigate(`/recipe/${displayRecipe.id}`, {
@@ -164,6 +164,13 @@ const RecipeCard = ({
             </span>
             <span>...</span>
           </p>
+          {/* {displayRecipe 
+          ? */}
+          {/* <p>Written by: {displayRecipe.user_id}</p> */}
+          {/* :
+          <p>Written by: themealdb.com</p>
+        } */}
+          
         </div>
       </div>
     </li>

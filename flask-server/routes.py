@@ -194,7 +194,7 @@ def get_recipes():
                 'ingredients': ingredients_with_measures,  # Use the combined string
                 'image_url': recipe.image_url,
                 'youtube_link': recipe.youtube_link,
-                'current_user': current_user
+                'user_id': 'current_user'
             }
 
             recipe_list.append(recipe_data)
@@ -277,7 +277,8 @@ def get_custom_recipes():
                 'title': recipe.title,
                 'ingredients': recipe.ingredients,
                 'instructions': recipe.instructions,
-                'image_url': recipe.image_url
+                'image_url': recipe.image_url,
+                'user_id': recipe.user_id
                 
             }
             recipe_list.append(recipe_data)
@@ -357,7 +358,7 @@ def get_shared_recipes():
                 'ingredients': recipe.ingredients,
                 'instructions': recipe.instructions,
                 'image_url': recipe.image_url,
-                'user': recipe.user_id
+                'user_id': recipe.user_id
                 
             }
             recipe_list.append(recipe_data)
