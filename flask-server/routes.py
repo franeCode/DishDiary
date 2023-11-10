@@ -1,7 +1,7 @@
 from flask import jsonify, request, redirect, session, send_from_directory
 import requests
 from flask_bcrypt import Bcrypt
-from models import Recipe, Users, FavoriteRecipe, CustomRecipe, db
+from models import Recipe, Users, SharedRecipes, CustomRecipe, db
 from flask_cors import cross_origin
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required, unset_jwt_cookies, current_user, JWTManager
 from flask import send_from_directory
@@ -280,15 +280,13 @@ def get_custom_recipes():
                 'image_url': recipe.image_url
                 
             }
-            
-            
-                
             recipe_list.append(recipe_data)
 
         return jsonify(recipe_list)
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
+
+
 @app.route('/api/share_recipe/<int:custom_recipe_id>/<int:recipe_id>', methods=['POST'])
 @jwt_required()
 def share_recipe(custom_recipe_id, recipe_id):
@@ -314,18 +312,20 @@ def share_recipe(custom_recipe_id, recipe_id):
                     return jsonify({'error': 'Custom recipe not found or unauthorized'}), 404
 
                 # Create a new Recipe instance and copy data
-                recipe = Recipe()
+                recipe = SharedRecipes()
                 # Set the attributes without setting the ID
                 recipe.title = custom_recipe.title
                 recipe.ingredients = custom_recipe.ingredients
                 recipe.instructions = custom_recipe.instructions
                 recipe.image_url = custom_recipe.image_url
+                
+                recipe.user_id = current_user_id
 
                 # Commit changes to the database
                 db.session.add(recipe)
                 db.session.commit()
                 
-                shared_recipe = Recipe.query.filter_by(title=recipe.title).first()
+                shared_recipe = SharedRecipes.query.filter_by(title=recipe.title).first()
                 if shared_recipe:
                     print(f"Shared Recipe ID: {shared_recipe.id}")
                 else:
@@ -340,6 +340,33 @@ def share_recipe(custom_recipe_id, recipe_id):
         app.logger.error(f"Database error: {str(e)}")
         return jsonify({'error': 'An error occurred while accessing the database'}), 500
 
+@app.route('/api/get_shared_recipes', methods=['GET'])
+@jwt_required()
+def get_shared_recipes():
+    """Get custom recipe form db and send it ot frontend"""
+    try:
+        current_user = get_jwt_identity()
+
+        recipes = SharedRecipes.query.filter_by(user_id=current_user).all()  # Filter recipes by user_id
+        recipe_list = []
+                
+        for recipe in recipes:
+            recipe_data = {
+                'id': recipe.id,
+                'title': recipe.title,
+                'ingredients': recipe.ingredients,
+                'instructions': recipe.instructions,
+                'image_url': recipe.image_url,
+                'user': recipe.user_id
+                
+            }
+            recipe_list.append(recipe_data)
+
+        return jsonify(recipe_list)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+    
 @app.route('/api/update_recipe/<int:recipe_id>', methods=['POST'])
 @jwt_required()
 def update_recipe(recipe_id):
