@@ -10,6 +10,7 @@ import RecipeView from './components/RecipeView';
 import RecipeCard from './components/RecipeCard';
 import CookBook from './components/CookBook';
 import CustomRecipes from './components/CustomRecipes';
+import SharedRecipes from './components/SharedRecipes';
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const AppRoutes = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/recipe/:id" element={<RecipeView />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/shared" element={<SharedRecipes />} />
         <Route path="/create_recipe" element={<CookBook />} />
         <Route path="/custom_recipes" element={<CustomRecipes />} />
       </Routes>

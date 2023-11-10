@@ -21,7 +21,7 @@ class Users(db.Model):
         return f"Registered: {self.username}"
 
 
-class FavoriteRecipe(db.Model):
+class SharedRecipes(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     instructions = db.Column(db.Text, nullable=False)
