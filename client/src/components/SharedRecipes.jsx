@@ -1,5 +1,6 @@
 import useRecipes from './useRecipes';
 import RecipeCard from './RecipeCard';
+import Spinner from './Spinner';
 
 
 const SharedRecipes = () => {
@@ -32,7 +33,7 @@ const SharedRecipes = () => {
               </div>
             </div>
           </div>
-          {loading && <p>Loading...</p>}
+          {loading && <Spinner />}
           {!loading && (
           <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 my-5 p-sm-2">
             {recipes.length > 0 ? (

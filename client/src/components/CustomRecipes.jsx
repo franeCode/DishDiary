@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
 import { useState } from "react";
 import useRecipes from "./useRecipes";
+import Spinner from "./Spinner";
 
 const CustomRecipes = () => {
   const [shareMessage, setShareMessage] = useState("");
@@ -73,7 +74,7 @@ const CustomRecipes = () => {
               </button>
             </div>
           </div>
-          {loading && <p>Loading...</p>}
+          {loading && <Spinner />}
           {!loading && (
           <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 my-5 p-sm-2">
           {recipes.length > 0 ? (

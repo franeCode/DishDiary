@@ -1,6 +1,7 @@
 import RecipeCard from "./RecipeCard";
 import useRecipes from "./useRecipes";
 import { useEffect, useState } from "react";
+import Spinner from "./Spinner";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -84,6 +85,8 @@ const Recipes = () => {
             </div>
           </div>
           </div>
+          {loading && <Spinner />}
+          {!loading && (
           <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2" style={{marginTop: '10rem'}}>
             {(searchQuery === "" ? recipes : filteredRecipes).map(
               (recipe) => (
@@ -96,6 +99,7 @@ const Recipes = () => {
               )
             )}
           </ul>
+          )}
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
             {/* <button className="bg-transparent p-3" onClick={() => prevPage()}>
               <i
