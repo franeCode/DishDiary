@@ -292,12 +292,12 @@ input[type="file" i]:hover {
   width: 90%;
   margin: 2.5rem auto;
 }
-.recipes-list {
+/* .recipes-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   list-style: none;
-}
+} */
 .border-card {
   border-bottom: 0.1rem dashed #a09e9e;
   margin-top: 0.5rem;

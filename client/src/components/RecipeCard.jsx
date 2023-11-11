@@ -177,4 +177,5 @@ const RecipeCard = ({
   );
 };
 
-export default RecipeCard;
+export default React.memo(RecipeCard);
+

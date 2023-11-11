@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 const Recipes = () => {
   const [recipes, setRecipes] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 4;
+  // const [currentPage, setCurrentPage] = useState(1);
+  // const recipesPerPage = 4;
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState([]);
   const navigate = useNavigate();
@@ -14,33 +14,6 @@ const Recipes = () => {
   useEffect(() => {
     fetchRecipes();
   }, []);
-
-  // const fetchRecipes = async () => {
-  //   axios
-  //     .get(
-  //       "http://localhost:5000/api/get_recipes",
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-  //         },
-  //       }
-  //     ).then((response) => {
-  //       const data = response.data;
-
-  //     if (Array.isArray(data)) {
-  //       setRecipes(data);
-  //       setFilteredRecipes(data);
-  //       console.log("Response data:", data);
-  //     } else {
-  //       console.error("Invalid data format:", data);
-  //     }
-  //     }).catch (error => {
-  //       console.error('Logout failed:', error.message);
-  //       if (error.response && error.response.status === 401) {
-  //         navigate("/login");
-  //       }
-  //     });
-  // };
 
   const fetchRecipes = async () => {
     try {
@@ -101,27 +74,28 @@ const Recipes = () => {
     handleSearchChange({ target: { value: searchQuery.toLowerCase() } });
   }, [recipes, searchQuery]);
 
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
+  // const indexOfLastRecipe = currentPage * recipesPerPage;
+  // const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
+  // const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
 
   // Function to handle going to the next page
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
+  // const nextPage = () => {
+  //   setCurrentPage(currentPage + 1);
+  // };
 
-  // Function to handle going to the previous page
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  // // Function to handle going to the previous page
+  // const prevPage = () => {
+  //   if (currentPage > 1) {
+  //     setCurrentPage(currentPage - 1);
+  //   }
+  // };
 
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
-        <div className="book position-relative border rounded shadow mt-5 px-5">
+        <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
+          <div className="position-fixed w-75 bg-white z-1">
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"
@@ -136,7 +110,7 @@ const Recipes = () => {
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div className="mx-lg-5 mt-3">
-            <div className="w-100 d-flex flex-row justify-content-between align-items-center p-2">
+            <div className="w-75 d-flex flex-row justify-content-center align-items-center p-2 m-5">
               <div className="input-group mx-auto">
                 <input
                   type="text"
@@ -155,8 +129,9 @@ const Recipes = () => {
               </div>
             </div>
           </div>
-          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 my-5 p-sm-2">
-            {(searchQuery === "" ? currentRecipes : filteredRecipes).map(
+          </div>
+          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2" style={{marginTop: '10rem'}}>
+            {(searchQuery === "" ? recipes : filteredRecipes).map(
               (recipe) => (
                 <RecipeCard
                   key={recipe.id}
@@ -169,7 +144,7 @@ const Recipes = () => {
             )}
           </ul>
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
-            <button className="bg-transparent p-3" onClick={() => prevPage()}>
+            {/* <button className="bg-transparent p-3" onClick={() => prevPage()}>
               <i
                 className="fa-solid fa-arrow-left-long fa-xl"
                 style={{ color: "#414448" }}
@@ -180,7 +155,7 @@ const Recipes = () => {
                 className="fa-solid fa-arrow-right-long fa-xl"
                 style={{ color: "#414448" }}
               ></i>
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
