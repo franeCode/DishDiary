@@ -1,6 +1,6 @@
 // useRecipes.js
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useRecipes = (apiEndpoint, headers = {}) => {
   const [recipes, setRecipes] = useState([]);
@@ -17,9 +17,10 @@ const useRecipes = (apiEndpoint, headers = {}) => {
         setRecipes(response.data);
         setLoading(false);
       } catch (error) {
-        console.error('Error fetching recipes:', error);
-        // Handle errors
-        setLoading(false);
+        console.error("Error fetching recipes:", error);
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
       }
     };
 

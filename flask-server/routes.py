@@ -115,7 +115,6 @@ def store_recipes():
                 if meal.get(f'strMeasure{i}') is not None and meal.get(f'strMeasure{i}').strip()
             ]
 
-
             recipe = Recipe(
                 title=meal.get('strMeal'),
                 instructions=meal.get('strInstructions'),
@@ -127,7 +126,7 @@ def store_recipes():
             print(recipe.ingredients)
             db.session.add(recipe)
 
-        db.session.commit()  # Commit the changes to the database
+        db.session.commit()  
 
         return jsonify({'message': 'Data successfully stored in the database!'})
 
@@ -146,12 +145,11 @@ def delete_recipe(recipe_id):
             app.logger.error(f"current_user_id: {current_user}")
         else:
             app.logger.error("User not found or unauthorized")
-            return jsonify({'error': 'User not found or unauthorized'}), 401  # Unauthorized status code
+            return jsonify({'error': 'User not found or unauthorized'}), 401  
         
         custom_recipe = CustomRecipe.query.filter_by(id=recipe_id, user_id=current_user).first()
          
         if custom_recipe is not None:
-            # Delete the recipe from the database
             db.session.delete(custom_recipe)
             db.session.commit()
             return jsonify({'message': 'Recipe deleted successfully'}), 200
@@ -183,15 +181,14 @@ def get_recipes():
                 # Combine ingredients and measures into a single string
                 ingredients_with_measures = ', '.join([f"{m} {i}" for m, i in zip(measures, ingredients)])
             else:
-                # Use the existing ingredients and measures if available, or an empty string if they are None
                 ingredients_with_measures = recipe.ingredients or ""
 
-            # Create a dictionary for each recipe with combined ingredients and measures
+            
             recipe_data = {
                 'id': recipe.id,
                 'title': recipe.title,
                 'instructions': recipe.instructions,
-                'ingredients': ingredients_with_measures,  # Use the combined string
+                'ingredients': ingredients_with_measures,
                 'image_url': recipe.image_url,
                 'youtube_link': recipe.youtube_link,
                 'user_id': current_user
@@ -244,7 +241,7 @@ def add_recipe():
                 db.session.add(recipe)
                 db.session.commit()
             except Exception as db_error:
-                db.session.rollback()  # Rollback changes in case of an error
+                db.session.rollback() 
                 print(f"Database error: {str(db_error)}")
                 return jsonify({'error': 'Database error'}), 500
 
@@ -268,7 +265,7 @@ def get_custom_recipes():
     try:
         current_user = get_jwt_identity()
 
-        recipes = CustomRecipe.query.filter_by(user_id=current_user).all()  # Filter recipes by user_id
+        recipes = CustomRecipe.query.filter_by(user_id=current_user).all()  
         recipe_list = []
                 
         for recipe in recipes:
@@ -294,7 +291,6 @@ def share_recipe(custom_recipe_id, recipe_id):
     try:
         app.logger.error(f"Request Headers: {request.headers}")
 
-        # Get the current user's ID from the JWT token
         current_user_id = get_jwt_identity()
 
         if current_user_id is not None:
@@ -314,7 +310,7 @@ def share_recipe(custom_recipe_id, recipe_id):
 
                 # Create a new Recipe instance and copy data
                 recipe = SharedRecipes()
-                # Set the attributes without setting the ID
+               
                 recipe.title = custom_recipe.title
                 recipe.ingredients = custom_recipe.ingredients
                 recipe.instructions = custom_recipe.instructions
@@ -322,7 +318,6 @@ def share_recipe(custom_recipe_id, recipe_id):
                 
                 recipe.user_id = current_user_id
 
-                # Commit changes to the database
                 db.session.add(recipe)
                 db.session.commit()
                 
@@ -346,10 +341,8 @@ def share_recipe(custom_recipe_id, recipe_id):
 def get_shared_recipes():
     """Get all shared recipes with user information"""
     try:
-        # Fetch all shared recipes with user information
         shared_recipes = SharedRecipes.query.all()
 
-        # Create a list of dictionaries containing recipe information
         shared_recipes_list = [
             {
                 'id': recipe.id,
@@ -362,7 +355,6 @@ def get_shared_recipes():
             for recipe in shared_recipes
         ]
 
-        # Return the list of shared recipes
         return jsonify(shared_recipes_list), 200
 
     except Exception as e:
@@ -374,14 +366,11 @@ def get_shared_recipes():
 @jwt_required()
 def update_recipe(recipe_id):
     try:
-        # Get the current user's ID from the JWT token
         current_user_id = get_jwt_identity()
 
-        # Check if the current user is authorized to update this recipe
         custom_recipe = CustomRecipe.query.filter_by(id=recipe_id, user_id=current_user_id).first()
 
         if custom_recipe:
-            # Parse the updated recipe data from the request
             updated_data = request.get_json()
             title = updated_data.get('title')
             ingredients = updated_data.get('ingredients')
@@ -392,7 +381,6 @@ def update_recipe(recipe_id):
             custom_recipe.ingredients = ingredients
             custom_recipe.instructions = instructions
 
-            # Commit the changes to the database
             db.session.commit()
 
             return jsonify({'message': 'Recipe updated successfully'}), 200
@@ -401,16 +389,3 @@ def update_recipe(recipe_id):
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-    
-    
-# @app.route('/test_database_connection', methods=['GET'])
-# def test_database_connection():
-#     try:
-#         sql_expression = text('SELECT 1')
-#         result = db.session.execute(sql_expression)
-#         if result.scalar() == 1:
-#             return jsonify({'message': 'Database connection is working'})
-#         else:
-#             return jsonify({'error': 'Database connection test failed'}), 500
-#     except Exception as e:
-#         return jsonify({'error': str(e)}), 500

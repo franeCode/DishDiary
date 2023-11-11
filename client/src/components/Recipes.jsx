@@ -8,10 +8,12 @@ const Recipes = () => {
   const [filteredRecipes, setFilteredRecipes] = useState([]);
 
   const headers = {
-    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+    Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
-  const { recipes, loading } = useRecipes('http://localhost:5000/api/get_recipes', headers);
-  
+  const { recipes, loading } = useRecipes(
+    "http://localhost:5000/api/get_recipes",
+    headers
+  );
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -51,54 +53,57 @@ const Recipes = () => {
         <div className="bg-image"></div>
         <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
           <div className="position-fixed w-75 bg-white z-1">
-          <div className="lines my-5"></div>
-          <div
-            className="holes hole-top"
-            style={{ width: "20px", height: "20px" }}
-          ></div>
-          <div
-            className="holes hole-middle"
-            style={{ width: "20px", height: "20px" }}
-          ></div>
-          <div
-            className="holes hole-bottom"
-            style={{ width: "20px", height: "20px" }}
-          ></div>
-          <div className="mx-lg-5 mt-3">
-            <div className="w-75 d-flex flex-row justify-content-center align-items-center p-2 m-5">
-              <div className="input-group mx-auto">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Search recipes"
-                  value={searchQuery}
-                  onChange={(e) => handleSearchChange(e)}
-                />
-                <button
-                  className="rounded text-light"
-                  type="button"
-                  id="button-addon2"
-                >
-                  Search
-                </button>
+            <div className="lines my-5"></div>
+            <div
+              className="holes hole-top"
+              style={{ width: "20px", height: "20px" }}
+            ></div>
+            <div
+              className="holes hole-middle"
+              style={{ width: "20px", height: "20px" }}
+            ></div>
+            <div
+              className="holes hole-bottom"
+              style={{ width: "20px", height: "20px" }}
+            ></div>
+            <div className="mx-lg-5 mt-3">
+              <div className="w-75 d-flex flex-row justify-content-center align-items-center p-2 m-5">
+                <div className="input-group mx-auto">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search recipes"
+                    value={searchQuery}
+                    onChange={(e) => handleSearchChange(e)}
+                  />
+                  <button
+                    className="rounded text-light"
+                    type="button"
+                    id="button-addon2"
+                  >
+                    Search
+                  </button>
+                </div>
               </div>
             </div>
           </div>
-          </div>
           {loading && <Spinner />}
           {!loading && (
-          <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2" style={{marginTop: '10rem'}}>
-            {(searchQuery === "" ? recipes : filteredRecipes).map(
-              (recipe) => (
-                <RecipeCard
-                  key={recipe.id}
-                  recipe={recipe}
-                  showIcon={false}
-                  type="recipe"
-                />
-              )
-            )}
-          </ul>
+            <ul
+              className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2"
+              style={{ marginTop: "10rem" }}
+            >
+              {(searchQuery === "" ? recipes : filteredRecipes).map(
+                (recipe) => (
+                  <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    showIcon={false}
+                    type="recipe"
+                  />
+                )
+              )}
+            </ul>
           )}
           <div className="position-absolute bottom-0 start-50 translate-middle-x">
             {/* <button className="bg-transparent p-3" onClick={() => prevPage()}>
