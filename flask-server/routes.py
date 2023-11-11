@@ -194,7 +194,7 @@ def get_recipes():
                 'ingredients': ingredients_with_measures,  # Use the combined string
                 'image_url': recipe.image_url,
                 'youtube_link': recipe.youtube_link,
-                'user_id': 'current_user'
+                'user_id': current_user
             }
 
             recipe_list.append(recipe_data)

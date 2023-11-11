@@ -168,12 +168,12 @@ const RecipeCard = ({
             </span>
             <span>...</span>
           </p>
-          {/* {displayRecipe 
-          ? */}
+         {displayRecipe 
+          ?
           <p>Written by: {user}</p>
-          {/* :
+          :
           <p>Written by: themealdb.com</p>
-        } */}
+        }
           
         </div>
       </div>
