@@ -90,6 +90,7 @@ const SharedRecipes = () => {
                   recipe={recipe}
                   setRecipes={setRecipes}
                   showIcon={false}
+                  user={recipe.user_id}
                 />
                 ))
                 ) : (

@@ -131,6 +131,7 @@ const CustomRecipes = () => {
                   showIcon={true}
                   showRecipeMessage={showRecipeMessage}
                   type="custom"
+                  user={recipe.user_id}
                 />
               ))
             ) : (

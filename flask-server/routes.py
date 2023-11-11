@@ -344,28 +344,30 @@ def share_recipe(custom_recipe_id, recipe_id):
 @app.route('/api/get_shared_recipes', methods=['GET'])
 @jwt_required()
 def get_shared_recipes():
-    """Get custom recipe form db and send it ot frontend"""
+    """Get all shared recipes with user information"""
     try:
-        current_user = get_jwt_identity()
+        # Fetch all shared recipes with user information
+        shared_recipes = SharedRecipes.query.all()
 
-        recipes = SharedRecipes.query.filter_by(user_id=current_user).all()  # Filter recipes by user_id
-        recipe_list = []
-                
-        for recipe in recipes:
-            recipe_data = {
+        # Create a list of dictionaries containing recipe information
+        shared_recipes_list = [
+            {
                 'id': recipe.id,
                 'title': recipe.title,
                 'ingredients': recipe.ingredients,
                 'instructions': recipe.instructions,
                 'image_url': recipe.image_url,
-                'user_id': recipe.user_id
-                
+                'user_id': recipe.user_id,
             }
-            recipe_list.append(recipe_data)
+            for recipe in shared_recipes
+        ]
 
-        return jsonify(recipe_list)
+        # Return the list of shared recipes
+        return jsonify(shared_recipes_list), 200
+
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
     
     
 @app.route('/api/update_recipe/<int:recipe_id>', methods=['POST'])
