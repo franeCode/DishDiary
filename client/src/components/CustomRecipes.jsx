@@ -1,48 +1,17 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
 import RecipeCard from "./RecipeCard";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import useRecipes from "./useRecipes";
 
 const CustomRecipes = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 4;
-  // const location = useLocation();
-  const navigate = useNavigate();
-  // const queryParams = new URLSearchParams(location.search);
-  // const isRecipeAdded = queryParams.get("formValid") === "true";  
   const [shareMessage, setShareMessage] = useState("");
   const [deleteMessage, setDeleteMessage] = useState("");
 
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
-
-  const fetchRecipes = () => {
-    axios
-      .get("/api/get_custom_recipes", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-        },
-      })
-      .then((response) => {
-        const data = response.data;
-
-        if (Array.isArray(data)) {
-          setRecipes(data);
-        } else {
-          console.error("Invalid data format:", data);
-        }
-        })
-      .catch((error) => {
-        console.error("Logout failed:", error.message);
-        if (error.response && error.response.status === 401) {
-          navigate("/login");
-        }
-      });
+  const headers = {
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
   };
-
+  const { recipes, loading } = useRecipes('http://localhost:5000/api/get_custom_recipes', headers);
+  
   // Function to show the message
   const showRecipeMessage = (message, messageType) => {
     if (messageType === "share") {
@@ -55,22 +24,6 @@ const CustomRecipes = () => {
       setTimeout(() => {
         setDeleteMessage("");
       }, 3000);
-    }
-  };
-
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-
-  // Function to handle going to the next page
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  // Function to handle going to the previous page
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
     }
   };
 
@@ -120,14 +73,15 @@ const CustomRecipes = () => {
               </button>
             </div>
           </div>
+          {loading && <p>Loading...</p>}
+          {!loading && (
           <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 my-5 p-sm-2">
           {recipes.length > 0 ? (
-              currentRecipes.map((recipe) => (
+              recipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}
                   customRecipe={recipe}
                   customRecipeId={recipe.id}
-                  setRecipes={setRecipes}
                   showIcon={true}
                   showRecipeMessage={showRecipeMessage}
                   type="custom"
@@ -142,20 +96,7 @@ const CustomRecipes = () => {
               </div>
             )}
           </ul>
-          <div className="position-absolute bottom-0 start-50 translate-middle-x">
-            <button className="p-3 bg-transparent" onClick={() => prevPage()}>
-              <i
-                className="fa-solid fa-arrow-left-long fa-xl"
-                style={{ color: "#414448" }}
-              ></i>
-            </button>
-            <button className="p-3 bg-transparent" onClick={() => nextPage()}>
-              <i
-                className="fa-solid fa-arrow-right-long fa-xl"
-                style={{ color: "#414448" }}
-              ></i>
-            </button>
-          </div>
+          )}
         </div>
       </div>
     </div>

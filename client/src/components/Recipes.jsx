@@ -1,46 +1,16 @@
-import React, { useEffect, useState } from "react";
 import RecipeCard from "./RecipeCard";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import useRecipes from "./useRecipes";
+import { useEffect, useState } from "react";
 
 const Recipes = () => {
-  const [recipes, setRecipes] = useState([]);
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const recipesPerPage = 4;
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredRecipes, setFilteredRecipes] = useState([]);
-  const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
-
-  const fetchRecipes = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:5000/api/get_recipes",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-      const data = response.data;
-
-      if (Array.isArray(data)) {
-        setRecipes(data);
-        setFilteredRecipes(data);
-        console.log("Response data:", data);
-      } else {
-        console.error("Invalid data format:", data);
-      }
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-      if (error.response && error.response.status === 401) {
-        navigate("/login");
-      }
-    }
+  const headers = {
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
   };
+  const { recipes, loading } = useRecipes('http://localhost:5000/api/get_recipes', headers);
+  
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -73,22 +43,6 @@ const Recipes = () => {
   useEffect(() => {
     handleSearchChange({ target: { value: searchQuery.toLowerCase() } });
   }, [recipes, searchQuery]);
-
-  // const indexOfLastRecipe = currentPage * recipesPerPage;
-  // const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  // const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-
-  // Function to handle going to the next page
-  // const nextPage = () => {
-  //   setCurrentPage(currentPage + 1);
-  // };
-
-  // // Function to handle going to the previous page
-  // const prevPage = () => {
-  //   if (currentPage > 1) {
-  //     setCurrentPage(currentPage - 1);
-  //   }
-  // };
 
   return (
     <div>
@@ -136,7 +90,6 @@ const Recipes = () => {
                 <RecipeCard
                   key={recipe.id}
                   recipe={recipe}
-                  setRecipes={setRecipes}
                   showIcon={false}
                   type="recipe"
                 />
