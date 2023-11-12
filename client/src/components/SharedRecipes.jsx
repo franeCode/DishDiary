@@ -1,62 +1,13 @@
-import React, { useEffect, useState } from "react";
-import RecipeCard from "./RecipeCard";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import useRecipes from './useRecipes';
+import RecipeCard from './RecipeCard';
+import Spinner from './Spinner';
+
 
 const SharedRecipes = () => {
-  const [recipes, setRecipes] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const recipesPerPage = 4;
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchRecipes();
-  }, []);
-
-  const fetchRecipes = async () => {
-    try {
-      console.log("Fetching recipes...");
-      const response = await axios.get(
-        "http://localhost:5000/api/get_shared_recipes",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-      const data = response.data;
-  
-      if (Array.isArray(data)) {
-        setRecipes(data);
-        console.log("Response data:", data);
-      } else {
-        console.error("Invalid data format:", data);
-      }
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-      if (error.response && error.response.status === 401) {
-        console.log("Redirecting to login page...");
-        navigate("/login");
-      }
-    }
+  const headers = {
+    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
   };
-  
-
-  const indexOfLastRecipe = currentPage * recipesPerPage;
-  const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
-  const currentRecipes = recipes.slice(indexOfFirstRecipe, indexOfLastRecipe);
-
-  // Function to handle going to the next page
-  const nextPage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  // Function to handle going to the previous page
-  const prevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
+  const { recipes, loading } = useRecipes('http://localhost:5000/api/get_shared_recipes', headers);
 
   return (
     <div>
@@ -82,14 +33,16 @@ const SharedRecipes = () => {
               </div>
             </div>
           </div>
+          {loading && <Spinner />}
+          {!loading && (
           <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 my-5 p-sm-2">
             {recipes.length > 0 ? (
-              currentRecipes.map((recipe) => (
+              recipes.map((recipe) => (
                 <RecipeCard
                   key={recipe.id}
                   recipe={recipe}
-                  setRecipes={setRecipes}
                   showIcon={false}
+                  user={recipe.user_id}
                 />
                 ))
                 ) : (
@@ -100,7 +53,8 @@ const SharedRecipes = () => {
                   </div>
                 )}
           </ul>
-          <div className="position-absolute bottom-0 start-50 translate-middle-x">
+            )}
+          {/* <div className="position-absolute bottom-0 start-50 translate-middle-x">
             <button className="bg-transparent p-3" onClick={() => prevPage()}>
               <i
                 className="fa-solid fa-arrow-left-long fa-xl"
@@ -113,7 +67,7 @@ const SharedRecipes = () => {
                 style={{ color: "#414448" }}
               ></i>
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

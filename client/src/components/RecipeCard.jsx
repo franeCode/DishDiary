@@ -11,6 +11,7 @@ const RecipeCard = ({
   customRecipeId,
   showRecipeMessage,
   type,
+  user
 }) => {
   const [isIconVisible, setIsIconVisible] = useState(false); // State for showing/hiding icons
   const displayRecipe = recipe || customRecipe;
@@ -52,9 +53,12 @@ const RecipeCard = ({
       });
   };
 
-  const shareRecipe = (customRecipeId, recipeId, formData) => {
+  const shareRecipe = (customRecipeId, recipeId, formData, user) => {
     axios
-      .post(`/api/share_recipe/${customRecipeId}/${recipeId}`, formData, {
+      .post(`/api/share_recipe/${customRecipeId}/${recipeId}`, {
+        formData,
+        user
+      } , {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
           "Content-Type": "multipart/form-data",
@@ -164,12 +168,12 @@ const RecipeCard = ({
             </span>
             <span>...</span>
           </p>
-          {/* {displayRecipe 
-          ? */}
-          {/* <p>Written by: {displayRecipe.user_id}</p> */}
-          {/* :
+         {displayRecipe 
+          ?
+          <p>Written by: {user}</p>
+          :
           <p>Written by: themealdb.com</p>
-        } */}
+        }
           
         </div>
       </div>
