@@ -32,7 +32,7 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow px-5 fs-2">
       <div className="container-fluid">
-        <Link className="navbar-brand d-flex align-items-center fs-1" to="/">
+        <Link className="navbar-brand d-flex align-items-center fs-1" to="/home">
           <div style={{ width: "10rem" }}>
             <img src={logo} alt="logo"></img>
           </div>
@@ -53,11 +53,6 @@ const Navbar = () => {
           id="navbarNav"
         >
           <ul className="navbar-nav align-items-md-center fs-4">
-            <li className="nav-item">
-              <Link className="nav-link" to="/home">
-                Home
-              </Link>
-            </li>
             <li className="nav-item">
               <Link className="nav-link" to="/custom_recipes">
                 CookBook
