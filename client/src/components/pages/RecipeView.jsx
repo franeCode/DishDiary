@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import noImage from "../assets/img/no-image.jpeg";
+import noImage from "../../assets/img/no-image.jpeg";
 import { Link } from "react-router-dom";
 
 const RecipeView = () => {

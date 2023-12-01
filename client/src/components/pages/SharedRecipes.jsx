@@ -1,7 +1,6 @@
-import useRecipes from './useRecipes';
-import RecipeCard from './RecipeCard';
-import Spinner from './Spinner';
-
+import useRecipes from '../useRecipes';
+import RecipeCard from '../RecipeCard';
+import Spinner from '../Spinner';
 
 const SharedRecipes = () => {
   const headers = {

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import logo from '../assets/img/part-logo.png';
+import logo from '../../assets/img/part-logo.png';
 import { Link } from 'react-router-dom';
 
 const Intro = () => {
