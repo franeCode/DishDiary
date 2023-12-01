@@ -52,7 +52,8 @@ const CustomRecipes = () => {
             {deleteMessage}
           </div>
         )}
-        <div className="book position-relative border rounded shadow mt-5 px-5">
+        <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
+        <div className="position-fixed w-75 bg-white z-1">
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"
@@ -67,8 +68,8 @@ const CustomRecipes = () => {
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div className="mx-5 mt-3">
-            <div className="w-100 d-flex p-2">
-              <div className="flex-grow-1 text-center ps-sm-5 fs-3">
+            <div className="w-100 d-flex p-2 mt-5">
+              <div className="flex-grow-1 text-center ps-sm-5 pb-2 fs-3">
                 ~ COOKBOOK ~
               </div>
               <button className="d-none d-sm-block btn text-white rounded align-self-end">
@@ -84,9 +85,10 @@ const CustomRecipes = () => {
               </button>
             </div>
           </div>
+          </div>
           {loading && <Spinner />}
           {!loading && (
-            <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 my-5 p-sm-2">
+            <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 p-sm-2">
               {recipes.length > 0 ? (
                 recipes.map((recipe) => (
                   <RecipeCard
