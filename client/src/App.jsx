@@ -7,7 +7,7 @@ import Home from './components/pages/Home';
 import Login from './components/Login';
 import Recipes from './components/pages/Recipes';
 import RecipeView from './components/pages/RecipeView';
-// import RecipeCard from './components/RecipeCard';
+import NotFound from './components/pages/NotFound';
 import CookBook from './components/CookBook';
 import CustomRecipes from './components/pages/CustomRecipes';
 import SharedRecipes from './components/pages/SharedRecipes';
@@ -46,6 +46,7 @@ const AppRoutes = () => {
         <Route path="/shared" element={<SharedRecipes />} />
         <Route path="/create_recipe" element={<CookBook />} />
         <Route path="/custom_recipes" element={<CustomRecipes />} />
+        <Route path="/not_found" element={<NotFound />} />
       </Routes>
     </>
   );

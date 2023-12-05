@@ -15,7 +15,6 @@ const SharedRecipes = () => {
 
   const fetchRecipes = async () => {
     try {
-      console.log("Fetching recipes...");
       const response = await axios.get(
         "http://localhost:5000/api/get_shared_recipes",
         {
@@ -35,7 +34,6 @@ const SharedRecipes = () => {
     } catch (error) {
       console.error("Error fetching recipes:", error);
       if (error.response && error.response.status === 401) {
-        console.log("Redirecting to login page...");
         navigate("/login");
       }
     }

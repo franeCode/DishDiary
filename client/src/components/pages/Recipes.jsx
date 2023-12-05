@@ -1,7 +1,8 @@
 import RecipeCard from "../RecipeCard";
 import useRecipes from "../useRecipes";
+import NotFound from "./NotFound";
 import { useEffect, useState } from "react";
-import Spinner from "../../Spinner";
+import Spinner from "../Spinner";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -10,16 +11,10 @@ const Recipes = () => {
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
-  const { recipes, loading } = useRecipes(
+  const { recipes, loading, error } = useRecipes(
     "http://localhost:5000/api/get_recipes",
     headers
   );
-
-  const handleSearchChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-    console.log("Search query:", query);
-  };
 
   useEffect(() => {
     if (Array.isArray(recipes)) {
@@ -32,6 +27,15 @@ const Recipes = () => {
     }
   }, [recipes, searchQuery]);
 
+  if (error) return <NotFound />
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    console.log("Search query:", query);
+  };
+
+  
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
