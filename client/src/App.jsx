@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import "./App.css";
 import Navbar from './components/Navbar';
-import Intro from './components/Intro';
+import Intro from './components/pages/Intro';
 import Register from './components/Register';
-import Home from './components/Home';
+import Home from './components/pages/Home';
 import Login from './components/Login';
-import Recipes from './components/Recipes';
-import RecipeView from './components/RecipeView';
-import RecipeCard from './components/RecipeCard';
+import Recipes from './components/pages/Recipes';
+import RecipeView from './components/pages/RecipeView';
+// import RecipeCard from './components/RecipeCard';
 import CookBook from './components/CookBook';
-import CustomRecipes from './components/CustomRecipes';
-import SharedRecipes from './components/SharedRecipes';
+import CustomRecipes from './components/pages/CustomRecipes';
+import SharedRecipes from './components/pages/SharedRecipes';
 
 const App = () => {
   return (

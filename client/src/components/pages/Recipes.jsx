@@ -1,7 +1,7 @@
 import RecipeCard from "../RecipeCard";
 import useRecipes from "../useRecipes";
 import { useEffect, useState } from "react";
-import Spinner from "../Spinner";
+import Spinner from "../../Spinner";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
