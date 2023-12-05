@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import RecipeCard from "./RecipeCard";
+import RecipeCard from "../RecipeCard";
 import { useState } from "react";
-import useRecipes from "./useRecipes";
-import Spinner from "./Spinner";
+import useRecipes from "../useRecipes";
+import Spinner from "../Spinner";
+import NotFound from "./NotFound";
 
 const CustomRecipes = () => {
   const [shareMessage, setShareMessage] = useState("");
@@ -11,7 +12,7 @@ const CustomRecipes = () => {
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
-  const { recipes, loading } = useRecipes(
+  const { recipes, loading, error } = useRecipes(
     "http://localhost:5000/api/get_custom_recipes",
     headers
   );
@@ -30,6 +31,8 @@ const CustomRecipes = () => {
       }, 3000);
     }
   };
+
+  if (error) return <NotFound />
 
   return (
     <div>
@@ -52,7 +55,8 @@ const CustomRecipes = () => {
             {deleteMessage}
           </div>
         )}
-        <div className="book position-relative border rounded shadow mt-5 px-5">
+        <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
+        <div className="static-wrapper w-75 bg-white z-1">
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"
@@ -67,26 +71,27 @@ const CustomRecipes = () => {
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div className="mx-5 mt-3">
-            <div className="w-100 d-flex p-2">
-              <div className="flex-grow-1 text-center ps-sm-5 fs-3">
-                ~ COOKBOOK ~
-              </div>
-              <button className="d-none d-sm-block btn text-white rounded align-self-end">
+            <div className="w-100 d-flex flex-col p-3 mt-5">
+            <button className="w-100 d-block btn text-white rounded align-self-end">
                 <Link
                   className="text-decoration-none text-white"
                   to="/create_recipe"
                 >
                   <i
                     style={{ color: "#555" }}
-                    className="fa-regular fa-pen-to-square fa-xl"
+                    className="fa-regular fa-pen-to-square fa-lg fa-lg-xl"
                   ></i>
                 </Link>
               </button>
+              <div className="flex-grow-1 text-center ps-sm-5 pb-2 fs-3">
+                ~ COOKBOOK ~
+              </div>
             </div>
+          </div>
           </div>
           {loading && <Spinner />}
           {!loading && (
-            <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 my-5 p-sm-2">
+            <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 p-sm-2" style={{marginTop: "13rem"}}>
               {recipes.length > 0 ? (
                 recipes.map((recipe) => (
                   <RecipeCard
