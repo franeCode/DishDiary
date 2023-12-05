@@ -292,12 +292,10 @@ input[type="file" i]:hover {
   width: 90%;
   margin: 2.5rem auto;
 }
-/* .recipes-list {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  list-style: none;
-} */
+.static-wrapper {
+  position: fixed;
+  left: 13%;
+}
 .border-card {
   border-bottom: 0.1rem dashed #a09e9e;
   margin-top: 0.5rem;
@@ -309,13 +307,13 @@ input[type="file" i]:hover {
     top: 10px;
   }
   .hole-top {
-    left: 10%;
+    left: 5%;
   }
   .hole-middle {
-    left: 50%;
+    left: 45%;
   }
   .hole-bottom {
-    left: 90%;
+    left: 85%;
   }
   .lines {
     border-top: 1px solid rgba(209, 107, 30);
@@ -325,8 +323,8 @@ input[type="file" i]:hover {
     min-width: 90%;
     margin-top: 2.5rem;
   }
-  .book {
-    height: 100%;
+  .static-wrapper {
+    position: fixed;
   }
 }
 .icon-box {

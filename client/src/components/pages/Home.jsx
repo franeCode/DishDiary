@@ -3,6 +3,7 @@ import view from "../../assets/img/make-food.jpg";
 import write from "../../assets/img/view.webp";
 import logo from "../../assets/img/logo-icon.svg";
 import { useLocation } from "react-router-dom";
+import Footer from "../Footer";
 
 const Home = () => {
   // const location = useLocation();
@@ -122,6 +123,7 @@ const Home = () => {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

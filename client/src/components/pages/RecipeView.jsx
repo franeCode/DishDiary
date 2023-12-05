@@ -3,19 +3,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import noImage from "../../assets/img/no-image.jpeg";
 import { Link } from "react-router-dom";
+import NotFound from "./NotFound";
 
 const RecipeView = () => {
   const location = useLocation();
   const { recipe } = location.state || {};
   const { id } = useParams();
   const navigate = useNavigate();
-  console.log("RecipeView - URL Parameter ID:", id);
-  console.log("Recipe data:", recipe);
-  console.log("Image:", recipe.image_url);
+  
 
-  if (!recipe) {
-    return <div>No recipe data available.</div>;
-  }
+  if (!recipe) return <NotFound />
 
   // Define the imageUrl
   const imageUrl = `${window.location.origin}/${recipe.image_url}`;

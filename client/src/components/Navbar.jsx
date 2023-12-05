@@ -65,7 +65,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/shared">
-                Shared
+              DishMate
               </Link>
             </li>
             <li className="nav-item">

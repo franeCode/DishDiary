@@ -2,6 +2,7 @@ import RecipeCard from "../RecipeCard";
 import useRecipes from "../useRecipes";
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner";
+import NotFound from "./NotFound";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -10,28 +11,10 @@ const Recipes = () => {
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
-  const { recipes, loading } = useRecipes(
+  const { recipes, loading, error } = useRecipes(
     "http://localhost:5000/api/get_recipes",
     headers
   );
-
-  const handleSearchChange = (e) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-    console.log("Search query:", query);
-
-    // Ensure recipes is not undefined before filtering
-    if (Array.isArray(recipes)) {
-      const filtered = recipes.filter((recipe) => {
-        if (recipe.title) {
-          return recipe.title.toLowerCase().includes(query);
-        }
-        return false;
-      });
-      setFilteredRecipes(filtered);
-      console.log("Filtered:", filtered);
-    }
-  };
 
   useEffect(() => {
     if (Array.isArray(recipes)) {
@@ -40,19 +23,24 @@ const Recipes = () => {
           recipe.title && recipe.title.toLowerCase().includes(searchQuery)
       );
       setFilteredRecipes(filtered);
+      console.log("Filtered:", filtered);
     }
   }, [recipes, searchQuery]);
 
-  useEffect(() => {
-    handleSearchChange({ target: { value: searchQuery.toLowerCase() } });
-  }, [recipes, searchQuery]);
+  if (error) return <NotFound />;
+
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    console.log("Search query:", query);
+  };
 
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
-          <div className="position-fixed w-75 bg-white z-1">
+          <div className="static-wrapper w-75 bg-white z-1">
             <div className="lines my-5"></div>
             <div
               className="holes hole-top"
@@ -91,7 +79,7 @@ const Recipes = () => {
           {!loading && (
             <ul
               className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2"
-              style={{ marginTop: "10rem" }}
+              style={{ marginTop: "13rem" }}
             >
               {(searchQuery === "" ? recipes : filteredRecipes).map(
                 (recipe) => (

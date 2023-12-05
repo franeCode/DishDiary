@@ -11,6 +11,7 @@ import RecipeCard from './components/RecipeCard';
 import CookBook from './components/pages/CookBook';
 import CustomRecipes from './components/pages/CustomRecipes';
 import SharedRecipes from './components/pages/SharedRecipes';
+import NotFound from './components/pages/NotFound';
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           path="/*"
           element={<AppRoutes />}
         />
+        <Route path="/not_found" element={<NotFound />}></Route>
       </Routes>
     </Router>
   );
