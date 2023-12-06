@@ -2,16 +2,16 @@
 
 [Video Demo](https://youtu.be/Xu7Et3H4DX8)
 
-DishDiary is a web application that simplifies the way you manage, share, and explore delicious recipes. Whether you're an experienced chef or a cooking enthusiast, DishDiary streamlines your culinary journey.
+DishDiary is a web application that simplifies the way you manage, share, and explore delicious recipes. 
 
 🌟 Features
 
 
-Recipe Management: Create and organize your recipes with a user-friendly interface.
+Recipe Management: Create and organize recipes with a user-friendly interface.
 
-Image Upload: Easily upload images of your culinary creations to accompany your recipes.
+Image Upload: Easily upload images of culinary creations to accompany recipes.
 
-Recipe Sharing: Share your recipes with the world and discover new culinary ideas.
+Recipe Sharing: Share recipes with the world and discover new culinary ideas.
 
 User Authentication: Secure login and registration process with JWT token-based authentication.
 
@@ -20,8 +20,6 @@ Responsive Design: DishDiary is fully responsive for both mobile and desktop use
 
 💻 Technologies
 
-
-DishDiary is built using a variety of technologies, including:
 
 Frontend: HTML, CSS, Bootstrap, JavaScript, React
 
