@@ -1,33 +1,31 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import "./App.css";
-import Navbar from './components/Navbar';
-import Intro from './components/pages/Intro';
-import Register from './components/pages/Register';
-import Home from './components/pages/Home';
-import Login from './components/pages/Login';
-import Recipes from './components/pages/Recipes';
-import RecipeView from './components/pages/RecipeView';
-import RecipeCard from './components/RecipeCard';
-import CookBook from './components/pages/CookBook';
-import CustomRecipes from './components/pages/CustomRecipes';
-import SharedRecipes from './components/pages/SharedRecipes';
-import NotFound from './components/pages/NotFound';
-
+import Navbar from "./components/Navbar";
+import Intro from "./components/pages/Intro";
+import Register from "./components/pages/Register";
+import Home from "./components/pages/Home";
+import Login from "./components/pages/Login";
+import Recipes from "./components/pages/Recipes";
+import RecipeView from "./components/pages/RecipeView";
+import RecipeCard from "./components/RecipeCard";
+import CookBook from "./components/pages/CookBook";
+import CustomRecipes from "./components/pages/CustomRecipes";
+import SharedRecipes from "./components/pages/SharedRecipes";
+import NotFound from "./components/pages/NotFound";
 
 const App = () => {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={<Intro />}
-        />
+        <Route path="/" element={<Intro />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route
-          path="/*"
-          element={<AppRoutes />}
-        />
+        <Route path="/*" element={<AppRoutes />} />
         <Route path="/not_found" element={<NotFound />}></Route>
       </Routes>
     </Router>
@@ -37,7 +35,7 @@ const App = () => {
 const AppRoutes = () => {
   const location = useLocation();
 
-  const isHomePage = location.pathname === '/';
+  const isHomePage = location.pathname === "/";
 
   return (
     <>
@@ -56,4 +54,3 @@ const AppRoutes = () => {
 };
 
 export default App;
-

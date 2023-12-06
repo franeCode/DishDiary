@@ -301,6 +301,22 @@ input[type="file" i]:hover {
   margin-top: 0.5rem;
   width: 90%;
 }
+.icon-box {
+  position: absolute;
+  top: 30%;
+  right: 0;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+.show-icon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9em;
+}
+
 @media (max-width: 991.98px) {
   .holes {
     position: absolute;
@@ -327,20 +343,3 @@ input[type="file" i]:hover {
     position: fixed;
   }
 }
-.icon-box {
-  position: absolute;
-  top: 30%;
-  right: 0;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-}
-.show-icon {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.9em;
-}
-
-

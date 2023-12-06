@@ -1,10 +1,11 @@
-// useRecipes.js
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const useRecipes = (apiEndpoint, headers = {}) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchRecipes = async () => {
@@ -18,6 +19,7 @@ const useRecipes = (apiEndpoint, headers = {}) => {
         setLoading(false);
       } catch (error) {
         console.error("Error fetching recipes:", error);
+        navigate("/login");
         setTimeout(() => {
           setLoading(false);
         }, 2000);

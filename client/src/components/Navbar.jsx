@@ -32,7 +32,10 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow px-lg-5 fs-2">
       <div className="container-fluid">
-        <Link to="/home" className="navbar-brand d-flex align-items-center fs-1">
+        <Link
+          to="/home"
+          className="navbar-brand d-flex align-items-center fs-1"
+        >
           <div style={{ width: "8rem" }}>
             <img src={logo} alt="logo"></img>
           </div>
@@ -49,7 +52,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          className="collapse navbar-collapse justify-content-center"
+          className="collapse navbar-collapse justify-content-center justify-content-md-end"
           id="navbarNav"
         >
           <ul className="navbar-nav align-items-center p-2 fs-4">
@@ -65,7 +68,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/shared">
-              DishMate
+                DishMate
               </Link>
             </li>
             <li className="nav-item">

@@ -6,10 +6,7 @@ import { useLocation } from "react-router-dom";
 import Footer from "../Footer";
 
 const Home = () => {
-  // const location = useLocation();
-  // const { username } = location.state || {};
   const username = localStorage.getItem("username");
-
 
   return (
     <div>

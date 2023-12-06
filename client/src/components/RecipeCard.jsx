@@ -11,20 +11,18 @@ const RecipeCard = ({
   customRecipeId,
   showRecipeMessage,
   type,
-  user
+  user,
 }) => {
-  const [isIconVisible, setIsIconVisible] = useState(false); // State for showing/hiding icons
+  const [isIconVisible, setIsIconVisible] = useState(false);
   const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
-  // const username = localStorage.getItem("username");
-  // console.log("User:", customRecipe.user_id)
-  
+
   const handleReadMore = () => {
     if (displayRecipe && displayRecipe.id) {
       navigate(`/recipe/${displayRecipe.id}`, {
-        state: { 
+        state: {
           recipe: displayRecipe,
-          image_url: displayRecipe.image_url, 
+          image_url: displayRecipe.image_url,
         },
       });
     }
@@ -55,16 +53,20 @@ const RecipeCard = ({
 
   const shareRecipe = (customRecipeId, recipeId, formData, user) => {
     axios
-      .post(`/api/share_recipe/${customRecipeId}/${recipeId}`, {
-        formData,
-        user
-      } , {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          "Content-Type": "multipart/form-data",
-          Accept: "multipart/form-data",
+      .post(
+        `/api/share_recipe/${customRecipeId}/${recipeId}`,
+        {
+          formData,
+          user,
         },
-      })
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            "Content-Type": "multipart/form-data",
+            Accept: "multipart/form-data",
+          },
+        }
+      )
       .then((response) => {
         showRecipeMessage("Recipe shared successfully.", "share");
         console.log(response.data.message);
@@ -106,75 +108,96 @@ const RecipeCard = ({
             </h5>
             <button
               className="rounded bg-transparent p-sm-2"
-              onClick={() => setIsIconVisible(!isIconVisible)} 
+              onClick={() => setIsIconVisible(!isIconVisible)}
             >
-              <i className="fa-solid fa-ellipsis-vertical fa-xl" style={{ color: "#414448" }}></i>
+              <i
+                className="fa-solid fa-ellipsis-vertical fa-xl"
+                style={{ color: "#414448" }}
+              ></i>
             </button>
           </div>
-            <div className="icon-box">
-              <div className="d-flex flex-column justify-content-between">
-            {type === "custom" && isIconVisible && (
-              <div className="d-flex flex-column justify-content-between">
-                <button
-                  className="btn rounded bg-transparent"
-                  onClick={() => shareRecipe(customRecipeId, displayRecipe.id)}
-                >
-                  <Link 
-                    className="show-icon text-decoration-none" to="/custom_recipes"
-                    style={{ color: "#414448" }}>
-                    <p className="mb-0 px-2">Share</p>
-                    <i className="fa-solid fa-share-nodes fa-sm" style={{ color: "#414448" }}></i>
-                  </Link>
-                </button>
-                <button
-                  className="btn text-white rounded"
-                  type="submit"
-                  onClick={() => deleteRecipe(displayRecipe.id)}
-                >
-                  <Link 
-                    className="show-icon text-decoration-none" to="/custom_recipes"
-                    style={{ color: "#414448" }}>
+          <div className="icon-box">
+            <div className="d-flex flex-column justify-content-between">
+              {type === "custom" && isIconVisible && (
+                <div className="d-flex flex-column justify-content-between">
+                  <button
+                    className="btn rounded bg-transparent"
+                    onClick={() =>
+                      shareRecipe(customRecipeId, displayRecipe.id)
+                    }
+                  >
+                    <Link
+                      className="show-icon text-decoration-none"
+                      to="/custom_recipes"
+                      style={{ color: "#414448" }}
+                    >
+                      <p className="mb-0 px-2">Share</p>
+                      <i
+                        className="fa-solid fa-share-nodes fa-sm"
+                        style={{ color: "#414448" }}
+                      ></i>
+                    </Link>
+                  </button>
+                  <button
+                    className="btn text-white rounded"
+                    type="submit"
+                    onClick={() => deleteRecipe(displayRecipe.id)}
+                  >
+                    <Link
+                      className="show-icon text-decoration-none"
+                      to="/custom_recipes"
+                      style={{ color: "#414448" }}
+                    >
                       <p className="mb-0 px-2">Delete</p>
-                    <i className="fa-solid fa-trash fa-sm" style={{ color: "#414448" }}></i>
-                  </Link>
+                      <i
+                        className="fa-solid fa-trash fa-sm"
+                        style={{ color: "#414448" }}
+                      ></i>
+                    </Link>
+                  </button>
+                </div>
+              )}
+              {isIconVisible && (
+                <button
+                  className="btn bg-transparent rounded"
+                  type="button"
+                  style={{ color: "#414448" }}
+                  onClick={() => handleReadMore()}
+                >
+                  <span className="show-icon">
+                    <p className="mb-0 px-2">Read more</p>
+                    <i
+                      className="fa-solid fa-info fa-sm"
+                      style={{ color: "var(--text-color)" }}
+                    ></i>
+                  </span>
                 </button>
-              </div>
-            )}
-            {isIconVisible && (
-              <button
-                className="btn bg-transparent rounded"
-                type="button"
-                style={{ color: "#414448" }}
-                onClick={() => handleReadMore()}
-              >
-                <span className="show-icon">
-                  <p className="mb-0 px-2">Read more</p>
-                  <i className="fa-solid fa-info fa-sm" style={{ color: "var(--text-color)" }}></i>
-                </span>
-              </button>
-            )}
-          </div>
+              )}
+            </div>
           </div>
           <p className="d-none d-sm-block border-card"></p>
           <p className="d-none d-sm-block fs-6 mb-0">
             Ingredients:{" "}
-            <span style={{ fontSize: "0.8rem" }}>{displayRecipe.ingredients.substring(0, 25)}</span>
+            <span style={{ fontSize: "0.8rem" }}>
+              {displayRecipe.ingredients.substring(0, 25)}
+            </span>
           </p>
           <p className="d-none d-sm-block border-card"></p>
-          <p className="d-none d-sm-block fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
+          <p
+            className="d-none d-sm-block fs-6 overflow-y-hidden mb-0"
+            style={{ height: "5rem", width: "90%" }}
+          >
             Instructions:{" "}
             <span style={{ fontSize: "0.8rem" }}>
               {displayRecipe ? displayRecipe.instructions : ""}
             </span>
             <span>...</span>
           </p>
-         {displayRecipe 
-          ?
-          <p className="d-none d-sm-block ">Written by: {user}</p>
-          :
-          <p className="d-none d-sm-block ">Written by: themealdb.com</p>
-        }
-          
+          {/* {displayRecipe ? (
+            <p className="d-none d-sm-block ">Written by: {user}</p>
+          ) : (
+            <p className="d-none d-sm-block ">Written by: themealdb.com</p>
+          )} */}
         </div>
       </div>
     </li>
@@ -182,4 +205,3 @@ const RecipeCard = ({
 };
 
 export default React.memo(RecipeCard);
-

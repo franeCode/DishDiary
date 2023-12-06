@@ -3,6 +3,7 @@ import useRecipes from "../useRecipes";
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner";
 import NotFound from "./NotFound";
+import Footer from "../Footer";
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -93,22 +94,10 @@ const Recipes = () => {
               )}
             </ul>
           )}
-          <div className="position-absolute bottom-0 start-50 translate-middle-x">
-            {/* <button className="bg-transparent p-3" onClick={() => prevPage()}>
-              <i
-                className="fa-solid fa-arrow-left-long fa-xl"
-                style={{ color: "#414448" }}
-              ></i>
-            </button>
-            <button className="bg-transparent p-3" onClick={() => nextPage()}>
-              <i
-                className="fa-solid fa-arrow-right-long fa-xl"
-                style={{ color: "#414448" }}
-              ></i>
-            </button> */}
-          </div>
+          <div className="position-absolute bottom-0 start-50 translate-middle-x"></div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
