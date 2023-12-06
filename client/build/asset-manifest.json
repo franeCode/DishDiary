@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0221184d.css",
+    "main.js": "/static/js/main.35f1c203.js",
+    "static/js/787.c4e7f8f9.chunk.js": "/static/js/787.c4e7f8f9.chunk.js",
+    "static/media/recipeview5.jpg": "/static/media/recipeview5.f20b812c8c53e164ec9f.jpg",
+    "static/media/home-bg.webp": "/static/media/home-bg.28773292d17e181d4369.webp",
+    "static/media/make-food.jpg": "/static/media/make-food.926680ab727f37708d65.jpg",
+    "static/media/no-image.jpeg": "/static/media/no-image.b82f2445446c07096e27.jpeg",
+    "static/media/view.webp": "/static/media/view.9f871079d3f8d89ec735.webp",
+    "static/media/logo-icon.svg": "/static/media/logo-icon.f79b123e00a5767ba5b53fa2af42dc45.svg",
+    "index.html": "/index.html",
+    "main.0221184d.css.map": "/static/css/main.0221184d.css.map",
+    "main.35f1c203.js.map": "/static/js/main.35f1c203.js.map",
+    "787.c4e7f8f9.chunk.js.map": "/static/js/787.c4e7f8f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0221184d.css",
+    "static/js/main.35f1c203.js"
+  ]
+}

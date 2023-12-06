@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 const useRecipes = (apiEndpoint, headers = {}) => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,9 +28,9 @@ const useRecipes = (apiEndpoint, headers = {}) => {
     };
 
     fetchRecipes();
-  }, [apiEndpoint, headers]);
+  }, []);
 
-  return { recipes, loading };
+  return { recipes, loading, error };
 };
 
 export default useRecipes;

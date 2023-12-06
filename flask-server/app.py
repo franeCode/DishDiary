@@ -14,7 +14,7 @@ import sys
 
 
 # app = Flask(__name__)
-app = Flask(__name__, static_folder='client/src')
+app = Flask(__name__, static_folder='client/build')
 load_dotenv()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
