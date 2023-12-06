@@ -8,6 +8,7 @@ from flask_jwt_extended import JWTManager, get_jwt_identity
 from datetime import timedelta
 from dotenv import load_dotenv
 import os
+import sys
 
 
 
@@ -23,7 +24,7 @@ app.config['SESSION_TYPE'] = 'filesystem'
 CORS(app)
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
+print(sys.path)
 
 @app.after_request
 def after_request(response):
@@ -47,4 +48,4 @@ from routes import *
 from models import *
   
 if __name__ == '__main__':
-        app.run(debug=True)
+        app.run(debug=False)
