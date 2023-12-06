@@ -1,1 +1,1 @@
-web: gunicorn dish-diary:app
+web: gunicorn app.py:app
