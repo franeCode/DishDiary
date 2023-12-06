@@ -30,10 +30,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow px-5 fs-2">
+    <nav className="navbar navbar-expand-lg navbar-light fixed-top shadow px-lg-5 fs-2">
       <div className="container-fluid">
         <Link to="/home" className="navbar-brand d-flex align-items-center fs-1">
-          <div style={{ width: "10rem" }}>
+          <div style={{ width: "8rem" }}>
             <img src={logo} alt="logo"></img>
           </div>
         </Link>
@@ -49,10 +49,10 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div
-          className="collapse navbar-collapse justify-content-end"
+          className="collapse navbar-collapse justify-content-center"
           id="navbarNav"
         >
-          <ul className="navbar-nav align-items-md-center fs-4">
+          <ul className="navbar-nav align-items-center p-2 fs-4">
             <li className="nav-item">
               <Link className="nav-link" to="/custom_recipes">
                 CookBook

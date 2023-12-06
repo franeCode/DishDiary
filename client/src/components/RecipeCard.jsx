@@ -80,7 +80,7 @@ const RecipeCard = ({
   return (
     <li>
       <div
-        className="d-flex flex-sm-row align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
+        className="d-flex flex-sm-row container flex-grow-1 align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
         style={{ width: "100%", borderColor: "transparent" }}
       >
         {displayRecipe && displayRecipe.image_url ? (
@@ -93,7 +93,7 @@ const RecipeCard = ({
         ) : (
           <img
             src={noImage}
-            className="card-img-top rounded-4 m-3"
+            className="card-img-top rounded-4 m-sm-3"
             alt="image"
             style={{ width: "30%", height: "80%" }}
           />
@@ -155,13 +155,13 @@ const RecipeCard = ({
             )}
           </div>
           </div>
-          <p className="border-card"></p>
-          <p className="fs-6 overflow-hidden mb-0" style={{ height: "1.5rem", width: "90%" }}>
+          <p className="d-none d-sm-block border-card"></p>
+          <p className="d-none d-sm-block fs-6 mb-0">
             Ingredients:{" "}
-            <span style={{ fontSize: "0.8rem" }}>{displayRecipe.ingredients}</span>
+            <span style={{ fontSize: "0.8rem" }}>{displayRecipe.ingredients.substring(0, 25)}</span>
           </p>
-          <p className="border-card"></p>
-          <p className="fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
+          <p className="d-none d-sm-block border-card"></p>
+          <p className="d-none d-sm-block fs-6 overflow-y-hidden mb-0" style={{ height: "5rem", width: "90%" }}>
             Instructions:{" "}
             <span style={{ fontSize: "0.8rem" }}>
               {displayRecipe ? displayRecipe.instructions : ""}
@@ -170,9 +170,9 @@ const RecipeCard = ({
           </p>
          {displayRecipe 
           ?
-          <p>Written by: {user}</p>
+          <p className="d-none d-sm-block ">Written by: {user}</p>
           :
-          <p>Written by: themealdb.com</p>
+          <p className="d-none d-sm-block ">Written by: themealdb.com</p>
         }
           
         </div>
