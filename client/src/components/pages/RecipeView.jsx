@@ -4,19 +4,12 @@ import { useParams } from "react-router-dom";
 import noImage from "../../assets/img/no-image.jpeg";
 import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
-<<<<<<< HEAD
-=======
-
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
 const RecipeView = () => {
   const location = useLocation();
   const { recipe } = location.state || {};
   const { id } = useParams();
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
   
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
 
   if (!recipe) return <NotFound />
 

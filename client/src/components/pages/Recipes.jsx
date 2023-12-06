@@ -1,14 +1,8 @@
 import RecipeCard from "../RecipeCard";
 import useRecipes from "../useRecipes";
-<<<<<<< HEAD
-import NotFound from "./NotFound";
-import { useEffect, useState } from "react";
-import Spinner from "../Spinner";
-=======
 import { useEffect, useState } from "react";
 import Spinner from "../Spinner";
 import NotFound from "./NotFound";
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
 
 const Recipes = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,11 +27,7 @@ const Recipes = () => {
     }
   }, [recipes, searchQuery]);
 
-<<<<<<< HEAD
-  if (error) return <NotFound />
-=======
   if (error) return <NotFound />;
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -45,20 +35,12 @@ const Recipes = () => {
     console.log("Search query:", query);
   };
 
-<<<<<<< HEAD
-  
-=======
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
-<<<<<<< HEAD
-          <div className="position-fixed w-75 bg-white z-1">
-=======
           <div className="static-wrapper w-75 bg-white z-1">
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
             <div className="lines my-5"></div>
             <div
               className="holes hole-top"
@@ -97,11 +79,7 @@ const Recipes = () => {
           {!loading && (
             <ul
               className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2"
-<<<<<<< HEAD
-              style={{ marginTop: "10rem" }}
-=======
               style={{ marginTop: "13rem" }}
->>>>>>> b0d8598003a5144af05de0738a303accf7921325
             >
               {(searchQuery === "" ? recipes : filteredRecipes).map(
                 (recipe) => (
