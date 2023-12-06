@@ -1,1 +1,1 @@
-web: /app/.heroku/python/bin/gunicorn dish-diary:app
+web: gunicorn dish-diary:app
