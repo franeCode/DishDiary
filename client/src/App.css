@@ -92,6 +92,7 @@ button:hover {
 }
 .quote {
   color: #fff;
+  text-align: center;
 }
 .login-wrapper {
   width: 25rem;
@@ -318,6 +319,7 @@ input[type="file" i]:hover {
 }
 
 @media (max-width: 991.98px) {
+  
   .holes {
     position: absolute;
     top: 10px;
