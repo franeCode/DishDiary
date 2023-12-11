@@ -319,7 +319,9 @@ input[type="file" i]:hover {
 }
 
 @media (max-width: 991.98px) {
-  
+  .login-wrapper {
+    width: 80%;
+  }
   .holes {
     position: absolute;
     top: 10px;
