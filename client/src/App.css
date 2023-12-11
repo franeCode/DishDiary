@@ -345,5 +345,6 @@ input[type="file" i]:hover {
   }
   .static-wrapper {
     position: fixed;
+    top: 21.6%;
   }
 }
