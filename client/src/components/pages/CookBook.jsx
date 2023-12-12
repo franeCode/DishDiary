@@ -120,9 +120,10 @@ const CookBook = () => {
           </div>
         ) : null}
         <div
-          className="book position-relative border rounded shadow mt-5 p-3"
+          className="book position-relative border rounded shadow my-5 p-3"
           style={{ height: "100%" }}
         >
+          
           <div className="lines my-5"></div>
           <div
             className="holes hole-top"

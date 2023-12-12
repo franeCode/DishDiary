@@ -38,10 +38,28 @@ const Recipes = () => {
 
   return (
     <div>
-      <div className="d-flex justify-content-center align-items-center overflow-hidden mt-5 pt-5">
+      <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
-        <div className="book overflow-y-scroll border rounded shadow mt-5 px-5">
-          <div className="static-wrapper w-75 bg-white z-1">
+        <div className="rounded relative z-3 w-75 d-flex flex-row justify-content-center align-items-center mt-3 p-2">
+        <div className="input-group w-100 w-md-75 ">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search recipes"
+                    value={searchQuery}
+                    onChange={(e) => handleSearchChange(e)}
+                  />
+                  <button
+                    className="rounded text-light"
+                    type="button"
+                    id="button-addon2"
+                  >
+                    Search
+                  </button>
+                </div>
+            </div>
+        <div className="book position-relative border rounded shadow my-5 px-5">
+          <div className="w-100 bg-white z-1">
             <div className="lines my-5"></div>
             <div
               className="holes hole-top"
@@ -55,9 +73,9 @@ const Recipes = () => {
               className="holes hole-bottom"
               style={{ width: "20px", height: "20px" }}
             ></div>
-            <div className="mx-lg-5 mt-3">
-              <div className="w-75 d-flex flex-row justify-content-center align-items-center p-2 m-5">
-                <div className="input-group mx-auto">
+            {/* <div className="mt-3 w-100">
+              <div className="d-flex flex-row justify-content-center align-items-center p-2 m-5">
+                <div className="d-none d-lg-block input-group w-100 w-md-75 ">
                   <input
                     type="text"
                     className="form-control"
@@ -74,13 +92,12 @@ const Recipes = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           {loading && <Spinner />}
           {!loading && (
             <ul
-              className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-md-5 p-sm-2"
-              style={{ marginTop: "13rem" }}
+              className="row row-cols-lg-2 row-cols-md-1 list-unstyled  overflow-y-scroll list-wrapper p-md-5 p-sm-2 pb-3"
             >
               {(searchQuery === "" ? recipes : filteredRecipes).map(
                 (recipe) => (
