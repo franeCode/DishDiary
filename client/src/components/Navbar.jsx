@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     axios
-      .get("api/logout")
+      .get("/api/logout")
       .then((response) => {
         if (response.status === 200) {
           localStorage.removeItem("access_token");

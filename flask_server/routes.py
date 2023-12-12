@@ -77,7 +77,7 @@ def login():
     return jsonify(access_token=access_token), 200
 
 
-@app.route("api/logout")
+@app.route("/api/logout")
 def logout():
     """Log user out"""
     resp = jsonify({'logout': True})

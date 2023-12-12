@@ -10,7 +10,7 @@ const Login = () => {
 
   const logInUser = () => {
     axios
-      .post("api/login", {
+      .post("/api/login", {
         username: username,
         password: password,
       })

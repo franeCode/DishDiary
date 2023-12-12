@@ -12,7 +12,7 @@ const Register = () => {
   const registerUser = () => {
     axios
       .post(
-        "api/register",
+        "/api/register",
         {
           username: username,
           password: password,
