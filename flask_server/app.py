@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 import os
 import sys
 
-app = Flask(__name__, static_folder='../build', static_url_path='/')
+app = Flask(__name__, static_folder='../client/build', static_url_path='/')
 load_dotenv()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///recipes.db'
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")

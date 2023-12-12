@@ -1,4 +1,4 @@
-bind = '127.0.0.1:80'
-workers = 4
+bind = '127.0.0.1:8000'
+workers = 2
 chdir = 'flask_server'
 # wsgi_app = 'app:create_app()'
