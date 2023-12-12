@@ -9,7 +9,7 @@ const SharedRecipes = () => {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
   const { recipes, loading, error } = useRecipes(
-    "http://localhost:5000/api/get_shared_recipes",
+    "api/get_shared_recipes",
     headers
   );
 

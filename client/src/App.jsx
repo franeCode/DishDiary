@@ -17,6 +17,9 @@ import CookBook from "./components/pages/CookBook";
 import CustomRecipes from "./components/pages/CustomRecipes";
 import SharedRecipes from "./components/pages/SharedRecipes";
 import NotFound from "./components/pages/NotFound";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://localhost:8000";
 
 const App = () => {
   return (

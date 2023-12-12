@@ -12,7 +12,7 @@ const Register = () => {
   const registerUser = () => {
     axios
       .post(
-        "http://127.0.0.1:5000/register",
+        "api/register",
         {
           username: username,
           password: password,

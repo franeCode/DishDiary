@@ -17,14 +17,17 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
-
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+       
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected_route():
     current_user = get_jwt_identity()
     return f'Hello, {current_user}! This route is protected by JWT authentication.'
 
-@app.route("/register", methods=["GET", "POST"])
+@app.route("/api/register", methods=["GET", "POST"])
 def register():
     """Register user"""
    
@@ -55,7 +58,7 @@ def register():
     })
     
 
-@app.route("/login", methods=["POST"])
+@app.route("/api/login", methods=["POST"])
 @cross_origin(supports_credentials=True)
 def login():
     """Login user"""
@@ -74,7 +77,7 @@ def login():
     return jsonify(access_token=access_token), 200
 
 
-@app.route("/logout")
+@app.route("api/logout")
 def logout():
     """Log user out"""
     resp = jsonify({'logout': True})

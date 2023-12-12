@@ -13,7 +13,7 @@ const CustomRecipes = () => {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
   const { recipes, loading } = useRecipes(
-    "http://localhost:5000/api/get_custom_recipes",
+    "api/get_custom_recipes",
     headers
   );
 
