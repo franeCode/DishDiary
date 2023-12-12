@@ -54,23 +54,22 @@ const CustomRecipes = () => {
           </div>
         )}
         <div className="d-lg-none w-75 bg-white rounded d-flex align-items-center p-2 z-3">
-                <div className="flex-grow-1 text-center ps-sm-5 page-header">
-                  ~ COOKBOOK ~
-                </div>
-                <button className="d-block btn text-white rounded align-self-end">
-                  <Link
-                    className="text-decoration-none text-white"
-                    to="/create_recipe"
-                  >
-                    <i
-                      style={{ color: "#555" }}
-                      className="fa-regular fa-pen-to-square fa-md-xl"
-                    ></i>
-                  </Link>
-                </button>
-              </div>
+          <div className="flex-grow-1 text-center ps-sm-5 page-header">
+            ~ COOKBOOK ~
+          </div>
+          <button className="d-block btn text-white rounded align-self-end">
+            <Link
+              className="text-decoration-none text-white"
+              to="/create_recipe"
+            >
+              <i
+                style={{ color: "#555" }}
+                className="fa-regular fa-pen-to-square fa-md-xl"
+              ></i>
+            </Link>
+          </button>
+        </div>
         <div className="book position-relative border rounded shadow my-5 px-5">
-        
           <div className="w-100 bg-white z-1">
             <div className="lines my-5"></div>
             <div
@@ -106,10 +105,7 @@ const CustomRecipes = () => {
           </div>
           {loading && <Spinner />}
           {!loading && (
-            <ul
-              className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 p-sm-2  overflow-y-scroll list-wrapper"
-            
-            >
+            <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled p-lg-5 p-sm-2  overflow-y-scroll list-wrapper">
               {recipes.length > 0 ? (
                 recipes.map((recipe) => (
                   <RecipeCard

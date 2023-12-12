@@ -41,23 +41,23 @@ const Recipes = () => {
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
         <div className="rounded relative z-3 w-75 d-flex flex-row justify-content-center align-items-center mt-3 p-2">
-        <div className="input-group w-100 w-md-75 ">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search recipes"
-                    value={searchQuery}
-                    onChange={(e) => handleSearchChange(e)}
-                  />
-                  <button
-                    className="rounded text-light"
-                    type="button"
-                    id="button-addon2"
-                  >
-                    Search
-                  </button>
-                </div>
-            </div>
+          <div className="input-group w-100 w-md-75 ">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search recipes"
+              value={searchQuery}
+              onChange={(e) => handleSearchChange(e)}
+            />
+            <button
+              className="rounded text-light"
+              type="button"
+              id="button-addon2"
+            >
+              Search
+            </button>
+          </div>
+        </div>
         <div className="book position-relative border rounded shadow my-5 px-5">
           <div className="w-100 bg-white z-1">
             <div className="lines my-5"></div>
@@ -96,9 +96,7 @@ const Recipes = () => {
           </div>
           {loading && <Spinner />}
           {!loading && (
-            <ul
-              className="row row-cols-lg-2 row-cols-md-1 list-unstyled  overflow-y-scroll list-wrapper p-md-5 p-sm-2 pb-3"
-            >
+            <ul className="row row-cols-lg-2 row-cols-md-1 list-unstyled  overflow-y-scroll list-wrapper p-md-5 p-sm-2 pb-3">
               {(searchQuery === "" ? recipes : filteredRecipes).map(
                 (recipe) => (
                   <RecipeCard
