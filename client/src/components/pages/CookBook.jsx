@@ -211,7 +211,7 @@ const CookBook = () => {
                 >
                   <Link
                     className="text-decoration-none text-white"
-                    to="/custom_recipes"
+                    to="/api/custom_recipes"
                   >
                     view
                   </Link>
