@@ -19,7 +19,7 @@ const Login = () => {
         if (jwtToken) {
           localStorage.setItem("access_token", jwtToken);
           axios
-            .get("http://localhost:5000/api/get_recipes", {
+            .get("/api/get_recipes", {
               headers: {
                 Authorization: `Bearer ${jwtToken}`,
               },

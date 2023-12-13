@@ -44,4 +44,4 @@ from routes import *
 from models import *
   
 if __name__ == '__main__':
-        app.run(debug=False)
+        app.run(debug=True)
