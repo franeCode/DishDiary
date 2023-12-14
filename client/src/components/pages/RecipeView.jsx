@@ -8,9 +8,10 @@ import Footer from "../Footer";
 
 const RecipeView = () => {
   const location = useLocation();
-  const { recipe } = location.state || {};
+  const { recipe, image_url } = location.state || {};
   const { id } = useParams();
   const navigate = useNavigate();
+  console.log(image_url)
 
   if (!recipe) return <NotFound />;
 
@@ -46,7 +47,7 @@ const RecipeView = () => {
                   style={{ color: "#414448" }}
                 ></i>
               </button>
-              <Link className="text-decoration-none" to="/cookbook">
+              <Link className="text-decoration-none" to="/create_recipe">
                 <i
                   style={{ color: "#414448" }}
                   className="fa-regular fa-pen-to-square fa-xl"
@@ -55,9 +56,9 @@ const RecipeView = () => {
             </div>
           </div>
           <div className="d-flex flex-column justify-content-center align-items-center px-5 py-4">
-            {recipe.image_url ? (
+            {image_url ? (
               <img
-                src={recipe.image_url ? recipe.image_url : imageUrl}
+                src={image_url}
                 className="rounded"
                 alt="image"
                 style={{ width: "25%", height: "auto" }}

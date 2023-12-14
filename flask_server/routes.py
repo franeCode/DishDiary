@@ -87,11 +87,11 @@ def logout():
 @app.route('/api/recipes', methods=['GET'])
 @cache.cached(timeout=3600)
 def store_recipes():
-    print('hello')
+    # print('hello')
     """Get recipes and store it in the db"""
-    print('Deleting existing recipes...')
+    # print('Deleting existing recipes...')
     Recipe.query.delete()
-    print('Deletion complete!')
+    # print('Deletion complete!')
     try:
         response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?f=')   
         data = response.json()
@@ -292,12 +292,12 @@ def get_custom_recipes():
 @jwt_required()
 def share_recipe(custom_recipe_id, recipe_id):
     try:
-        app.logger.error(f"Request Headers: {request.headers}")
+        # app.logger.error(f"Request Headers: {request.headers}")
 
         current_user_id = get_jwt_identity()
 
         if current_user_id is not None:
-            app.logger.error(f"current_user_id: {current_user_id}, custom_recipe_id: {custom_recipe_id}")
+            # app.logger.error(f"current_user_id: {current_user_id}, custom_recipe_id: {custom_recipe_id}")
 
             # Check if the custom_recipe_id is not None
             if custom_recipe_id is not None:

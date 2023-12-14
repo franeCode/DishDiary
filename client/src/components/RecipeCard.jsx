@@ -88,21 +88,21 @@ const RecipeCard = ({
         {displayRecipe && displayRecipe.image_url ? (
           <img
             src={displayRecipe.image_url}
-            className="card-img-top rounded-4 m-sm-3"
+            className="card-img-top rounded-4 p-2"
             alt="image"
-            style={{ width: "30%", height: "80%" }}
+            style={{ width: "30%" }}
           />
         ) : (
           <img
             src={noImage}
-            className="card-img-top rounded-4 m-sm-3"
+            className="card-img-top rounded-4 p-2"
             alt="image"
-            style={{ width: "30%", height: "80%" }}
+            style={{ width: "30%" }}
           />
         )}
         {/* <p>Written by {username}</p> */}
         <div className="card-body my-3 p-2">
-          <div className="d-flex flex-row justify-content-between">
+          <div className="d-flex flex-row justify-content-between align-items-center">
             <h5 className="card-title fs-4 mx-3 mx-sm-0">
               {displayRecipe ? displayRecipe.title : "No title available"}
             </h5>

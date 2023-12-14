@@ -20,7 +20,6 @@ const CookBook = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRecipe({ ...recipe, [name]: value });
-    console.log("Recipe:", recipe);
   };
 
   const handleSubmit = (e) => {
@@ -211,7 +210,7 @@ const CookBook = () => {
                 >
                   <Link
                     className="text-decoration-none text-white"
-                    to="/api/custom_recipes"
+                    to="/custom_recipes"
                   >
                     view
                   </Link>

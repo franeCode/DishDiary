@@ -19,7 +19,7 @@ import SharedRecipes from "./components/pages/SharedRecipes";
 import NotFound from "./components/pages/NotFound";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "http://localhost:8000";
 
 const App = () => {
   return (

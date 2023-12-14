@@ -19,12 +19,12 @@ const SharedRecipes = () => {
     <div>
       <div className="d-flex flex-column justify-content-center align-items-center overflow-hidden mt-5 pt-5">
         <div className="bg-image"></div>
-        <div className="d-lg-none bg-white rounded relative z-3 w-75 d-flex flex-row justify-content-center align-items-center mt-3 p-2">
-          <p className="fs-lg-3 text-center fs-5 px-lg-5">
-            ~ Community crafted recipes, from kitchen to kitchen ~
+        <div className="rounded z-3 w-75 d-flex flex-row justify-content-center align-items-center mt-4 p-2">
+          <p className="fs-3 text-center text-white px-lg-5">
+            Community crafted recipes, from kitchen to kitchen
           </p>
         </div>
-        <div className="book position-relative border rounded shadow my-5 px-5">
+        <div className="book position-relative border rounded shadow my-3 px-5">
           <div className="w-100 bg-white z-1">
             <div className="lines my-5"></div>
             <div
@@ -39,13 +39,13 @@ const SharedRecipes = () => {
               className="holes hole-bottom"
               style={{ width: "20px", height: "20px" }}
             ></div>
-            <div className="mx-lg-5 mt-3">
+            {/* <div className="mx-lg-5 mt-3">
               <div className="d-none w-100 d-lg-flex flex-row justify-content-center align-items-center p-2">
                 <p className="fs-lg-3 text-center fs-5 px-lg-5">
                   ~ Community crafted recipes, from kitchen to kitchen ~
                 </p>
               </div>
-            </div>
+            </div> */}
           </div>
           {loading && <Spinner />}
           {!loading && (

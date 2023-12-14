@@ -13,7 +13,7 @@ const CustomRecipes = () => {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
   const { recipes, loading } = useRecipes(
-    "api/get_custom_recipes",
+    "/api/get_custom_recipes",
     headers
   );
 
@@ -53,9 +53,9 @@ const CustomRecipes = () => {
             {deleteMessage}
           </div>
         )}
-        <div className="d-lg-none w-75 bg-white rounded d-flex align-items-center p-2 z-3">
-          <div className="flex-grow-1 text-center ps-sm-5 page-header">
-            ~ COOKBOOK ~
+        <div className="w-75 rounded d-flex align-items-center mt-3 p-2 z-3">
+          <div className="flex-grow-1 text-center text-white ps-sm-5 fs-3">
+            COOKBOOK
           </div>
           <button className="d-block btn text-white rounded align-self-end">
             <Link
@@ -64,7 +64,7 @@ const CustomRecipes = () => {
             >
               <i
                 style={{ color: "#555" }}
-                className="fa-regular fa-pen-to-square fa-md-xl"
+                className="fa-regular fa-pen-to-square fa-xl text-white"
               ></i>
             </Link>
           </button>
@@ -85,7 +85,7 @@ const CustomRecipes = () => {
               style={{ width: "20px", height: "20px" }}
             ></div>
             <div className="mx-5 mt-3">
-              <div className="d-none w-100 d-lg-flex p-2">
+              {/* <div className="d-none w-100 d-lg-flex p-2">
                 <div className="flex-grow-1 text-center ps-sm-5 page-header">
                   ~ COOKBOOK ~
                 </div>
@@ -100,7 +100,7 @@ const CustomRecipes = () => {
                     ></i>
                   </Link>
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
           {loading && <Spinner />}
