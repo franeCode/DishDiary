@@ -21,6 +21,10 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 def index():
     return app.send_static_file('index.html')
        
+# @app.errorhandler(404)
+# def not_found(e):
+#     return app.send_static_file('/404.jsx')
+
 @app.route('/protected', methods=['GET'])
 @jwt_required()
 def protected_route():

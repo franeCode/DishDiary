@@ -19,7 +19,7 @@ import SharedRecipes from "./components/pages/SharedRecipes";
 import NotFound from "./components/pages/NotFound";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:5000";
+axios.defaults.baseURL = "https://dish-diary-9993d7a31702.herokuapp.com/";
 
 const App = () => {
   return (
