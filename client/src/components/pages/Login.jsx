@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -100,9 +101,9 @@ const Login = () => {
                 </button>
                 <p className="small fw-bold mt-2 pt-1 mb-0">
                   Don't have an account?{" "}
-                  <a href="/register" style={{ color: "#FF7D04" }}>
+                  <Link to="/register" style={{ color: "#FF7D04" }}>
                     Register
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>
