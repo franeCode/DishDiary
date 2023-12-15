@@ -354,12 +354,8 @@ input[type="file" i]:hover {
   .page-header {
     font-size: 1em;
   }
-  /* .list-wrapper {
-    max-height: 70%;
-  } */
-}
-/* @media (max-width: 991.98px) {
-  .list-wrapper {
-    max-height: 40rem;
+  .card-title {
+    font-size: 1em;
   }
-} */
+}
+
