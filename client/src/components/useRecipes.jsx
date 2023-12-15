@@ -8,29 +8,36 @@ const useRecipes = (apiEndpoint, headers = {}) => {
   const [error, setError] = useState();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const response = await axios.get(apiEndpoint, {
-          headers: {
-            ...headers,
-          },
-        });
-        setRecipes(response.data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching recipes:", error);
-        navigate("/login");
-        setTimeout(() => {
-          setLoading(false);
-        }, 2000);
-      }
-    };
+  const fetchRecipes = async () => {
+    try {
+      const response = await axios.get(apiEndpoint, {
+        headers: {
+          ...headers,
+        },
+      });
+      setRecipes(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+      setError("An error occurred while fetching recipes.");
 
+      if (error.response) {
+        if (error.response.status === 401) {
+          navigate("/login");
+        } else {
+          navigate("/404");
+        }
+      } else {
+        navigate("/404");
+      }
+    }
+  };
+
+  useEffect(() => {
     fetchRecipes();
   }, []);
 
-  return { recipes, loading, error };
+  return { recipes, loading, error, fetchRecipes };
 };
 
 export default useRecipes;

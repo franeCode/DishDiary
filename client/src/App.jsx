@@ -17,9 +17,9 @@ import CookBook from "./components/pages/CookBook";
 import CustomRecipes from "./components/pages/CustomRecipes";
 import SharedRecipes from "./components/pages/SharedRecipes";
 import NotFound from "./components/pages/NotFound";
-import axios from "axios";
+// import axios from "axios";
 
-axios.defaults.baseURL = "https://dish-diary-9993d7a31702.herokuapp.com/";
+// axios.defaults.baseURL = "https://dish-diary-9993d7a31702.herokuapp.com/";
 
 const App = () => {
   return (

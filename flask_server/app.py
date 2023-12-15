@@ -20,7 +20,6 @@ app.config['SESSION_TYPE'] = 'filesystem'
 CORS(app)
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-print(sys.path)
 
 @app.after_request
 def after_request(response):

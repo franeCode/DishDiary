@@ -5,13 +5,14 @@ import noImage from "../assets/img/no-image.jpeg";
 import axios from "axios";
 
 const RecipeCard = ({
+  recipes,
   recipe,
   setRecipes,
+  fetchRecipes,
   customRecipe,
   customRecipeId,
   showRecipeMessage,
   type,
-  user,
 }) => {
   const [isIconVisible, setIsIconVisible] = useState(false);
   const displayRecipe = recipe || customRecipe;
@@ -29,26 +30,27 @@ const RecipeCard = ({
   };
 
   const deleteRecipe = async (recipeId) => {
-    axios
-      .delete(`/api/delete_recipe/${recipeId}`, {
+    try {
+      const response = await axios.delete(`/api/delete_recipe/${recipeId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          setRecipes((recipes) =>
-            recipes.filter((recipe) => recipe.id !== recipeId)
-          );
-          showRecipeMessage("Recipe deleted successfully.", "delete");
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting recipe:", error);
-        if (error.response && error.response.status === 401) {
-          navigate("/login");
-        }
       });
+
+      if (response.status === 200) {
+        console.log("after deleting:", recipes);
+        if (Array.isArray(recipes)) {
+          setRecipes(recipes.filter((recipe) => recipe.id !== recipeId));
+        }
+        fetchRecipes();
+        showRecipeMessage("Recipe deleted successfully.", "delete");
+      }
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+      if (error.response && error.response.status === 401) {
+        navigate("/login");
+      }
+    }
   };
 
   const shareRecipe = (customRecipeId, recipeId, formData, user) => {
@@ -69,7 +71,6 @@ const RecipeCard = ({
       )
       .then((response) => {
         showRecipeMessage("Recipe shared successfully.", "share");
-        console.log(response.data.message);
       })
       .catch((error) => {
         console.error(error.response.data.error);
@@ -204,4 +205,4 @@ const RecipeCard = ({
   );
 };
 
-export default React.memo(RecipeCard);
+export default RecipeCard;

@@ -72,7 +72,7 @@ const Login = () => {
                 <p className="lead mb-2 me-3">Log Into Your Account</p>
               </div>
 
-              <div className="form-outline mb-4">
+              <div className="form-outline mx-5 mb-4">
                 <input
                   type="username"
                   value={username}
@@ -82,7 +82,7 @@ const Login = () => {
                 />
               </div>
 
-              <div className="form-outline mb-3">
+              <div className="form-outline mx-5 mb-3">
                 <input
                   type="password"
                   value={password}

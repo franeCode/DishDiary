@@ -21,9 +21,9 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 def index():
     return app.send_static_file('index.html')
        
-# @app.errorhandler(404)
-# def not_found(e):
-#     return app.send_static_file('/404.jsx')
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('/not_found.jsx')
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
@@ -89,7 +89,7 @@ def logout():
     return resp, 200
 
 @app.route('/api/recipes', methods=['GET'])
-@cache.cached(timeout=3600)
+# @cache.cached(timeout=3600)
 def store_recipes():
     # print('hello')
     """Get recipes and store it in the db"""
@@ -99,18 +99,12 @@ def store_recipes():
     try:
         response = requests.get('https://www.themealdb.com/api/json/v1/1/search.php?f=')   
         data = response.json()
-        # print(data)
-
-        # Clear existing recipes from the database
-        print('Deleting existing recipes...')
         Recipe.query.delete()
-        print('Deletion complete!')
 
         for meal in data['meals']:
             if meal is None:
                 continue
 
-            # Retrieve the ingredients data as a list
             ingredients = [
                 meal[f'strIngredient{i}'].strip()
                 for i in range(1, 21)
@@ -130,7 +124,7 @@ def store_recipes():
                 image_url=meal.get('strMealThumb'),
                 youtube_link=meal.get('strYoutube')
             )
-            print(recipe.ingredients)
+            
             db.session.add(recipe)
 
         db.session.commit()  
@@ -146,7 +140,7 @@ def delete_recipe(recipe_id):
     try:
         logging.info('Entered try block')
         
-        current_user = get_jwt_identity()
+        current_user = get_jwt_identity() 
         
         if current_user is not None:
             app.logger.error(f"current_user_id: {current_user}")
@@ -181,11 +175,10 @@ def get_recipes():
         for recipe in recipes:
             # Check if ingredients and measures are not None
             if recipe.ingredients and recipe.measure:
-                # Split the ingredients and measures
+               
                 ingredients = recipe.ingredients.split(', ')
                 measures = recipe.measure.split(', ')
 
-                # Combine ingredients and measures into a single string
                 ingredients_with_measures = ', '.join([f"{m} {i}" for m, i in zip(measures, ingredients)])
             else:
                 ingredients_with_measures = recipe.ingredients or ""

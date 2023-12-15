@@ -4,6 +4,7 @@ import { useState } from "react";
 import useRecipes from "../useRecipes";
 import Spinner from "../Spinner";
 import Footer from "../Footer";
+import NotFound from "./NotFound";
 
 const CustomRecipes = () => {
   const [shareMessage, setShareMessage] = useState("");
@@ -12,12 +13,13 @@ const CustomRecipes = () => {
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
-  const { recipes, loading } = useRecipes(
+  const { recipes, loading, error, fetchRecipes } = useRecipes(
     "/api/get_custom_recipes",
     headers
   );
 
-  // Function to show the message
+  if (error) return <NotFound />;
+
   const showRecipeMessage = (message, messageType) => {
     if (messageType === "share") {
       setShareMessage(message);
@@ -85,22 +87,6 @@ const CustomRecipes = () => {
               style={{ width: "20px", height: "20px" }}
             ></div>
             <div className="mx-5 mt-3">
-              {/* <div className="d-none w-100 d-lg-flex p-2">
-                <div className="flex-grow-1 text-center ps-sm-5 page-header">
-                  ~ COOKBOOK ~
-                </div>
-                <button className="d-block btn text-white rounded align-self-end">
-                  <Link
-                    className="text-decoration-none text-white"
-                    to="/create_recipe"
-                  >
-                    <i
-                      style={{ color: "#555" }}
-                      className="fa-regular fa-pen-to-square fa-md-xl"
-                    ></i>
-                  </Link>
-                </button>
-              </div> */}
             </div>
           </div>
           {loading && <Spinner />}
@@ -112,6 +98,7 @@ const CustomRecipes = () => {
                     key={recipe.id}
                     customRecipe={recipe}
                     customRecipeId={recipe.id}
+                    fetchRecipes={fetchRecipes}
                     showIcon={true}
                     showRecipeMessage={showRecipeMessage}
                     type="custom"

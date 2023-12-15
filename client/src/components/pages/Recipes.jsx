@@ -12,10 +12,7 @@ const Recipes = () => {
   const headers = {
     Authorization: `Bearer ${localStorage.getItem("access_token")}`,
   };
-  const { recipes, loading, error } = useRecipes(
-    "/api/get_recipes",
-    headers
-  );
+  const { recipes, loading, error } = useRecipes("/api/get_recipes", headers);
 
   useEffect(() => {
     if (Array.isArray(recipes)) {
@@ -24,7 +21,6 @@ const Recipes = () => {
           recipe.title && recipe.title.toLowerCase().includes(searchQuery)
       );
       setFilteredRecipes(filtered);
-      console.log("Filtered:", filtered);
     }
   }, [recipes, searchQuery]);
 
@@ -33,7 +29,6 @@ const Recipes = () => {
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
     setSearchQuery(query);
-    console.log("Search query:", query);
   };
 
   return (
@@ -73,26 +68,6 @@ const Recipes = () => {
               className="holes hole-bottom"
               style={{ width: "20px", height: "20px" }}
             ></div>
-            {/* <div className="mt-3 w-100">
-              <div className="d-flex flex-row justify-content-center align-items-center p-2 m-5">
-                <div className="d-none d-lg-block input-group w-100 w-md-75 ">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search recipes"
-                    value={searchQuery}
-                    onChange={(e) => handleSearchChange(e)}
-                  />
-                  <button
-                    className="rounded text-light"
-                    type="button"
-                    id="button-addon2"
-                  >
-                    Search
-                  </button>
-                </div>
-              </div>
-            </div> */}
           </div>
           {loading && <Spinner />}
           {!loading && (

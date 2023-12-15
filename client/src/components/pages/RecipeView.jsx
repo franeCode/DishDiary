@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import noImage from "../../assets/img/no-image.jpeg";
 import { Link } from "react-router-dom";
 import NotFound from "./NotFound";
@@ -9,13 +8,10 @@ import Footer from "../Footer";
 const RecipeView = () => {
   const location = useLocation();
   const { recipe, image_url } = location.state || {};
-  const { id } = useParams();
   const navigate = useNavigate();
-  console.log(image_url)
 
   if (!recipe) return <NotFound />;
 
-  // Define the imageUrl
   const imageUrl = `${window.location.origin}/${recipe.image_url}`;
 
   return (
@@ -58,7 +54,7 @@ const RecipeView = () => {
           <div className="d-flex flex-column justify-content-center align-items-center px-5 py-4">
             {image_url ? (
               <img
-                src={image_url}
+                src={imageUrl}
                 className="rounded"
                 alt="image"
                 style={{ width: "25%", height: "auto" }}

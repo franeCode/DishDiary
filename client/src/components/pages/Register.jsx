@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 
@@ -53,7 +53,7 @@ const Register = () => {
               <div className="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
                 <p className="lead mb-2 me-3">Register Account</p>
               </div>
-              <div className="form-outline mb-4">
+              <div className="form-outline mx-5 mb-4">
               <input
                 autoComplete="off"
                 autoFocus
@@ -65,7 +65,7 @@ const Register = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
                 </div>
-              <div className="form-outline mb-4">
+              <div className="form-outline mx-5 mb-4">
                 <input
                   className="form-control form-control-lg"
                   id="password"
@@ -75,7 +75,7 @@ const Register = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 ></input>
               </div>
-              <div className="form-outline mb-4">
+              <div className="form-outline mx-5 mb-4">
                 <input
                   className="form-control form-control-lg"
                   id="confirmation"
@@ -95,10 +95,10 @@ const Register = () => {
                 </button>
                 <p className="small fw-bold mt-2 pt-1 mb-0">
                   Already have an account?{" "}
-                  <a href="/login" style={{ color: "#FF7D04" }}>
+                  <Link to="/login" style={{ color: "#FF7D04" }}>
                     Login
-                  </a>
-                </p>
+                  </Link>
+                </p> 
               </div>
             </form>
           </div>

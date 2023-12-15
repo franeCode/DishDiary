@@ -61,7 +61,7 @@ const SharedRecipes = () => {
                 ))
               ) : (
                 <div className="w-100 p-5 fs-4 text-center">
-                  <p>No recipes to display. Start writing!</p>
+                  <p>No recipes to display. Start sharing!</p>
                   <p className="border-card mx-auto w-50"></p>
                 </div>
               )}
