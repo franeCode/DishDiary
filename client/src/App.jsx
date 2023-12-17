@@ -29,7 +29,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/*" element={<AppRoutes />} />
-        <Route path="/not_found" element={<NotFound />}></Route>
+        {/* <Route path="/not_found" element={<NotFound />}></Route> */}
       </Routes>
     </Router>
   );
@@ -50,7 +50,7 @@ const AppRoutes = () => {
         <Route path="/shared" element={<SharedRecipes />} />
         <Route path="/create_recipe" element={<CookBook />} />
         <Route path="/custom_recipes" element={<CustomRecipes />} />
-        <Route path="/not_found" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );

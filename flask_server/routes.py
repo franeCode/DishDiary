@@ -23,7 +23,7 @@ def index():
        
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('/not_found.jsx')
+    return app.send_static_file('index.html')
 
 @app.route('/protected', methods=['GET'])
 @jwt_required()
@@ -307,7 +307,9 @@ def share_recipe(custom_recipe_id, recipe_id):
 
                 if not custom_recipe:
                     return jsonify({'error': 'Custom recipe not found or unauthorized'}), 404
-
+                
+                if SharedRecipes.query.filter_by(title=custom_recipe.title).first():
+                    return jsonify({'error': 'Recipe already shared'}), 400
                 # Create a new Recipe instance and copy data
                 recipe = SharedRecipes()
                

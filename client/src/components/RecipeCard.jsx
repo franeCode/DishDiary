@@ -80,25 +80,34 @@ const RecipeCard = ({
       });
   };
 
+  const isFirefox = navigator.userAgent.toLowerCase().indexOf("firefox") > -1;
+
   return (
     <li>
       <div
-        className="d-flex flex-sm-row container flex-grow-1 align-items-start justify-content-center rounded-4 shadow position-relative mb-4"
-        style={{ width: "100%", borderColor: "transparent" }}
+        className="d-flex flex-sm-row container flex-grow-1 align-items-start justify-content-center rounded-4 shadow position-relative mb-4 overflow-hidden"
+        style={{ width: "100%", height: "75%", borderColor: "transparent" }}
       >
         {displayRecipe && displayRecipe.image_url ? (
           <img
             src={displayRecipe.image_url}
-            className="card-img-top rounded-4 p-2"
+            className="card-img-md-top rounded-4 p-2"
             alt="image"
-            style={{ width: "30%" }}
+            style={{
+              width: isFirefox ? "5rem" : "30%",
+              MozBoxSizing: isFirefox ? "content-box" : "unset",
+              MozWidth: isFirefox ? "auto" : "unset",
+            }}
           />
         ) : (
           <img
             src={noImage}
             className="card-img-top rounded-4 p-2"
-            alt="image"
-            style={{ width: "30%" }}
+            style={{
+              width: isFirefox ? "5rem" : "30%",
+              MozBoxSizing: isFirefox ? "content-box" : "unset",
+              MozWidth: isFirefox ? "auto" : "unset",
+            }}
           />
         )}
         {/* <p>Written by {username}</p> */}
@@ -180,11 +189,12 @@ const RecipeCard = ({
           <p className="d-none d-sm-block fs-6 mb-0">
             Ingredients:{" "}
             <span style={{ fontSize: "0.8rem" }}>
-              {displayRecipe.ingredients.substring(0, 25)}
+              {displayRecipe.ingredients.substring(0, 100)}
             </span>
+            <span>...</span>
           </p>
           <p className="d-none d-sm-block border-card"></p>
-          <p
+          {/* <p
             className="d-none d-sm-block fs-6 overflow-y-hidden mb-0"
             style={{ height: "5rem", width: "90%" }}
           >
@@ -193,7 +203,7 @@ const RecipeCard = ({
               {displayRecipe ? displayRecipe.instructions : ""}
             </span>
             <span>...</span>
-          </p>
+          </p> */}
           {/* {displayRecipe ? (
             <p className="d-none d-sm-block ">Written by: {user}</p>
           ) : (

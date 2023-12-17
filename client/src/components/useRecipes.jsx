@@ -25,10 +25,10 @@ const useRecipes = (apiEndpoint, headers = {}) => {
         if (error.response.status === 401) {
           navigate("/login");
         } else {
-          navigate("/404");
+          navigate("/not_found");
         }
       } else {
-        navigate("/404");
+        navigate("/not_found");
       }
     }
   };
