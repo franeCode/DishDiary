@@ -15,6 +15,7 @@ const RecipeCard = ({
   type,
 }) => {
   const [isIconVisible, setIsIconVisible] = useState(false);
+  const [isShared, setIsShared] = useState(false);
   const displayRecipe = recipe || customRecipe;
   const navigate = useNavigate();
 
@@ -71,6 +72,7 @@ const RecipeCard = ({
       )
       .then((response) => {
         showRecipeMessage("Recipe shared successfully.", "share");
+        setIsShared(true);
       })
       .catch((error) => {
         console.error(error.response.data.error);
@@ -85,16 +87,16 @@ const RecipeCard = ({
   return (
     <li>
       <div
-        className="d-flex flex-sm-row container flex-grow-1 align-items-start justify-content-center rounded-4 shadow position-relative mb-4 overflow-hidden"
+        className="d-flex flex-sm-row container flex-grow-1 align-items-center justify-content-center rounded-4 shadow position-relative mb-4 overflow-hidden p-2"
         style={{ width: "100%", height: "75%", borderColor: "transparent" }}
       >
         {displayRecipe && displayRecipe.image_url ? (
           <img
             src={displayRecipe.image_url}
-            className="card-img-md-top rounded-4 p-2"
+            className="rounded-4 p-2"
             alt="image"
             style={{
-              width: isFirefox ? "5rem" : "30%",
+              width: isFirefox ? "5rem" : "25%",
               MozBoxSizing: isFirefox ? "content-box" : "unset",
               MozWidth: isFirefox ? "auto" : "unset",
             }}
@@ -102,9 +104,9 @@ const RecipeCard = ({
         ) : (
           <img
             src={noImage}
-            className="card-img-top rounded-4 p-2"
+            className="rounded-4 p-2"
             style={{
-              width: isFirefox ? "5rem" : "30%",
+              width: isFirefox ? "5rem" : "25%",
               MozBoxSizing: isFirefox ? "content-box" : "unset",
               MozWidth: isFirefox ? "auto" : "unset",
             }}
@@ -130,6 +132,7 @@ const RecipeCard = ({
             <div className="d-flex flex-column justify-content-between">
               {type === "custom" && isIconVisible && (
                 <div className="d-flex flex-column justify-content-between">
+                  {/* {!isShared &&  */}
                   <button
                     className="btn rounded bg-transparent"
                     onClick={() =>
@@ -148,6 +151,7 @@ const RecipeCard = ({
                       ></i>
                     </Link>
                   </button>
+                  {/* } */}
                   <button
                     className="btn text-white rounded"
                     type="submit"
@@ -186,14 +190,14 @@ const RecipeCard = ({
             </div>
           </div>
           <p className="d-none d-sm-block border-card"></p>
-          <p className="d-none d-sm-block fs-6 mb-0">
+          <p className="d-none d-sm-block fs-6">
             Ingredients:{" "}
             <span style={{ fontSize: "0.8rem" }}>
               {displayRecipe.ingredients.substring(0, 100)}
             </span>
             <span>...</span>
           </p>
-          <p className="d-none d-sm-block border-card"></p>
+          {/* <p className="d-none d-sm-block border-card"></p> */}
           {/* <p
             className="d-none d-sm-block fs-6 overflow-y-hidden mb-0"
             style={{ height: "5rem", width: "90%" }}

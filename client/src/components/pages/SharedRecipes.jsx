@@ -57,6 +57,7 @@ const SharedRecipes = () => {
                     recipe={recipe}
                     showIcon={false}
                     user={recipe.user_id}
+                    type="shared"
                   />
                 ))
               ) : (

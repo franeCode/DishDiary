@@ -41,7 +41,7 @@ const CustomRecipes = () => {
         {shareMessage && (
           <div
             className="bg-light position-absolute middle-50 rounded px-4 text-success p-1"
-            style={{ top: "9%", zIndex: "2" }}
+            style={{ top: "20%", zIndex: "4" }}
           >
             {shareMessage}
           </div>
@@ -50,7 +50,7 @@ const CustomRecipes = () => {
         {deleteMessage && (
           <div
             className="bg-light position-absolute middle-50 rounded px-4 text-success"
-            style={{ top: "9%", zIndex: "2" }}
+            style={{ top: "20%", zIndex: "2" }}
           >
             {deleteMessage}
           </div>

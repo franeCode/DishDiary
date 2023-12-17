@@ -12,12 +12,8 @@ const RecipeView = () => {
 
   if (!recipe) return <NotFound />;
 
-  // const imageUrl = `${window.location.origin}/${recipe.image_url}`;
-
-  // Check if the image URL is an external URL
   const isExternalImage = recipe.image_url.startsWith('http');
 
-  // Construct the imageUrl based on whether it's external or custom
   const imageUrl = isExternalImage ? recipe.image_url : `${window.location.origin}/${recipe.image_url}`;
 
 
@@ -57,7 +53,7 @@ const RecipeView = () => {
             style={{ width: "20px", height: "20px" }}
           ></div>
           <div className="d-flex flex-column justify-content-center align-items-center px-5 py-4">
-            {image_url ? ( 
+            {recipe.image_url ? ( 
               <img
                 src={imageUrl}
                 className="rounded"
